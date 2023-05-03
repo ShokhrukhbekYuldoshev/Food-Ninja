@@ -1,5 +1,3 @@
-// get collection from firestore
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreDatabase {

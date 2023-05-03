@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "665208381476",
+    "project_id": "food-ninja-f7b7c",
+    "storage_bucket": "food-ninja-f7b7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665208381476:android:a2843a681c023d968af8b1",
+        "android_client_info": {
+          "package_name": "com.shokhrukhbek.food_ninja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665208381476-s1vsqm8fhfh8154s16bmg4ie9b8cnk4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7H07umbLHgyQ3HwypY-CqauI_4b4eywo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665208381476-s1vsqm8fhfh8154s16bmg4ie9b8cnk4b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "665208381476-81um3u7uen1pilsttdn1440igr3i0tak.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodNinja"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

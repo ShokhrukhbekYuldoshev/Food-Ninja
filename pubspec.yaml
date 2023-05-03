@@ -21,7 +21,6 @@ dependencies:
   geolocator: ^9.0.2
   hive: ^2.2.3
   image_picker: ^0.8.7+4
-  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +33,12 @@ flutter:
   assets:
     - assets/png/
     - assets/svg/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+# flutter pub get
+# flutter pub run flutter_launcher_icons
