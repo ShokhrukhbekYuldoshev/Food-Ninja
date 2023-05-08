@@ -50,10 +50,18 @@ class User {
       firstName: map['firstName'],
       lastName: map['lastName'],
       image: map['image'],
-      favoritesFood: map['favoritesFood'],
-      favoritesRestaurant: map['favoritesRestaurant'],
-      paymentMethod: map['paymentMethod'],
-      createdAt: map['createdAt'],
+      favoritesFood: List<DocumentReference>.from(
+        map['favoritesFood']?.map(
+          (x) => x,
+        ),
+      ),
+      favoritesRestaurant: List<DocumentReference>.from(
+        map['favoritesRestaurant']?.map((x) => x),
+      ),
+      paymentMethod: map['paymentMethod'] == 'visa'
+          ? PaymentMethod.visa
+          : PaymentMethod.paypal,
+      createdAt: map['createdAt'].toDate(),
     );
   }
 
@@ -96,7 +104,7 @@ class User {
     );
   }
 
-  Future<void> toHive() async {
+  Future<void> saveToHive() async {
     var box = Hive.box('myBox');
 
     box.put('email', email);
@@ -107,7 +115,7 @@ class User {
     box.put('image', image);
     box.put('favoritesFood', favoritesFood);
     box.put('favoritesRestaurant', favoritesRestaurant);
-    box.put('paymentMethod', paymentMethod);
+    box.put('paymentMethod', paymentMethod.name);
     box.put('createdAt', createdAt);
   }
 }

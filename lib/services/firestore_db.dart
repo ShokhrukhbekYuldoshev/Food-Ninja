@@ -17,6 +17,18 @@ class FirestoreDatabase {
         .get();
   }
 
+  // get document from collection where field == value
+  Future<QuerySnapshot> getDocumentFromCollectionWhere(
+    String collectionName,
+    String field,
+    String value,
+  ) async {
+    return await _firebaseFirestore
+        .collection(collectionName)
+        .where(field, isEqualTo: value)
+        .get();
+  }
+
   Future<void> addDocument(
     String collectionName,
     Map<String, dynamic> data,

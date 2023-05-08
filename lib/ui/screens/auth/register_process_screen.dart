@@ -31,7 +31,7 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
     // set data to form fields
     _firstNameController.text = box.get('firstName', defaultValue: '');
     _lastNameController.text = box.get('lastName', defaultValue: '');
-    _phoneController.text = box.get('mobileNumber', defaultValue: '');
+    _phoneController.text = box.get('phone', defaultValue: '');
     super.initState();
   }
 

@@ -188,8 +188,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: PrimaryButton(
                               text: "Create Account",
                               onTap: () {
+                                // print email and password
                                 debugPrint(_emailController.text.trim());
                                 debugPrint(_passwordController.text);
+
+                                // Validate
+                                if (_emailController.text.trim().isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: AppColors.errorColor,
+                                      content: const Text("Email is required"),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                if (_passwordController.text.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: AppColors.errorColor,
+                                      content:
+                                          const Text("Password is required"),
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                // Submit
                                 BlocProvider.of<RegisterBloc>(context).add(
                                   RegisterSubmitted(
                                     email: _emailController.text.trim(),
