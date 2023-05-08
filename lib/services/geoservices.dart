@@ -1,3 +1,4 @@
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 // get current location, ask for permission if not granted
@@ -16,4 +17,12 @@ Future<Position> getCurrentLocation() async {
     }
   }
   return await geolocatorPlatform.getCurrentPosition();
+}
+
+// get address from position
+Future<String> getAddressFromPosition(double latitude, double longitude) async {
+  List<Placemark> placemarks =
+      await placemarkFromCoordinates(latitude, longitude);
+  Placemark place = placemarks[0];
+  return '${place.name}, ${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}, ${place.postalCode}';
 }

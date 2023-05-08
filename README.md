@@ -28,8 +28,8 @@ Food Ninja is a food delivery app created using Flutter, Firebase, BLoC.
 
 ## Getting Started
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+For help getting started with Flutter, view Flutter's online
+[documentation](https://flutter.dev/).
 
 ## How to Use
 
@@ -55,6 +55,13 @@ This project uses Firebase. Go to https://firebase.google.com/ and create a new 
 
 **Step 4:**
 
+Mapbox is used for map. Go to https://www.mapbox.com/ and create a new token. Then, create a file named `secrets.dart` in `lib` folder and add the following code:
+
+```
+const String MAPBOX_ACCESS_TOKEN = {YOUR_MAPBOX_ACCESS_TOKEN};
+```
+
+**Step 5:**
 Run the project in Android Studio or Visual Studio Code.
 
 ## Design

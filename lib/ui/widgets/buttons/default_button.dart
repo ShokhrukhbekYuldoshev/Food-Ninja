@@ -1,41 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
 
-class PrimaryButton extends StatelessWidget {
+class DefaultButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
+  final Color backgroundColor;
+  final Color textColor;
 
-  const PrimaryButton({
+  const DefaultButton({
     super.key,
     required this.text,
     required this.onTap,
+    this.backgroundColor = Colors.white,
+    this.textColor = Colors.black,
   });
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: backgroundColor,
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
       child: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         onTap: onTap,
         child: Container(
+          alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(
             horizontal: 60,
             vertical: 18,
           ),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColors.primaryGradient,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
-          ),
           child: Text(
             text,
-            style: CustomTextStyle.size16Weight400Text(
-              Colors.white,
+            style: CustomTextStyle.size16Weight700Text(
+              textColor,
             ),
           ),
         ),

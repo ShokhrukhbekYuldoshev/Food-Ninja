@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_ninja/ui/widgets/primary_button.dart';
+import 'package:food_ninja/ui/widgets/buttons/primary_button.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
 
 class OnboardingSecondScreen extends StatelessWidget {
@@ -13,14 +13,14 @@ class OnboardingSecondScreen extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 60),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 60),
               child: PrimaryButton(
                 text: "Next",
                 onTap: () {
                   Navigator.pushNamed(
                     context,
-                    "/login",
+                    "/register",
                   );
                 },
               ),
