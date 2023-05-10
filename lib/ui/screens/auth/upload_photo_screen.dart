@@ -131,7 +131,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                             height: 250,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [AppStyles.defaultBoxShadow],
+                              boxShadow: [AppStyles.boxShadow7],
                               borderRadius: AppStyles.largeBorderRadius,
                             ),
                             child: Stack(
@@ -180,7 +180,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                 height: 250,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  boxShadow: [AppStyles.defaultBoxShadow],
+                                  boxShadow: [AppStyles.boxShadow7],
                                   borderRadius: AppStyles.largeBorderRadius,
                                 ),
                                 child: Stack(
@@ -228,7 +228,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                 Ink(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    boxShadow: [AppStyles.defaultBoxShadow],
+                                    boxShadow: [AppStyles.boxShadow7],
                                     borderRadius: AppStyles.largeBorderRadius,
                                   ),
                                   child: InkWell(
@@ -262,7 +262,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                 Ink(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    boxShadow: [AppStyles.defaultBoxShadow],
+                                    boxShadow: [AppStyles.boxShadow7],
                                     borderRadius: AppStyles.largeBorderRadius,
                                   ),
                                   child: InkWell(

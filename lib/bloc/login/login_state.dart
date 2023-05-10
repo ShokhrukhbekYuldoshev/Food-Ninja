@@ -9,8 +9,8 @@ class LoginLoading extends LoginState {}
 
 class LoginSuccess extends LoginState {}
 
-class LoginFailure extends LoginState {
+class LoginError extends LoginState {
   final String error;
 
-  LoginFailure({required this.error});
+  LoginError({required this.error});
 }

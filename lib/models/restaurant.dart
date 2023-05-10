@@ -23,11 +23,15 @@ class Restaurant {
     return Restaurant(
       name: map['name'],
       image: map['image'],
-      rating: map['rating'],
+      rating: map['rating'] * 1.0,
       location: map['location'],
       description: map['description'],
-      foodList: map['foodList'],
-      createdAt: map['createdAt'],
+      foodList: List<DocumentReference>.from(
+        map['foodList']?.map(
+          (x) => x,
+        ),
+      ),
+      createdAt: map['createdAt'].toDate(),
     );
   }
 

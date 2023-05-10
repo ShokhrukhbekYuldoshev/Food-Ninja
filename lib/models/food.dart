@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Food {
-  final String image;
+  final String? image;
   final DocumentReference category;
   final DocumentReference restaurant;
   final String name;
@@ -31,12 +31,12 @@ class Food {
       category: map['category'],
       restaurant: map['restaurant'],
       name: map['name'],
-      price: map['price'],
-      rating: map['rating'],
-      discount: map['discount'],
-      description: map['description'],
-      ingredients: map['ingredients'],
-      createdAt: map['createdAt'],
+      price: map['price'] * 1.0,
+      rating: map['rating'] * 1.0,
+      discount: map['discount'] * 1.0 ?? 0.0,
+      description: map['description'] ?? '',
+      ingredients: List<String>.from(map['ingredients'] ?? const []),
+      createdAt: map['createdAt'].toDate(),
     );
   }
 

@@ -47,8 +47,8 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                 onTap: () async {
                   if (box.get('location') == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text("Please set your location"),
+                      const SnackBar(
+                        content: Text("Please set your location"),
                         backgroundColor: AppColors.errorColor,
                       ),
                     );
@@ -106,7 +106,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.cardColor,
-                      boxShadow: [AppStyles.defaultBoxShadow],
+                      boxShadow: [AppStyles.boxShadow7],
                       borderRadius: AppStyles.largeBorderRadius,
                     ),
                     child: Column(

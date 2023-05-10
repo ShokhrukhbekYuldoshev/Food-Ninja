@@ -7,6 +7,25 @@ class FirestoreDatabase {
     return await _firebaseFirestore.collection(collectionName).get();
   }
 
+  Future<QuerySnapshot> getCollectionWithPagination(
+    String collectionName,
+    int limit,
+    DocumentSnapshot? documentSnapshot,
+  ) async {
+    if (documentSnapshot == null) {
+      return await _firebaseFirestore
+          .collection(collectionName)
+          .limit(limit)
+          .get();
+    } else {
+      return await _firebaseFirestore
+          .collection(collectionName)
+          .limit(limit)
+          .startAfterDocument(documentSnapshot)
+          .get();
+    }
+  }
+
   Future<DocumentSnapshot> getDocument(
     String collectionName,
     String documentId,
@@ -57,10 +76,9 @@ class FirestoreDatabase {
         .delete();
   }
 
-  Future<QuerySnapshot> getCollectionFromReference(
+  Future<DocumentSnapshot<Object?>> getDocumentFromReference(
     DocumentReference documentReference,
-    String collectionName,
   ) async {
-    return await documentReference.collection(collectionName).get();
+    return await documentReference.get();
   }
 }

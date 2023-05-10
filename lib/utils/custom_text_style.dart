@@ -34,6 +34,14 @@ class CustomTextStyle {
     );
   }
 
+  static TextStyle size16Weight600Text([Color? color]) {
+    return TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      color: color ?? AppColors.textColor,
+    );
+  }
+
   static TextStyle size16Weight400Text([Color? color]) {
     return TextStyle(
       fontSize: 16,
@@ -42,10 +50,10 @@ class CustomTextStyle {
     );
   }
 
-  static TextStyle size16Weight700Text([Color? color]) {
+  static TextStyle size16Weight500Text([Color? color]) {
     return TextStyle(
       fontSize: 16,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w500,
       color: color ?? AppColors.textColor,
     );
   }
@@ -58,26 +66,10 @@ class CustomTextStyle {
     );
   }
 
-  static TextStyle size14Weight700Text([Color? color]) {
-    return TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w700,
-      color: color ?? AppColors.textColor,
-    );
-  }
-
   static TextStyle size12Weight400Text([Color? color]) {
     return TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: color ?? AppColors.textColor,
-    );
-  }
-
-  static TextStyle size12Weight700Text([Color? color]) {
-    return TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w700,
       color: color ?? AppColors.textColor,
     );
   }

@@ -26,12 +26,11 @@ class DefaultButton extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(
-            horizontal: 60,
             vertical: 18,
           ),
           child: Text(
             text,
-            style: CustomTextStyle.size16Weight700Text(
+            style: CustomTextStyle.size16Weight500Text(
               textColor,
             ),
           ),

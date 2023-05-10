@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_ninja/utils/app_colors.dart';
+import 'package:food_ninja/utils/app_styles.dart';
+import 'package:food_ninja/utils/custom_text_style.dart';
+
+class SearchField extends StatelessWidget {
+  const SearchField({
+    super.key,
+    required TextEditingController searchController,
+  }) : _searchController = searchController;
+
+  final TextEditingController _searchController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: TextField(
+        cursorColor: AppColors.secondaryDarkColor,
+        controller: _searchController,
+        decoration: InputDecoration(
+          fillColor: AppColors.secondaryLightColor.withOpacity(0.1),
+          filled: true,
+          hintText: "What do you want to order?",
+          hintStyle: CustomTextStyle.size14Weight400Text(
+            AppColors.secondaryDarkColor.withOpacity(0.4),
+          ).copyWith(
+            letterSpacing: 0.5,
+          ),
+          prefixIcon: Container(
+            padding: const EdgeInsets.all(12),
+            child: SvgPicture.asset(
+              "assets/svg/search.svg",
+            ),
+          ),
+          enabledBorder: AppStyles.defaultEnabledBorder,
+          focusedBorder: AppStyles.defaultFocusedBorder(
+            color: AppColors.secondaryColor,
+          ),
+        ),
+      ),
+    );
+  }
+}

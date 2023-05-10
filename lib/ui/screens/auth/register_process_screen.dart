@@ -102,7 +102,7 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            boxShadow: [AppStyles.defaultBoxShadow],
+                            boxShadow: [AppStyles.boxShadow7],
                           ),
                           child: TextFormField(
                             controller: _firstNameController,
@@ -123,7 +123,7 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                                 left: 20,
                               ),
                               enabledBorder: AppStyles.defaultEnabledBorder,
-                              focusedBorder: AppStyles.defaultFocusedBorder,
+                              focusedBorder: AppStyles.defaultFocusedBorder(),
                               errorBorder: AppStyles.defaultErrorBorder,
                               focusedErrorBorder:
                                   AppStyles.defaultFocusedErrorBorder,
@@ -133,7 +133,7 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                         const SizedBox(height: 20),
                         Container(
                           decoration: BoxDecoration(
-                            boxShadow: [AppStyles.defaultBoxShadow],
+                            boxShadow: [AppStyles.boxShadow7],
                           ),
                           child: TextFormField(
                             controller: _lastNameController,
@@ -154,7 +154,7 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                                 left: 20,
                               ),
                               enabledBorder: AppStyles.defaultEnabledBorder,
-                              focusedBorder: AppStyles.defaultFocusedBorder,
+                              focusedBorder: AppStyles.defaultFocusedBorder(),
                               errorBorder: AppStyles.defaultErrorBorder,
                               focusedErrorBorder:
                                   AppStyles.defaultFocusedErrorBorder,
@@ -164,7 +164,7 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                         const SizedBox(height: 20),
                         Container(
                           decoration: BoxDecoration(
-                            boxShadow: [AppStyles.defaultBoxShadow],
+                            boxShadow: [AppStyles.boxShadow7],
                           ),
                           child: TextFormField(
                             controller: _phoneController,
@@ -186,7 +186,7 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                                 left: 20,
                               ),
                               enabledBorder: AppStyles.defaultEnabledBorder,
-                              focusedBorder: AppStyles.defaultFocusedBorder,
+                              focusedBorder: AppStyles.defaultFocusedBorder(),
                               errorBorder: AppStyles.defaultErrorBorder,
                               focusedErrorBorder:
                                   AppStyles.defaultFocusedErrorBorder,

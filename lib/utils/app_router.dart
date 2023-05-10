@@ -1,6 +1,7 @@
 // onGenerate Route
 
 import 'package:flutter/material.dart';
+import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/ui/screens/auth/forgot_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/login_screen.dart';
 import 'package:food_ninja/ui/screens/auth/otp_screen.dart';
@@ -11,7 +12,12 @@ import 'package:food_ninja/ui/screens/auth/reset_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/set_location_screen.dart';
 import 'package:food_ninja/ui/screens/auth/set_payment_screen.dart';
 import 'package:food_ninja/ui/screens/auth/upload_photo_screen.dart';
+import 'package:food_ninja/ui/screens/explore/food_details_screen.dart';
+import 'package:food_ninja/ui/screens/explore/food_list_screen.dart';
+import 'package:food_ninja/ui/screens/explore/restaurant_details_screen.dart';
+import 'package:food_ninja/ui/screens/explore/restaurant_list_screen.dart';
 import 'package:food_ninja/ui/screens/home/home_screen.dart';
+import 'package:food_ninja/ui/screens/home/notification_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_first_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_second_screen.dart';
 import 'package:food_ninja/ui/screens/splash_screen.dart';
@@ -92,6 +98,33 @@ class AppRouter {
       case '/home':
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
+        );
+
+      case '/notification':
+        return MaterialPageRoute(
+          builder: (_) => const NotificationScreen(),
+        );
+
+      case '/restaurants':
+        return MaterialPageRoute(
+          builder: (_) => const RestaurantListScreen(),
+        );
+
+      case '/restaurants/detail':
+        return MaterialPageRoute(
+          builder: (_) => const RestaurantDetailsScreen(),
+        );
+
+      case '/foods':
+        return MaterialPageRoute(
+          builder: (_) => const FoodListScreen(),
+        );
+
+      case '/foods/detail':
+        return MaterialPageRoute(
+          builder: (_) => FoodDetailsScreen(
+            food: settings.arguments as Food,
+          ),
         );
 
       default:

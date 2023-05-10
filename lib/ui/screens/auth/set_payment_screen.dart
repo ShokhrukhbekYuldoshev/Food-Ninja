@@ -75,7 +75,7 @@ class _SetPaymentScreenState extends State<SetPaymentScreen> {
                       color: PaymentMethod.paypal == _paymentMethod
                           ? AppColors.primaryColor.withOpacity(0.1)
                           : Colors.white,
-                      boxShadow: [AppStyles.defaultBoxShadow],
+                      boxShadow: [AppStyles.boxShadow7],
                       borderRadius: AppStyles.largeBorderRadius,
                     ),
                     child: InkWell(
@@ -103,7 +103,7 @@ class _SetPaymentScreenState extends State<SetPaymentScreen> {
                       color: PaymentMethod.visa == _paymentMethod
                           ? AppColors.primaryColor.withOpacity(0.1)
                           : Colors.white,
-                      boxShadow: [AppStyles.defaultBoxShadow],
+                      boxShadow: [AppStyles.boxShadow7],
                       borderRadius: AppStyles.largeBorderRadius,
                     ),
                     child: InkWell(

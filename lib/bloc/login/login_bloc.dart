@@ -45,14 +45,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginSuccess());
       } on FirebaseAuthException catch (e) {
         emit(
-          LoginFailure(
+          LoginError(
             error: FirebaseAuthService(FirebaseAuth.instance).getErrorString(
               e.code,
             ),
           ),
         );
       } catch (e) {
-        emit(LoginFailure(error: e.toString()));
+        emit(LoginError(error: e.toString()));
       }
     });
   }

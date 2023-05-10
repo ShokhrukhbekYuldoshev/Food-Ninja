@@ -34,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             );
           }
 
-          if (state is RegisterFailure) {
+          if (state is RegisterError) {
             Navigator.pop(context);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -98,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Container(
                                   height: AppStyles.defaultTextFieldHeight,
                                   decoration: BoxDecoration(
-                                    boxShadow: [AppStyles.defaultBoxShadow],
+                                    boxShadow: [AppStyles.boxShadow7],
                                   ),
                                   child: TextFormField(
                                     controller: _emailController,
@@ -113,7 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       enabledBorder:
                                           AppStyles.defaultEnabledBorder,
                                       focusedBorder:
-                                          AppStyles.defaultFocusedBorder,
+                                          AppStyles.defaultFocusedBorder(),
                                     ),
                                   ),
                                 ),
@@ -121,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Container(
                                   height: AppStyles.defaultTextFieldHeight,
                                   decoration: BoxDecoration(
-                                    boxShadow: [AppStyles.defaultBoxShadow],
+                                    boxShadow: [AppStyles.boxShadow7],
                                   ),
                                   child: TextFormField(
                                     controller: _passwordController,
@@ -137,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       enabledBorder:
                                           AppStyles.defaultEnabledBorder,
                                       focusedBorder:
-                                          AppStyles.defaultFocusedBorder,
+                                          AppStyles.defaultFocusedBorder(),
                                       suffixIcon: GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -195,19 +195,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 // Validate
                                 if (_emailController.text.trim().isEmpty) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                       backgroundColor: AppColors.errorColor,
-                                      content: const Text("Email is required"),
+                                      content: Text("Email is required"),
                                     ),
                                   );
                                   return;
                                 }
                                 if (_passwordController.text.isEmpty) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                       backgroundColor: AppColors.errorColor,
-                                      content:
-                                          const Text("Password is required"),
+                                      content: Text("Password is required"),
                                     ),
                                   );
                                   return;
