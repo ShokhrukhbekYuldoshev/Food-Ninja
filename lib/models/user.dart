@@ -23,9 +23,9 @@ class User {
   final String location;
   final String firstName;
   final String lastName;
-  final String image;
-  final List<DocumentReference> favoritesFood;
-  final List<DocumentReference> favoritesRestaurant;
+  final String? image;
+  final List<DocumentReference>? favoriteFoods;
+  final List<DocumentReference>? favoriteRestaurants;
   final PaymentMethod paymentMethod;
   final DateTime createdAt;
 
@@ -35,9 +35,9 @@ class User {
     required this.location,
     required this.firstName,
     required this.lastName,
-    required this.image,
-    required this.favoritesFood,
-    required this.favoritesRestaurant,
+    this.image,
+    this.favoriteFoods,
+    this.favoriteRestaurants,
     required this.paymentMethod,
     required this.createdAt,
   });
@@ -50,14 +50,20 @@ class User {
       firstName: map['firstName'],
       lastName: map['lastName'],
       image: map['image'],
-      favoritesFood: List<DocumentReference>.from(
-        map['favoritesFood']?.map(
-          (x) => x,
-        ),
-      ),
-      favoritesRestaurant: List<DocumentReference>.from(
-        map['favoritesRestaurant']?.map((x) => x),
-      ),
+      favoriteFoods: map['favoriteFoods'] != null
+          ? List<DocumentReference>.from(
+              map['favoriteFoods']?.map(
+                (x) => x,
+              ),
+            )
+          : null,
+      favoriteRestaurants: map['favoriteRestaurants'] != null
+          ? List<DocumentReference>.from(
+              map['favoriteRestaurants']?.map(
+                (x) => x,
+              ),
+            )
+          : null,
       paymentMethod: map['paymentMethod'] == 'visa'
           ? PaymentMethod.visa
           : PaymentMethod.paypal,
@@ -73,8 +79,8 @@ class User {
       'firstName': firstName,
       'lastName': lastName,
       'image': image,
-      'favoritesFood': favoritesFood,
-      'favoritesRestaurant': favoritesRestaurant,
+      'favoriteFoods': favoriteFoods,
+      'favoriteRestaurant': favoriteRestaurants,
       'paymentMethod': paymentMethod.name,
       'createdAt': createdAt,
     };
@@ -88,15 +94,17 @@ class User {
       location: box.get('location', defaultValue: ''),
       firstName: box.get('firstName', defaultValue: ''),
       lastName: box.get('lastName', defaultValue: ''),
-      image: box.get('image', defaultValue: ''),
-      favoritesFood: box.get(
-        'favoritesFood',
-        defaultValue: List<DocumentReference>.empty(),
-      ),
-      favoritesRestaurant: box.get(
-        'favoritesRestaurant',
-        defaultValue: List<DocumentReference>.empty(),
-      ),
+      image: box.get('image', defaultValue: null),
+      favoriteFoods: box.get('favoriteFoods') != null
+          ? List<DocumentReference>.from(
+              box.get('favoriteFoods'),
+            )
+          : null,
+      favoriteRestaurants: box.get('favoriteRestaurants') != null
+          ? List<DocumentReference>.from(
+              box.get('favoriteRestaurants'),
+            )
+          : null,
       paymentMethod: box.get('paymentMethod', defaultValue: 'visa') == 'visa'
           ? PaymentMethod.visa
           : PaymentMethod.paypal,
@@ -113,8 +121,8 @@ class User {
     box.put('firstName', firstName);
     box.put('lastName', lastName);
     box.put('image', image);
-    box.put('favoritesFood', favoritesFood);
-    box.put('favoritesRestaurant', favoritesRestaurant);
+    box.put('favoriteFoods', favoriteFoods);
+    box.put('favoriteRestaurants', favoriteRestaurants);
     box.put('paymentMethod', paymentMethod.name);
     box.put('createdAt', createdAt);
   }

@@ -56,6 +56,7 @@ class RestaurantItem extends StatelessWidget {
                 children: [
                   Text(
                     restaurant.name,
+                    overflow: TextOverflow.ellipsis,
                     style: CustomTextStyle.size16Weight600Text(),
                   ),
                   const SizedBox(width: 5),

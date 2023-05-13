@@ -19,6 +19,7 @@ import 'package:food_ninja/ui/screens/explore/restaurant_details_screen.dart';
 import 'package:food_ninja/ui/screens/explore/restaurant_list_screen.dart';
 import 'package:food_ninja/ui/screens/home/home_screen.dart';
 import 'package:food_ninja/ui/screens/home/notification_screen.dart';
+import 'package:food_ninja/ui/screens/home/settings_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_first_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_second_screen.dart';
 import 'package:food_ninja/ui/screens/splash_screen.dart';
@@ -128,6 +129,11 @@ class AppRouter {
           builder: (_) => FoodDetailsScreen(
             food: settings.arguments as Food,
           ),
+        );
+
+      case '/settings':
+        return MaterialPageRoute(
+          builder: (_) => const SettingsScreen(),
         );
 
       default:

@@ -9,13 +9,29 @@ class OnboardingFirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 60),
-              child: PrimaryButton(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 56),
+              SvgPicture.asset(
+                "assets/svg/onboarding-1.svg",
+                width: 400,
+              ),
+              const SizedBox(height: 40),
+              Text(
+                "Find your Comfort \nFood here",
+                textAlign: TextAlign.center,
+                style: CustomTextStyle.size22Weight600Text(),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "Here You Can find a chef or dish for every \ntaste and color. Enjoy!",
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 60),
+              PrimaryButton(
                 text: "Next",
                 onTap: () {
                   Navigator.pushNamed(
@@ -24,33 +40,10 @@ class OnboardingFirstScreen extends StatelessWidget {
                   );
                 },
               ),
-            ),
+              const SizedBox(height: 60),
+            ],
           ),
-          SingleChildScrollView(
-            child: Align(
-              child: Column(
-                children: [
-                  const SizedBox(height: 56),
-                  SvgPicture.asset(
-                    "assets/svg/onboarding-1.svg",
-                    width: 400,
-                  ),
-                  const SizedBox(height: 40),
-                  Text(
-                    "Find your Comfort \nFood here",
-                    textAlign: TextAlign.center,
-                    style: CustomTextStyle.size22Weight600Text(),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Here You Can find a chef or dish for every \ntaste and color. Enjoy!",
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

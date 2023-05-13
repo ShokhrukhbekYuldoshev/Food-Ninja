@@ -26,7 +26,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         box.put('email', event.email);
 
         emit(RegisterSuccess());
-      } catch (e) {
+      } catch (e, s) {
+        debugPrint(e.toString());
+        debugPrint(s.toString());
         emit(RegisterError(error: e.toString()));
       }
     });

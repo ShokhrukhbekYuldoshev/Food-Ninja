@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ninja/bloc/food/food_bloc.dart';
 import 'package:food_ninja/bloc/login/login_bloc.dart';
+import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/bloc/register/register_bloc.dart';
+import 'package:food_ninja/services/hive_adapters.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -16,6 +18,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
+  Hive.registerAdapter(FirestoreDocumentReferenceAdapter());
   await Hive.openBox('myBox');
 
   runApp(
@@ -33,6 +36,9 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => FoodBloc(),
         ),
+        BlocProvider(
+          create: (context) => ProfileBloc(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -47,13 +53,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Food Ninja",
       theme: ThemeData(
+        useMaterial3: true,
         primaryColor: AppColors.primaryColor,
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: AppColors.backgroundColor,
           indicatorColor: AppColors.primaryColor.withOpacity(0.1),
           surfaceTintColor: Colors.transparent,
         ),
-        useMaterial3: true,
       ),
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
