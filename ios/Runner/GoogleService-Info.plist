@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.foodNinja</string>
+	<string>com.shokhrukhbek.foodNinja</string>
 	<key>PROJECT_ID</key>
 	<string>food-ninja-f7b7c</string>
 	<key>STORAGE_BUCKET</key>

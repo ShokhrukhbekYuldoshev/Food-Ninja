@@ -39,13 +39,12 @@ class OnboardingFirstScreen extends StatelessWidget {
                   Text(
                     "Find your Comfort \nFood here",
                     textAlign: TextAlign.center,
-                    style: CustomTextStyle.size22Weight700Text(),
+                    style: CustomTextStyle.size22Weight600Text(),
                   ),
                   const SizedBox(height: 20),
-                  Text(
+                  const Text(
                     "Here You Can find a chef or dish for every \ntaste and color. Enjoy!",
                     textAlign: TextAlign.center,
-                    style: CustomTextStyle.size12Weight400Text(),
                   ),
                 ],
               ),

@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: Text(
                         "Find Your \nFavorite Food",
-                        style: CustomTextStyle.size30Weight700Text(),
+                        style: CustomTextStyle.size30Weight600Text(),
                       ),
                     ),
                     Material(
@@ -265,9 +265,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 BlocBuilder<RestaurantBloc, RestaurantState>(
                   builder: (context, state) {
                     if (state is RestaurantLoading) {
-                      return Row(
+                      return const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Expanded(
                             child: RestaurantItemShimmer(),
                           ),

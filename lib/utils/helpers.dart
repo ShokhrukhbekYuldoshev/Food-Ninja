@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 bool validatePhoneNumber(String value) {
   if (value.isEmpty) {
     return false;
@@ -10,4 +12,8 @@ bool validatePhoneNumber(String value) {
     return false;
   }
   return true;
+}
+
+String formatDate(DateTime date) {
+  return DateFormat('MMMM dd, yyyy').format(date);
 }

@@ -86,12 +86,12 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                   const SizedBox(height: 20),
                   Text(
                     "Fill in your bio to get \nstarted",
-                    style: CustomTextStyle.size25Weight700Text(),
+                    style: CustomTextStyle.size25Weight600Text(),
                   ),
                   const SizedBox(height: 20),
                   Text(
                     "This data will be displayed in your account \nprofile for security",
-                    style: CustomTextStyle.size12Weight400Text(),
+                    style: CustomTextStyle.size14Weight400Text(),
                   ),
                   const SizedBox(height: 20),
                   // form fields, first name, last name, mobile number

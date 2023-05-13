@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: AppColors.cardColor,
+          backgroundColor: AppColors.backgroundColor,
           indicatorColor: AppColors.primaryColor.withOpacity(0.1),
           surfaceTintColor: Colors.transparent,
         ),

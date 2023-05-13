@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 60),
                           Text(
                             'Login To Your Account',
-                            style: CustomTextStyle.size20Weight700Text(),
+                            style: CustomTextStyle.size20Weight600Text(),
                           ),
                           const SizedBox(height: 40),
                           Form(
@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               blendMode: BlendMode.srcIn,
                               child: Text(
                                 "Forgot Password?",
-                                style: CustomTextStyle.size12Weight400Text()
+                                style: CustomTextStyle.size14Weight400Text()
                                     .copyWith(
                                   decoration: TextDecoration.underline,
                                 ),

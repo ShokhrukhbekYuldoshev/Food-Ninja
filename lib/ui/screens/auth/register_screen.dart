@@ -89,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           const SizedBox(height: 60),
                           Text(
                             'Sign Up For Free',
-                            style: CustomTextStyle.size20Weight700Text(),
+                            style: CustomTextStyle.size20Weight600Text(),
                           ),
                           const SizedBox(height: 40),
                           Form(
@@ -175,7 +175,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               blendMode: BlendMode.srcIn,
                               child: Text(
                                 "Already have an account?",
-                                style: CustomTextStyle.size12Weight400Text()
+                                style: CustomTextStyle.size14Weight400Text()
                                     .copyWith(
                                   decoration: TextDecoration.underline,
                                 ),

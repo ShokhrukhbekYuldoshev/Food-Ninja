@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_ninja/models/testimonial.dart';
 
 class Food {
   final String? image;
@@ -6,11 +7,11 @@ class Food {
   final DocumentReference restaurant;
   final String name;
   final double price;
-  final double rating;
-  final double discount;
-  final String description;
   final List<String> ingredients;
   final DateTime createdAt;
+  final String? description;
+  final double? discount;
+  final List<Testimonial> testimonials;
 
   Food({
     required this.image,
@@ -18,11 +19,11 @@ class Food {
     required this.restaurant,
     required this.name,
     required this.price,
-    required this.rating,
-    required this.discount,
-    required this.description,
     required this.ingredients,
     required this.createdAt,
+    this.discount,
+    this.description,
+    required this.testimonials,
   });
 
   factory Food.fromMap(Map<String, dynamic> map) {
@@ -32,11 +33,16 @@ class Food {
       restaurant: map['restaurant'],
       name: map['name'],
       price: map['price'] * 1.0,
-      rating: map['rating'] * 1.0,
-      discount: map['discount'] * 1.0 ?? 0.0,
-      description: map['description'] ?? '',
       ingredients: List<String>.from(map['ingredients'] ?? const []),
       createdAt: map['createdAt'].toDate(),
+      discount: map['discount'] * 1.0 ?? 0.0,
+      description: map['description'],
+      testimonials: List<Testimonial>.from(
+        map['testimonials']?.map(
+              (x) => Testimonial.fromMap(x),
+            ) ??
+            const [],
+      ),
     );
   }
 
@@ -47,11 +53,18 @@ class Food {
       'restaurant': restaurant,
       'name': name,
       'price': price,
-      'rating': rating,
-      'discount': discount,
-      'description': description,
       'ingredients': ingredients,
       'createdAt': createdAt,
+      'discount': discount ?? 0.0,
+      'description': description ?? '',
+      'testimonials': testimonials.map((x) => x.toMap()).toList(),
     };
+  }
+
+  // rating is calculated by averaging all the ratings from testimonials
+  double get rating {
+    if (testimonials.isEmpty) return 0.0;
+    return testimonials.map((e) => e.rating).reduce((a, b) => a + b) /
+        testimonials.length;
   }
 }

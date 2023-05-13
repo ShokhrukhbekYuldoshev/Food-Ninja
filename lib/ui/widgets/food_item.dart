@@ -98,7 +98,7 @@ class _FoodItemState extends State<FoodItem> {
               const SizedBox(width: 10),
               Text(
                 "\$${widget.food.price}",
-                style: CustomTextStyle.size22Weight700Text(
+                style: CustomTextStyle.size22Weight600Text(
                   AppColors.secondaryDarkColor,
                 ),
               ),

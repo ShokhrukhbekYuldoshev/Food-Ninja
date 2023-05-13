@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/models/restaurant.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
@@ -33,16 +34,21 @@ class RestaurantItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: AppStyles.defaultBorderRadius,
-                child: Image.network(
-                  restaurant.image,
-                  height: 90,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      "assets/png/no-image.png",
-                      height: 90,
-                    );
-                  },
-                ),
+                child: restaurant.image == null
+                    ? Image.asset(
+                        "assets/png/no-image.png",
+                        height: 90,
+                      )
+                    : Image.network(
+                        restaurant.image!,
+                        height: 90,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            "assets/png/no-image.png",
+                            height: 90,
+                          );
+                        },
+                      ),
               ),
               const SizedBox(height: 10),
               Row(
@@ -53,11 +59,12 @@ class RestaurantItem extends StatelessWidget {
                     style: CustomTextStyle.size16Weight600Text(),
                   ),
                   const SizedBox(width: 5),
-                  const Icon(
-                    Icons.star,
-                    color: AppColors.starColor,
-                    size: 16,
+                  SvgPicture.asset(
+                    "assets/svg/star.svg",
+                    height: 14,
+                    width: 14,
                   ),
+                  const SizedBox(width: 3),
                   Text(
                     restaurant.rating.toString(),
                     style: CustomTextStyle.size14Weight400Text(

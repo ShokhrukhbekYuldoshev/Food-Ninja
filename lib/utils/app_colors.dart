@@ -30,9 +30,9 @@ class AppColors {
   static const Color lightCardColor = Color(0xFFFFFFFF);
 
   // dark theme colors
-  static Color darkBackgroundColor = Colors.black;
-  static Color darkTextColor = Colors.white;
-  static Color darkCardColor = Colors.black.withOpacity(0.1);
+  static const Color darkBackgroundColor = Colors.black;
+  static const Color darkTextColor = Colors.white;
+  static const Color darkCardColor = Color(0xFF252525);
 
   // getters
   static Color get backgroundColor => ThemeData().brightness == Brightness.light

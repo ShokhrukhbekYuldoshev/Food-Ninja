@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:food_ninja/models/food.dart';
+import 'package:food_ninja/models/restaurant.dart';
 import 'package:food_ninja/ui/screens/auth/forgot_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/login_screen.dart';
 import 'package:food_ninja/ui/screens/auth/otp_screen.dart';
@@ -112,7 +113,9 @@ class AppRouter {
 
       case '/restaurants/detail':
         return MaterialPageRoute(
-          builder: (_) => const RestaurantDetailsScreen(),
+          builder: (_) => RestaurantDetailsScreen(
+            restaurant: settings.arguments as Restaurant,
+          ),
         );
 
       case '/foods':

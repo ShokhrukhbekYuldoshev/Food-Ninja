@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/models/food.dart';
+import 'package:food_ninja/ui/widgets/bullet_point.dart';
+import 'package:food_ninja/ui/widgets/testimonial_item.dart';
+import 'package:food_ninja/utils/app_colors.dart';
+import 'package:food_ninja/utils/app_styles.dart';
+import 'package:food_ninja/utils/custom_text_style.dart';
 
 class FoodDetailsScreen extends StatelessWidget {
   final Food food;
@@ -11,136 +17,220 @@ class FoodDetailsScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppColors.secondaryColor,
+              ),
+            ),
             expandedHeight: MediaQuery.of(context).size.height * 0.4,
-            flexibleSpace: FlexibleSpaceBar(
-              background: food.image != null
-                  ? Image.network(
-                      food.image!,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.asset(
-                      "assets/png/no-image.png",
-                      fit: BoxFit.cover,
+            flexibleSpace: Stack(
+              children: [
+                FlexibleSpaceBar(
+                  background: food.image != null
+                      ? Image.network(
+                          food.image!,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          "assets/png/no-image.png",
+                          fit: BoxFit.cover,
+                        ),
+                ),
+                //Border radius
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppColors.cardColor,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
                     ),
+                  ),
+                )
+              ],
             ),
           ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        food.name,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        food.description,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        "\$${food.price}",
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Divider(),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey[200],
-                            ),
-                            child: const Icon(
-                              Icons.favorite_border,
-                              color: Colors.red,
+          SliverToBoxAdapter(
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(
+                20,
+                0,
+                20,
+                40,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 34,
+                    child: Row(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          height: 34,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: AppStyles.largeBorderRadius,
+                            gradient: LinearGradient(
+                              colors: [
+                                AppColors.primaryColor.withOpacity(0.1),
+                                AppColors.primaryDarkColor.withOpacity(0.1),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
                             ),
                           ),
-                          const SizedBox(width: 10),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey[200],
-                            ),
-                            child: const Icon(
-                              Icons.share,
-                              color: Colors.black,
+                          child: ShaderMask(
+                            shaderCallback: (rect) {
+                              return LinearGradient(
+                                colors: AppColors.primaryGradient,
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ).createShader(rect);
+                            },
+                            child: Text(
+                              'Popular',
+                              style: CustomTextStyle.size14Weight400Text(
+                                Colors.white,
+                              ),
                             ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      const Divider(),
-                      // ingredients
-                      const SizedBox(height: 10),
-                      const Text(
-                        "Ingredients",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: food.ingredients.length,
-                        padding: const EdgeInsets.all(0),
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.grey[200],
-                              ),
-                              child: const Icon(
-                                Icons.check,
-                                color: Colors.green,
-                              ),
-                            ),
-                            title: Text(
-                              food.ingredients[index],
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                        const Spacer(),
+                        SvgPicture.asset(
+                          "assets/svg/location.svg",
+                        ),
+                        const SizedBox(width: 12),
+                        SvgPicture.asset(
+                          "assets/svg/heart.svg",
+                        ),
+                      ],
+                    ),
+                  ),
 
-                      const SizedBox(height: 10),
-                      const Text(
-                        "Testimonials",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  const SizedBox(height: 20),
+                  Text(
+                    food.name,
+                    style: CustomTextStyle.size27Weight600Text(),
+                  ),
+                  const SizedBox(height: 20),
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        "assets/svg/star.svg",
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        "${food.rating} Rating",
+                        style: CustomTextStyle.size14Weight400Text(
+                          AppColors.grayColor.withOpacity(0.3),
+                        ),
+                      ),
+                      const SizedBox(width: 25),
+                      SvgPicture.asset(
+                        "assets/svg/shopping-bag.svg",
+                      ),
+                      const SizedBox(width: 10),
+                      // TODO: change this to actual number of orders
+                      Text(
+                        "2000+ Orders",
+                        style: CustomTextStyle.size14Weight400Text(
+                          AppColors.grayColor.withOpacity(0.3),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 24),
+
+                  // description
+                  food.description != null && food.description!.isNotEmpty
+                      ? Text(
+                          food.description!,
+                          style: CustomTextStyle.size14Weight400Text(),
+                        )
+                      : Center(
+                          child: Text(
+                            "No description available",
+                            style: CustomTextStyle.size14Weight400Text(
+                              AppColors.grayColor.withOpacity(0.3),
+                            ),
+                          ),
+                        ),
+                  const SizedBox(height: 20),
+
+                  // ingredients
+                  Text(
+                    "Ingredients",
+                    style: CustomTextStyle.size18Weight600Text(),
+                  ),
+                  const SizedBox(height: 10),
+                  food.ingredients.isNotEmpty
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: food.ingredients.length,
+                          padding: const EdgeInsets.all(0),
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                const SizedBox(width: 20),
+                                const BulletPoint(),
+                                const SizedBox(width: 10),
+                                Text(
+                                  food.ingredients[index],
+                                  style: CustomTextStyle.size14Weight400Text(),
+                                ),
+                              ],
+                            );
+                          },
+                        )
+                      : Center(
+                          child: Text(
+                            "No ingredients available",
+                            style: CustomTextStyle.size14Weight400Text(
+                              AppColors.grayColor.withOpacity(0.3),
+                            ),
+                          ),
+                        ),
+
+                  const SizedBox(height: 20),
+                  // testimonials
+                  Text(
+                    "Testimonials",
+                    style: CustomTextStyle.size18Weight600Text(),
+                  ),
+                  const SizedBox(height: 20),
+                  food.testimonials.isNotEmpty
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: food.testimonials.length,
+                          padding: const EdgeInsets.all(0),
+                          itemBuilder: (context, index) {
+                            return TestimonialItem(
+                              testimonial: food.testimonials[index],
+                            );
+                          },
+                        )
+                      : Center(
+                          child: Text(
+                            "No testimonials available",
+                            style: CustomTextStyle.size14Weight400Text(
+                              AppColors.grayColor.withOpacity(0.3),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
             ),
           ),
         ],

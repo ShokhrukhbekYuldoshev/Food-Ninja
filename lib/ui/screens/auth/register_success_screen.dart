@@ -44,7 +44,7 @@ class RegisterSuccessScreen extends StatelessWidget {
                   blendMode: BlendMode.srcIn,
                   child: Text(
                     "Congratulations!",
-                    style: CustomTextStyle.size30Weight700Text(),
+                    style: CustomTextStyle.size30Weight600Text(),
                   ),
                 ),
                 const SizedBox(height: 12),

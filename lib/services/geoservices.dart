@@ -1,28 +1,32 @@
-import 'package:geocoding/geocoding.dart';
+import 'package:food_ninja/secrets.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:dio/dio.dart';
 
+class Geoservices {
 // get current location, ask for permission if not granted
-Future<Position> getCurrentLocation() async {
-  final GeolocatorPlatform geolocatorPlatform = GeolocatorPlatform.instance;
-  final LocationPermission permission =
-      await geolocatorPlatform.checkPermission();
-  if (permission == LocationPermission.deniedForever) {
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
-  } else if (permission == LocationPermission.denied) {
+  Future<Position> getCurrentLocation() async {
+    final GeolocatorPlatform geolocatorPlatform = GeolocatorPlatform.instance;
     final LocationPermission permission =
-        await geolocatorPlatform.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
+        await geolocatorPlatform.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.',
+      );
+    } else if (permission == LocationPermission.denied) {
+      final LocationPermission permission =
+          await geolocatorPlatform.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
     }
+    return await geolocatorPlatform.getCurrentPosition();
   }
-  return await geolocatorPlatform.getCurrentPosition();
-}
 
-// get address from position
-Future<String> getAddressFromPosition(double latitude, double longitude) async {
-  List<Placemark> placemarks =
-      await placemarkFromCoordinates(latitude, longitude);
-  Placemark place = placemarks[0];
-  return '${place.name}, ${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}, ${place.postalCode}';
+  Future<String> reverseGeocoding(double latitude, double longitude) async {
+    final String url =
+        'https://api.mapbox.com/geocoding/v5/mapbox.places/$longitude,$latitude.json?access_token=$MAPBOX_ACCESS_TOKEN';
+    final Response response = await Dio().get(url);
+    final String placeName = response.data['features'][0]['place_name'];
+    return placeName;
+  }
 }

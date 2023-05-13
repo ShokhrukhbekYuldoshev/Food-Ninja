@@ -89,12 +89,12 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                   const SizedBox(height: 20),
                   Text(
                     "Set Your Location",
-                    style: CustomTextStyle.size25Weight700Text(),
+                    style: CustomTextStyle.size25Weight600Text(),
                   ),
                   const SizedBox(height: 20),
                   Text(
                     "This data will be displayed in your account \nprofile for security",
-                    style: CustomTextStyle.size12Weight400Text(),
+                    style: CustomTextStyle.size14Weight400Text(),
                   ),
                   const SizedBox(height: 20),
                   Container(
@@ -140,7 +140,8 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                                 ),
                               );
 
-                              String placeName = await getAddressFromPosition(
+                              String placeName =
+                                  await Geoservices().reverseGeocoding(
                                 latLng.latitude,
                                 latLng.longitude,
                               );
@@ -183,7 +184,7 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     super.initState();
 
-    getCurrentLocation().then((value) {
+    Geoservices().getCurrentLocation().then((value) {
       setState(() {
         _currentPosition = value;
       });
@@ -204,7 +205,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getCurrentLocation(),
+      future: Geoservices().getCurrentLocation(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return _buildMap();
@@ -217,6 +218,9 @@ class _MapScreenState extends State<MapScreen> {
 
   Widget _buildMap() {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Select Location"),
+      ),
       body: FlutterMap(
         options: MapOptions(
           zoom: 18.0,

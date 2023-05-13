@@ -59,12 +59,12 @@ class _SetPaymentScreenState extends State<SetPaymentScreen> {
                   const SizedBox(height: 20),
                   Text(
                     "Payment Method",
-                    style: CustomTextStyle.size25Weight700Text(),
+                    style: CustomTextStyle.size25Weight600Text(),
                   ),
                   const SizedBox(height: 20),
                   Text(
                     "This data will be displayed in your account \nprofile for security",
-                    style: CustomTextStyle.size12Weight400Text(),
+                    style: CustomTextStyle.size14Weight400Text(),
                   ),
                   const SizedBox(height: 20),
                   // payment method selection between two options: paypal and visa

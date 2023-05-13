@@ -118,4 +118,7 @@ class User {
     box.put('paymentMethod', paymentMethod.name);
     box.put('createdAt', createdAt);
   }
+
+  String get fullName => '$firstName $lastName';
+  String get initials => '${firstName[0]}${lastName[0]}';
 }

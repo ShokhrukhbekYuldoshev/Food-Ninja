@@ -39,13 +39,12 @@ class OnboardingSecondScreen extends StatelessWidget {
                   Text(
                     "Food Ninja is Where Your Comfort \nFood Lives",
                     textAlign: TextAlign.center,
-                    style: CustomTextStyle.size22Weight700Text(),
+                    style: CustomTextStyle.size22Weight600Text(),
                   ),
                   const SizedBox(height: 20),
-                  Text(
+                  const Text(
                     "Enjoy a fast and smooth food delivery at your \ndoorstep",
                     textAlign: TextAlign.center,
-                    style: CustomTextStyle.size12Weight400Text(),
                   ),
                 ],
               ),
