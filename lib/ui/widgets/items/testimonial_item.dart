@@ -5,7 +5,7 @@ import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
 import 'package:food_ninja/utils/helpers.dart';
 
-import '../../models/testimonial.dart';
+import '../../../models/testimonial.dart';
 
 class TestimonialItem extends StatelessWidget {
   const TestimonialItem({
@@ -42,10 +42,14 @@ class TestimonialItem extends StatelessWidget {
                     size: 40,
                   ),
                 )
-              : Image.network(
-                  testimonial.userImage!,
-                  height: 64,
-                  width: 64,
+              : ClipRRect(
+                  borderRadius: AppStyles.largeBorderRadius,
+                  child: Image.network(
+                    testimonial.userImage!,
+                    height: 64,
+                    width: 64,
+                    fit: BoxFit.cover,
+                  ),
                 ),
           const SizedBox(width: 20),
           Expanded(

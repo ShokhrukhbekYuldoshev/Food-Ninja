@@ -15,8 +15,8 @@ class FoodItem extends StatefulWidget {
 }
 
 class _FoodItemState extends State<FoodItem> {
-  String category = "";
   final FirestoreDatabase _db = FirestoreDatabase();
+  String category = "";
   @override
   void initState() {
     super.initState();

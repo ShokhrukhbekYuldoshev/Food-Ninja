@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ninja/bloc/food/food_bloc.dart';
 import 'package:food_ninja/bloc/login/login_bloc.dart';
+import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/bloc/register/register_bloc.dart';
 import 'package:food_ninja/services/hive_adapters.dart';
@@ -38,6 +39,9 @@ Future<void> main() async {
         ),
         BlocProvider(
           create: (context) => ProfileBloc(),
+        ),
+        BlocProvider(
+          create: (context) => OrderBloc(),
         ),
       ],
       child: const MyApp(),

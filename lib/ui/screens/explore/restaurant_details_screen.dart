@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/models/restaurant.dart';
-import 'package:food_ninja/ui/widgets/testimonial_item.dart';
+import 'package:food_ninja/ui/widgets/items/testimonial_item.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';

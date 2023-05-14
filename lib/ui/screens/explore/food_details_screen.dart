@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/ui/widgets/bullet_point.dart';
-import 'package:food_ninja/ui/widgets/testimonial_item.dart';
+import 'package:food_ninja/ui/widgets/buttons/primary_button.dart';
+import 'package:food_ninja/ui/widgets/items/testimonial_item.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -14,6 +17,18 @@ class FoodDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.fromLTRB(25, 0, 25, 25),
+        child: PrimaryButton(
+          text: "Add to cart",
+          onTap: () {
+            BlocProvider.of<OrderBloc>(context).add(
+              AddToCart(food),
+            );
+            Navigator.pushNamed(context, '/cart');
+          },
+        ),
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -116,9 +131,23 @@ class FoodDetailsScreen extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 20),
-                  Text(
-                    food.name,
-                    style: CustomTextStyle.size27Weight600Text(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          food.name,
+                          style: CustomTextStyle.size27Weight600Text(),
+                        ),
+                      ),
+                      Text(
+                        "\$${food.price}",
+                        style: CustomTextStyle.size22Weight600Text(
+                          AppColors.secondaryDarkColor,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 20),
 

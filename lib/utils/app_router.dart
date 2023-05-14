@@ -1,5 +1,3 @@
-// onGenerate Route
-
 import 'package:flutter/material.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/restaurant.dart';
@@ -22,6 +20,7 @@ import 'package:food_ninja/ui/screens/home/notification_screen.dart';
 import 'package:food_ninja/ui/screens/home/settings_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_first_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_second_screen.dart';
+import 'package:food_ninja/ui/screens/order/cart_screen.dart';
 import 'package:food_ninja/ui/screens/splash_screen.dart';
 
 class AppRouter {
@@ -134,6 +133,11 @@ class AppRouter {
       case '/settings':
         return MaterialPageRoute(
           builder: (_) => const SettingsScreen(),
+        );
+
+      case '/cart':
+        return MaterialPageRoute(
+          builder: (_) => const CartScreen(),
         );
 
       default:

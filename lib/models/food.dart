@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:food_ninja/models/testimonial.dart';
 
 class Food {
@@ -12,6 +14,9 @@ class Food {
   final String? description;
   final double? discount;
   final List<Testimonial> testimonials;
+
+  // for cart
+  int quantity = 0;
 
   Food({
     required this.image,
@@ -66,5 +71,35 @@ class Food {
     if (testimonials.isEmpty) return 0.0;
     return testimonials.map((e) => e.rating).reduce((a, b) => a + b) /
         testimonials.length;
+  }
+
+  @override
+  bool operator ==(covariant Food other) {
+    if (identical(this, other)) return true;
+
+    return other.image == image &&
+        other.category == category &&
+        other.restaurant == restaurant &&
+        other.name == name &&
+        other.price == price &&
+        listEquals(other.ingredients, ingredients) &&
+        other.createdAt == createdAt &&
+        other.description == description &&
+        other.discount == discount &&
+        listEquals(other.testimonials, testimonials);
+  }
+
+  @override
+  int get hashCode {
+    return image.hashCode ^
+        category.hashCode ^
+        restaurant.hashCode ^
+        name.hashCode ^
+        price.hashCode ^
+        ingredients.hashCode ^
+        createdAt.hashCode ^
+        description.hashCode ^
+        discount.hashCode ^
+        testimonials.hashCode;
   }
 }

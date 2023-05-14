@@ -33,6 +33,7 @@ class PrimaryButton extends StatelessWidget {
           ),
           child: Text(
             text,
+            textAlign: TextAlign.center,
             style: CustomTextStyle.size16Weight400Text(
               Colors.white,
             ),

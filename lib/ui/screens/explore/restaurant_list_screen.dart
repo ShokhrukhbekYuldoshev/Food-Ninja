@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ninja/bloc/restaurant/restaurant_bloc.dart';
 import 'package:food_ninja/models/restaurant.dart';
-import 'package:food_ninja/ui/widgets/restaurant_item.dart';
+import 'package:food_ninja/ui/widgets/items/restaurant_item.dart';
 import 'package:food_ninja/ui/widgets/search_filter_widget.dart';
 
 class RestaurantListScreen extends StatefulWidget {
