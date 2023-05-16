@@ -80,19 +80,52 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedIndex: _selectedIndex,
             destinations: [
               NavigationDestination(
-                icon: SvgPicture.asset(
+                icon: Opacity(
+                  opacity: 0.5,
+                  child: SvgPicture.asset(
+                    "assets/svg/home.svg",
+                  ),
+                ),
+                selectedIcon: SvgPicture.asset(
                   "assets/svg/home.svg",
                 ),
                 label: "Home",
               ),
               NavigationDestination(
-                icon: SvgPicture.asset(
+                icon: Opacity(
+                  opacity: 0.5,
+                  child: SvgPicture.asset(
+                    "assets/svg/chat.svg",
+                  ),
+                ),
+                selectedIcon: SvgPicture.asset(
                   "assets/svg/chat.svg",
                 ),
                 label: "Chat",
               ),
               NavigationDestination(
                 icon: BlocBuilder<OrderBloc, OrderState>(
+                  builder: (context, state) {
+                    return Badge(
+                      backgroundColor: AppColors.errorColor,
+                      isLabelVisible: OrderRepository.cart.isNotEmpty,
+                      label: Text(
+                        OrderRepository.cart.length.toString(),
+                        style: CustomTextStyle.size14Weight400Text(
+                          Colors.white,
+                        ),
+                      ),
+                      offset: const Offset(10, -10),
+                      child: Opacity(
+                        opacity: 0.5,
+                        child: SvgPicture.asset(
+                          "assets/svg/cart.svg",
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                selectedIcon: BlocBuilder<OrderBloc, OrderState>(
                   builder: (context, state) {
                     return Badge(
                       backgroundColor: AppColors.errorColor,
@@ -113,7 +146,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: "Cart",
               ),
               NavigationDestination(
-                icon: SvgPicture.asset(
+                icon: Opacity(
+                  opacity: 0.5,
+                  child: SvgPicture.asset(
+                    "assets/svg/profile.svg",
+                  ),
+                ),
+                selectedIcon: SvgPicture.asset(
                   "assets/svg/profile.svg",
                 ),
                 label: "Profile",

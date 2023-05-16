@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/repositories/order_repository.dart';
 import 'package:food_ninja/ui/widgets/buttons/back_button.dart';
-import 'package:food_ninja/ui/widgets/buttons/secondary_button.dart';
 import 'package:food_ninja/ui/widgets/items/cart_item.dart';
+import 'package:food_ninja/ui/widgets/price_info_widget.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -18,116 +18,19 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BlocBuilder<OrderBloc, OrderState>(
         builder: (context, state) {
-          return IntrinsicHeight(
-            child: Container(
-              margin: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: AppColors.primaryGradient,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: AppStyles.largeBorderRadius,
-                boxShadow: [AppStyles.boxShadow7],
-              ),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: SvgPicture.asset(
-                      'assets/svg/pattern-card.svg',
-                    ),
+          return PriceInfoWidget(
+            onTap: () {
+              if (OrderRepository.cart.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Cart is empty"),
+                    backgroundColor: AppColors.errorColor,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Subtotal',
-                              style: CustomTextStyle.size16Weight400Text(
-                                Colors.white,
-                              ),
-                            ),
-                            Text(
-                              '\$${OrderRepository.subtotal}',
-                              style: CustomTextStyle.size16Weight400Text(
-                                Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Delivery fee',
-                              style: CustomTextStyle.size16Weight400Text(
-                                Colors.white,
-                              ),
-                            ),
-                            Text(
-                              '\$${OrderRepository.deliveryFee}',
-                              style: CustomTextStyle.size16Weight400Text(
-                                Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Discount',
-                              style: CustomTextStyle.size16Weight400Text(
-                                Colors.white,
-                              ),
-                            ),
-                            Text(
-                              '\$${OrderRepository.discount}',
-                              style: CustomTextStyle.size16Weight400Text(
-                                Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total',
-                              style: CustomTextStyle.size22Weight600Text(
-                                Colors.white,
-                              ),
-                            ),
-                            Text(
-                              '\$${OrderRepository.total}',
-                              style: CustomTextStyle.size22Weight600Text(
-                                Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: SecondaryButton(
-                                text: "Place Order",
-                                onTap: () {},
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                );
+                return;
+              }
+              Navigator.pushNamed(context, "/order/confirm");
+            },
           );
         },
       ),
@@ -153,6 +56,15 @@ class CartScreen extends StatelessWidget {
                       style: CustomTextStyle.size25Weight600Text(),
                     ),
                     const SizedBox(height: 20),
+                    if (OrderRepository.cart.isEmpty)
+                      Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        child: Text(
+                          "Cart is empty",
+                          style: CustomTextStyle.size16Weight400Text(),
+                        ),
+                      ),
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),

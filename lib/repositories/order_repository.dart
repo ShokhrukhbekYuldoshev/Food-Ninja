@@ -1,5 +1,8 @@
 import 'package:food_ninja/models/order.dart' as model;
+import 'package:food_ninja/models/order_status.dart';
+import 'package:food_ninja/models/payment_method.dart';
 import 'package:food_ninja/services/firestore_db.dart';
+import 'package:hive/hive.dart';
 
 import '../models/food.dart';
 
@@ -7,20 +10,32 @@ class OrderRepository {
   final FirestoreDatabase _db = FirestoreDatabase();
   static final List<Food> cart = [];
 
-  Future<void> addOrder(model.Order order) async {
-    await _db.addDocument(
-      'orders',
-      order.toMap(),
-    );
+  static final Box<dynamic> box = Hive.box('myBox');
+
+  // load cart from hive
+  static void loadCart() {
+    if (box.containsKey('cart')) {
+      final List<Food> cartList = List<Food>.from(box.get('cart'));
+      cart.clear();
+      for (Food item in cartList) {
+        cart.add(item);
+      }
+    }
+  }
+
+  // update cart in hive
+  void updateHive() {
+    box.put('cart', cart);
   }
 
   void addToCart(Food food) {
     if (cart.contains(food)) {
-      food.quantity++;
+      cart[cart.indexOf(food)].quantity++;
     } else {
       cart.add(food);
       food.quantity++;
     }
+    updateHive();
   }
 
   void removeFromCart(Food food) {
@@ -29,6 +44,7 @@ class OrderRepository {
         food.quantity--;
       }
     }
+    updateHive();
   }
 
   void removeCompletelyFromCart(Food food) {
@@ -36,6 +52,7 @@ class OrderRepository {
       cart.remove(food);
       food.quantity = 0;
     }
+    updateHive();
   }
 
   // subtotal
@@ -60,5 +77,31 @@ class OrderRepository {
   // total
   static double get total {
     return subtotal + deliveryFee - discount;
+  }
+
+  Future<void> createOrder() async {
+    final model.Order order = model.Order(
+      cart: cart,
+      subtotal: subtotal,
+      deliveryFee: deliveryFee,
+      discount: discount,
+      total: total,
+      createdAt: DateTime.now(),
+      status: OrderStatus.pending,
+      userEmail: box.get('email'),
+      restaurant: cart[0].restaurant,
+      paymentMethod: box.get('paymentMethod', defaultValue: 'visa') == 'visa'
+          ? PaymentMethod.visa
+          : PaymentMethod.paypal,
+    );
+
+    // firestore
+    await _db.addDocument(
+      'orders',
+      order.toMap(),
+    );
+
+    cart.clear();
+    updateHive();
   }
 }

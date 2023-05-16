@@ -1,23 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
+import 'package:food_ninja/models/payment_method.dart';
 import 'package:hive/hive.dart';
 
-enum PaymentMethod {
-  visa,
-  paypal;
-
-  String get name {
-    switch (this) {
-      case PaymentMethod.visa:
-        return 'Visa';
-      case PaymentMethod.paypal:
-        return 'Paypal';
-      default:
-        return '';
-    }
-  }
-}
-
-class User {
+class User extends Equatable {
   final String email;
   final String phone;
   final String location;
@@ -29,17 +15,17 @@ class User {
   final PaymentMethod paymentMethod;
   final DateTime createdAt;
 
-  User({
+  const User({
     required this.email,
     required this.phone,
     required this.location,
     required this.firstName,
     required this.lastName,
+    required this.createdAt,
+    required this.paymentMethod,
     this.image,
     this.favoriteFoods,
     this.favoriteRestaurants,
-    required this.paymentMethod,
-    required this.createdAt,
   });
 
   factory User.fromMap(Map<String, dynamic> map) {
@@ -129,4 +115,18 @@ class User {
 
   String get fullName => '$firstName $lastName';
   String get initials => '${firstName[0]}${lastName[0]}';
+
+  @override
+  List<Object?> get props => [
+        email,
+        phone,
+        location,
+        firstName,
+        lastName,
+        image,
+        favoriteFoods,
+        favoriteRestaurants,
+        paymentMethod,
+        createdAt,
+      ];
 }

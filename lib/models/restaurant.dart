@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:food_ninja/models/testimonial.dart';
 
-class Restaurant {
+class Restaurant extends Equatable {
   final String name;
   final String location;
   final List<DocumentReference> foodList;
@@ -10,7 +11,7 @@ class Restaurant {
   final String? image;
   final String? description;
 
-  Restaurant({
+  const Restaurant({
     required this.name,
     required this.location,
     required this.foodList,
@@ -59,4 +60,15 @@ class Restaurant {
     return testimonials.map((e) => e.rating).reduce((a, b) => a + b) /
         testimonials.length;
   }
+
+  @override
+  List<Object?> get props => [
+        name,
+        image,
+        location,
+        description,
+        foodList,
+        createdAt,
+        testimonials,
+      ];
 }

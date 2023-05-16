@@ -1,34 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+import 'package:equatable/equatable.dart';
 
 import 'package:food_ninja/models/testimonial.dart';
 
-class Food {
-  final String? image;
+// ignore: must_be_immutable
+class Food extends Equatable {
   final DocumentReference category;
   final DocumentReference restaurant;
   final String name;
   final double price;
   final List<String> ingredients;
   final DateTime createdAt;
+  final String? image;
   final String? description;
   final double? discount;
-  final List<Testimonial> testimonials;
+  final List<Testimonial>? testimonials;
 
   // for cart
   int quantity = 0;
 
   Food({
-    required this.image,
     required this.category,
     required this.restaurant,
     required this.name,
     required this.price,
     required this.ingredients,
     required this.createdAt,
+    this.testimonials,
+    this.image,
     this.discount,
     this.description,
-    required this.testimonials,
+    required this.quantity,
   });
 
   factory Food.fromMap(Map<String, dynamic> map) {
@@ -48,6 +50,7 @@ class Food {
             ) ??
             const [],
       ),
+      quantity: map['quantity'] ?? 0,
     );
   }
 
@@ -62,44 +65,17 @@ class Food {
       'createdAt': createdAt,
       'discount': discount ?? 0.0,
       'description': description ?? '',
-      'testimonials': testimonials.map((x) => x.toMap()).toList(),
+      'testimonials': testimonials?.map((x) => x.toMap()).toList(),
     };
   }
 
   // rating is calculated by averaging all the ratings from testimonials
   double get rating {
-    if (testimonials.isEmpty) return 0.0;
-    return testimonials.map((e) => e.rating).reduce((a, b) => a + b) /
-        testimonials.length;
+    if (testimonials != null && testimonials!.isEmpty) return 0.0;
+    return testimonials!.map((e) => e.rating).reduce((a, b) => a + b) /
+        testimonials!.length;
   }
 
   @override
-  bool operator ==(covariant Food other) {
-    if (identical(this, other)) return true;
-
-    return other.image == image &&
-        other.category == category &&
-        other.restaurant == restaurant &&
-        other.name == name &&
-        other.price == price &&
-        listEquals(other.ingredients, ingredients) &&
-        other.createdAt == createdAt &&
-        other.description == description &&
-        other.discount == discount &&
-        listEquals(other.testimonials, testimonials);
-  }
-
-  @override
-  int get hashCode {
-    return image.hashCode ^
-        category.hashCode ^
-        restaurant.hashCode ^
-        name.hashCode ^
-        price.hashCode ^
-        ingredients.hashCode ^
-        createdAt.hashCode ^
-        description.hashCode ^
-        discount.hashCode ^
-        testimonials.hashCode;
-  }
+  List<Object> get props => [name, createdAt];
 }

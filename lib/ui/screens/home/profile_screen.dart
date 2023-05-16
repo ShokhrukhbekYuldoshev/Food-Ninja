@@ -53,6 +53,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ? Image.network(
                             _user.image!,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(
+                              "assets/png/no-image.png",
+                              fit: BoxFit.cover,
+                            ),
                           )
                         : Image.asset(
                             "assets/png/no-image.png",

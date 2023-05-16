@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_ninja/secrets.dart';
 import 'package:food_ninja/services/firestore_db.dart';
+import 'package:food_ninja/ui/screens/set_location_map_screen.dart';
 import 'package:food_ninja/ui/widgets/buttons/back_button.dart';
 import 'package:food_ninja/ui/widgets/buttons/default_button.dart';
 import 'package:food_ninja/ui/widgets/buttons/primary_button.dart';
@@ -10,11 +10,7 @@ import 'package:food_ninja/ui/widgets/loading_indicator.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:hive/hive.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:food_ninja/services/geoservices.dart';
 
 class SetLocationScreen extends StatefulWidget {
   const SetLocationScreen({super.key});
@@ -24,8 +20,8 @@ class SetLocationScreen extends StatefulWidget {
 }
 
 class _SetLocationScreenState extends State<SetLocationScreen> {
-  String locationText = "Your Location";
   var box = Hive.box('myBox');
+  String locationText = Hive.box('myBox').get('location') ?? "Your location";
 
   @override
   Widget build(BuildContext context) {
@@ -132,27 +128,18 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                           width: double.infinity,
                           child: DefaultButton(
                             text: "Set Location",
-                            onTap: () async {
-                              LatLng latLng = await Navigator.push(
+                            onTap: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const MapScreen(),
+                                  builder: (context) =>
+                                      const SetLocationMapScreen(),
                                 ),
-                              );
-
-                              String placeName =
-                                  await Geoservices().reverseGeocoding(
-                                latLng.latitude,
-                                latLng.longitude,
-                              );
-
-                              setState(() {
-                                locationText = placeName;
+                              ).then((value) {
+                                setState(() {
+                                  locationText = box.get('location');
+                                });
                               });
-
-                              // save data to hive
-
-                              box.put('location', placeName);
                             },
                             backgroundColor: AppColors.grayLightColor,
                           ),
@@ -165,100 +152,6 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
-
-  @override
-  State<MapScreen> createState() => _MapScreenState();
-}
-
-class _MapScreenState extends State<MapScreen> {
-  static Position? _currentPosition;
-
-  @override
-  void initState() {
-    super.initState();
-
-    Geoservices().getCurrentLocation().then((value) {
-      setState(() {
-        _currentPosition = value;
-      });
-    });
-  }
-
-  LatLng selectedLocation = LatLng(
-    _currentPosition?.latitude ?? 37.7749,
-    _currentPosition?.longitude ?? -122.4194,
-  );
-
-  void _selectLocation(LatLng position) {
-    setState(() {
-      selectedLocation = position;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Geoservices().getCurrentLocation(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return _buildMap();
-        } else {
-          return const LoadingIndicator();
-        }
-      },
-    );
-  }
-
-  Widget _buildMap() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Select Location"),
-      ),
-      body: FlutterMap(
-        options: MapOptions(
-          zoom: 18.0,
-          maxZoom: 18.0,
-          center: selectedLocation,
-          onTap: (tapPosition, latLng) => _selectLocation(latLng),
-          maxBounds: LatLngBounds(
-            LatLng(-90, -180.0),
-            LatLng(90.0, 180.0),
-          ),
-        ),
-        children: [
-          TileLayer(
-            urlTemplate:
-                "https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=$MAPBOX_ACCESS_TOKEN",
-          ),
-          MarkerLayer(
-            markers: [
-              Marker(
-                width: 216,
-                height: 216,
-                point: selectedLocation,
-                builder: (ctx) => SvgPicture.asset(
-                  "assets/svg/map-pin-radar.svg",
-                  width: 30,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primaryDarkColor,
-        foregroundColor: Colors.white,
-        onPressed: () {
-          Navigator.pop(context, selectedLocation);
-        },
-        child: const Icon(Icons.check),
       ),
     );
   }

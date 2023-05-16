@@ -13,3 +13,9 @@ class LoadRestaurants extends RestaurantEvent {
     required this.lastDocument,
   });
 }
+
+class LoadRestaurantFoods extends RestaurantEvent {
+  final List<DocumentReference> foodList;
+
+  LoadRestaurantFoods(this.foodList);
+}

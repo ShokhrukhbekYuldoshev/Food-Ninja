@@ -1,9 +1,11 @@
-class Notification {
+import 'package:equatable/equatable.dart';
+
+class Notification extends Equatable {
   final String title;
   final bool isSuccess;
   final DateTime createdAt;
 
-  Notification({
+  const Notification({
     required this.title,
     required this.isSuccess,
     required this.createdAt,
@@ -24,4 +26,7 @@ class Notification {
       'createdAt': createdAt,
     };
   }
+
+  @override
+  List<Object?> get props => [title, isSuccess, createdAt];
 }

@@ -10,6 +10,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   final OrderRepository orderRepository = OrderRepository();
   OrderBloc() : super(OrderInitial()) {
     on<OrderEvent>((event, emit) {});
+    on<UpdateUI>((event, emit) {
+      emit(OrderInitial());
+      emit(UIUpdated());
+    });
     on<AddToCart>((event, emit) {
       emit(OrderInitial());
       orderRepository.addToCart(event.food);
@@ -24,6 +28,17 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderInitial());
       orderRepository.removeCompletelyFromCart(event.food);
       emit(CartUpdated(OrderRepository.cart));
+    });
+    on<CreateOrder>((event, emit) async {
+      emit(OrderCreating());
+      try {
+        await orderRepository.createOrder();
+        emit(OrderCreated());
+      } catch (e, s) {
+        debugPrint(e.toString());
+        debugPrint(s.toString());
+        emit(OrderError(e.toString()));
+      }
     });
   }
 }

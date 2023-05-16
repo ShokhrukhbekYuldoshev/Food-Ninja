@@ -21,6 +21,8 @@ import 'package:food_ninja/ui/screens/home/settings_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_first_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_second_screen.dart';
 import 'package:food_ninja/ui/screens/order/cart_screen.dart';
+import 'package:food_ninja/ui/screens/order/order_confirm_screen.dart';
+import 'package:food_ninja/ui/screens/order/order_list_screen.dart';
 import 'package:food_ninja/ui/screens/splash_screen.dart';
 
 class AppRouter {
@@ -138,6 +140,16 @@ class AppRouter {
       case '/cart':
         return MaterialPageRoute(
           builder: (_) => const CartScreen(),
+        );
+
+      case '/order/confirm':
+        return MaterialPageRoute(
+          builder: (_) => const OrderConfirmScreen(),
+        );
+
+      case '/orders':
+        return MaterialPageRoute(
+          builder: (_) => const OrderListScreen(),
         );
 
       default:

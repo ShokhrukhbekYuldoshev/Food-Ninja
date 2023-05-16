@@ -6,11 +6,12 @@ import 'package:food_ninja/bloc/login/login_bloc.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/bloc/register/register_bloc.dart';
+import 'package:food_ninja/repositories/order_repository.dart';
 import 'package:food_ninja/services/hive_adapters.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'bloc/restaurant/restaurant_bloc.dart';
+import 'package:food_ninja/bloc/restaurant/restaurant_bloc.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -20,7 +21,11 @@ Future<void> main() async {
   );
   await Hive.initFlutter();
   Hive.registerAdapter(FirestoreDocumentReferenceAdapter());
+  Hive.registerAdapter(RestaurantAdapter());
+  Hive.registerAdapter(TestimonialAdapter());
+  Hive.registerAdapter(FoodAdapter());
   await Hive.openBox('myBox');
+  OrderRepository.loadCart();
 
   runApp(
     MultiBlocProvider(

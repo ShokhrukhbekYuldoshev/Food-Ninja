@@ -230,23 +230,23 @@ class FoodDetailsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-
                   const SizedBox(height: 20),
+
                   // testimonials
                   Text(
                     "Testimonials",
                     style: CustomTextStyle.size18Weight600Text(),
                   ),
                   const SizedBox(height: 20),
-                  food.testimonials.isNotEmpty
+                  food.testimonials != null && food.testimonials!.isNotEmpty
                       ? ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: food.testimonials.length,
+                          itemCount: food.testimonials!.length,
                           padding: const EdgeInsets.all(0),
                           itemBuilder: (context, index) {
                             return TestimonialItem(
-                              testimonial: food.testimonials[index],
+                              testimonial: food.testimonials![index],
                             );
                           },
                         )

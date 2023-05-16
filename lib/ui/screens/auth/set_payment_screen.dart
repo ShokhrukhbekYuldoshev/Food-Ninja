@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_ninja/models/user.dart';
+import 'package:food_ninja/models/payment_method.dart';
 import 'package:food_ninja/ui/widgets/buttons/back_button.dart';
 import 'package:food_ninja/ui/widgets/buttons/primary_button.dart';
 import 'package:food_ninja/utils/app_colors.dart';

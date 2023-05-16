@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_ninja/bloc/restaurant/restaurant_bloc.dart';
+import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/restaurant.dart';
+import 'package:food_ninja/ui/widgets/food_card.dart';
 import 'package:food_ninja/ui/widgets/items/testimonial_item.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
 
-class RestaurantDetailsScreen extends StatelessWidget {
+class RestaurantDetailsScreen extends StatefulWidget {
   final Restaurant restaurant;
   const RestaurantDetailsScreen({super.key, required this.restaurant});
+
+  @override
+  State<RestaurantDetailsScreen> createState() =>
+      _RestaurantDetailsScreenState();
+}
+
+class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
+  final List<Food> foods = [];
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<RestaurantBloc>(context).add(
+      LoadRestaurantFoods(widget.restaurant.foodList),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +46,9 @@ class RestaurantDetailsScreen extends StatelessWidget {
             flexibleSpace: Stack(
               children: [
                 FlexibleSpaceBar(
-                  background: restaurant.image != null
+                  background: widget.restaurant.image != null
                       ? Image.network(
-                          restaurant.image!,
+                          widget.restaurant.image!,
                           fit: BoxFit.cover,
                         )
                       : Image.asset(
@@ -116,7 +135,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
 
                   const SizedBox(height: 20),
                   Text(
-                    restaurant.name,
+                    widget.restaurant.name,
                     style: CustomTextStyle.size27Weight600Text(),
                   ),
                   const SizedBox(height: 20),
@@ -129,7 +148,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        "${restaurant.rating} Rating",
+                        "${widget.restaurant.rating} Rating",
                         style: CustomTextStyle.size14Weight400Text(
                           AppColors.grayColor.withOpacity(0.3),
                         ),
@@ -151,10 +170,10 @@ class RestaurantDetailsScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // description
-                  restaurant.description != null &&
-                          restaurant.description!.isNotEmpty
+                  widget.restaurant.description != null &&
+                          widget.restaurant.description!.isNotEmpty
                       ? Text(
-                          restaurant.description!,
+                          widget.restaurant.description!,
                           style: CustomTextStyle.size14Weight400Text(),
                         )
                       : Center(
@@ -167,22 +186,67 @@ class RestaurantDetailsScreen extends StatelessWidget {
                         ),
                   const SizedBox(height: 20),
 
+                  // menu
+                  Text(
+                    "Menu",
+                    style: CustomTextStyle.size18Weight600Text(),
+                  ),
                   const SizedBox(height: 20),
+                  BlocBuilder<RestaurantBloc, RestaurantState>(
+                    builder: (context, state) {
+                      if (state is RestaurantFoodsLoaded) {
+                        foods.clear();
+                        foods.addAll(state.foods);
+                      }
+                      return foods.isNotEmpty
+                          ? SizedBox(
+                              height: 190,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                padding: const EdgeInsets.all(0),
+                                shrinkWrap: true,
+                                children: foods
+                                    .map(
+                                      (food) => Row(
+                                        children: [
+                                          FoodCard(
+                                            food: food,
+                                          ),
+                                          const SizedBox(width: 20),
+                                        ],
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            )
+                          : Center(
+                              child: Text(
+                                "No foods available",
+                                style: CustomTextStyle.size14Weight400Text(
+                                  AppColors.grayColor.withOpacity(0.3),
+                                ),
+                              ),
+                            );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+
                   // testimonials
                   Text(
                     "Testimonials",
                     style: CustomTextStyle.size18Weight600Text(),
                   ),
                   const SizedBox(height: 20),
-                  restaurant.testimonials.isNotEmpty
+                  widget.restaurant.testimonials.isNotEmpty
                       ? ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: restaurant.testimonials.length,
+                          itemCount: widget.restaurant.testimonials.length,
                           padding: const EdgeInsets.all(0),
                           itemBuilder: (context, index) {
                             return TestimonialItem(
-                              testimonial: restaurant.testimonials[index],
+                              testimonial:
+                                  widget.restaurant.testimonials[index],
                             );
                           },
                         )

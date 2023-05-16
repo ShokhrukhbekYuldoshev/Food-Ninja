@@ -18,3 +18,15 @@ class RestaurantError extends RestaurantState {
 
   RestaurantError({required this.message});
 }
+
+class RestaurantFoodsLoaded extends RestaurantState {
+  final List<Food> foods;
+
+  RestaurantFoodsLoaded({required this.foods});
+}
+
+class RestaurantFoodsError extends RestaurantState {
+  final String message;
+
+  RestaurantFoodsError({required this.message});
+}

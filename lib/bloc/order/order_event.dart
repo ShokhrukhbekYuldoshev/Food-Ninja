@@ -3,6 +3,8 @@ part of 'order_bloc.dart';
 @immutable
 abstract class OrderEvent {}
 
+class UpdateUI extends OrderEvent {}
+
 class AddToCart extends OrderEvent {
   final Food food;
 
@@ -19,4 +21,8 @@ class RemoveCompletelyFromCart extends OrderEvent {
   final Food food;
 
   RemoveCompletelyFromCart(this.food);
+}
+
+class CreateOrder extends OrderEvent {
+  CreateOrder();
 }

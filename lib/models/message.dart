@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class Message {
+class Message extends Equatable {
   final DocumentReference receiver;
   final DocumentReference sender;
   final String text;
   final DateTime createdAt;
 
-  Message({
+  const Message({
     required this.receiver,
     required this.sender,
     required this.text,
@@ -30,4 +31,7 @@ class Message {
       'createdAt': createdAt,
     };
   }
+
+  @override
+  List<Object?> get props => [receiver, sender, text, createdAt];
 }
