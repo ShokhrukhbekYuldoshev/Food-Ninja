@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:food_ninja/models/food.dart';
+import 'package:food_ninja/models/order.dart';
 import 'package:food_ninja/repositories/order_repository.dart';
 
 part 'order_event.dart';
@@ -37,7 +38,18 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       } catch (e, s) {
         debugPrint(e.toString());
         debugPrint(s.toString());
-        emit(OrderError(e.toString()));
+        emit(OrderCreatingError(e.toString()));
+      }
+    });
+    on<FetchOrders>((event, emit) async {
+      emit(OrdersFetching());
+      try {
+        List<Order> orders = await orderRepository.fetchOrders();
+        emit(OrdersFetched(orders));
+      } catch (e, s) {
+        debugPrint(e.toString());
+        debugPrint(s.toString());
+        emit(OrderFetchingError(e.toString()));
       }
     });
   }

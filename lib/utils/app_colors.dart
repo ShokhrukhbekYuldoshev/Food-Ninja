@@ -19,6 +19,19 @@ class AppColors {
   static const Color borderColor = Color(0xFFF4F4F4);
   static const Color grayColor = Color(0xFF3B3B3B);
   static const Color grayLightColor = Color(0xFFF6F6F6);
+  // for order status
+  // pending,
+  // preparing,
+  // delivering,
+  // delivered,
+  // canceled;
+
+  // for order status
+  static const Color pendingColor = starColor;
+  static const Color preparingColor = secondaryColor;
+  static const Color deliveringColor = Colors.blue;
+  static const Color deliveredColor = successColor;
+  static const Color canceledColor = errorColor;
 
   // shimmer colors
   static const Color shimmerBaseColor = Color(0xFFE0E0E0);

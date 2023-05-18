@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_ninja/models/food.dart';
+import 'package:food_ninja/models/order.dart';
 import 'package:food_ninja/models/restaurant.dart';
 import 'package:food_ninja/ui/screens/auth/forgot_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/login_screen.dart';
@@ -22,6 +23,7 @@ import 'package:food_ninja/ui/screens/onboarding/onboarding_first_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_second_screen.dart';
 import 'package:food_ninja/ui/screens/order/cart_screen.dart';
 import 'package:food_ninja/ui/screens/order/order_confirm_screen.dart';
+import 'package:food_ninja/ui/screens/order/order_details_screen.dart';
 import 'package:food_ninja/ui/screens/order/order_list_screen.dart';
 import 'package:food_ninja/ui/screens/splash_screen.dart';
 
@@ -150,6 +152,13 @@ class AppRouter {
       case '/orders':
         return MaterialPageRoute(
           builder: (_) => const OrderListScreen(),
+        );
+
+      case '/orders/detail':
+        return MaterialPageRoute(
+          builder: (_) => OrderDetailsScreen(
+            order: settings.arguments as Order,
+          ),
         );
 
       default:

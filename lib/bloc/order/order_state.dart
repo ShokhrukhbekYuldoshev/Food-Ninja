@@ -21,8 +21,22 @@ class OrderCreated extends OrderState {
   OrderCreated();
 }
 
-class OrderError extends OrderState {
+class OrderCreatingError extends OrderState {
   final String message;
 
-  OrderError(this.message);
+  OrderCreatingError(this.message);
+}
+
+class OrdersFetching extends OrderState {}
+
+class OrdersFetched extends OrderState {
+  final List<Order> orders;
+
+  OrdersFetched(this.orders);
+}
+
+class OrderFetchingError extends OrderState {
+  final String message;
+
+  OrderFetchingError(this.message);
 }

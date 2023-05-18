@@ -33,7 +33,7 @@ class OrderConfirmScreen extends StatelessWidget {
             (route) => false,
           );
           Navigator.of(context).pushNamed("/orders");
-        } else if (state is OrderError) {
+        } else if (state is OrderCreatingError) {
           // remove loading
           Navigator.of(context).pop();
           // show error message

@@ -4,6 +4,7 @@ import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/order_status.dart';
 import 'package:food_ninja/models/payment_method.dart';
 
+// ignore: must_be_immutable
 class Order extends Equatable {
   final List<Food> cart;
   final double subtotal;
@@ -16,7 +17,10 @@ class Order extends Equatable {
   final DateTime createdAt;
   final PaymentMethod paymentMethod;
 
-  const Order({
+  // id is the document id
+  String? id;
+
+  Order({
     required this.cart,
     required this.subtotal,
     required this.deliveryFee,
@@ -39,13 +43,14 @@ class Order extends Equatable {
       restaurant: map['restaurant'],
       userEmail: map['userEmail'],
       status: OrderStatus.values[map['status']],
-      createdAt: map['createdAt'],
+      createdAt: map['createdAt'].toDate(),
       paymentMethod: PaymentMethod.values[map['paymentMethod']],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'cart': cart.map(
         (x) {
           var food = x.toMap();
@@ -67,6 +72,7 @@ class Order extends Equatable {
 
   @override
   List<Object?> get props => [
+        id,
         cart,
         subtotal,
         deliveryFee,

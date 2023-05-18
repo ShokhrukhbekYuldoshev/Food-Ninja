@@ -26,3 +26,7 @@ class RemoveCompletelyFromCart extends OrderEvent {
 class CreateOrder extends OrderEvent {
   CreateOrder();
 }
+
+class FetchOrders extends OrderEvent {
+  FetchOrders();
+}

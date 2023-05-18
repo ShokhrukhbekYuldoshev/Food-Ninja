@@ -87,7 +87,7 @@ class OrderRepository {
       discount: discount,
       total: total,
       createdAt: DateTime.now(),
-      status: OrderStatus.pending,
+      status: OrderStatus.delivered,
       userEmail: box.get('email'),
       restaurant: cart[0].restaurant,
       paymentMethod: box.get('paymentMethod', defaultValue: 'visa') == 'visa'
@@ -103,5 +103,26 @@ class OrderRepository {
 
     cart.clear();
     updateHive();
+  }
+
+  Future<List<model.Order>> fetchOrders() async {
+    final List<model.Order> orders = [];
+    var data = await _db.getDocumentFromCollectionWhere(
+      'orders',
+      'userEmail',
+      box.get('email'),
+    );
+    for (var item in data.docs) {
+      model.Order order = model.Order.fromMap(
+        item.data() as Map<String, dynamic>,
+      );
+      order.id = item.id;
+      orders.add(order);
+    }
+
+    // sort by date
+    orders.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    return orders;
   }
 }
