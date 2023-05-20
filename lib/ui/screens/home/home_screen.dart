@@ -220,7 +220,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   const SizedBox(height: 18),
-                  SearchFilterWidget(searchController: _searchController),
+                  SearchFilterWidget(
+                    searchController: _searchController,
+                    onChanged: (value) {},
+                    onTap: () {},
+                  ),
                   const SizedBox(height: 20),
                   Container(
                     width: double.infinity,
@@ -314,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 10),
                   BlocBuilder<RestaurantBloc, RestaurantState>(
                     builder: (context, state) {
-                      if (state is RestaurantLoading) {
+                      if (state is RestaurantsLoading) {
                         return const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -327,10 +331,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         );
-                      } else if (state is RestaurantLoaded) {
+                      } else if (state is RestaurantsLoaded) {
                         _restaurants.clear();
                         _restaurants.addAll(state.restaurants);
-                      } else if (state is RestaurantError) {
+                      } else if (state is RestaurantsLoadingError) {
                         return Center(
                           child: Text(state.message),
                         );

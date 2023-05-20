@@ -5,18 +5,18 @@ abstract class RestaurantState {}
 
 class RestaurantInitial extends RestaurantState {}
 
-class RestaurantLoading extends RestaurantState {}
+class RestaurantsLoading extends RestaurantState {}
 
-class RestaurantLoaded extends RestaurantState {
+class RestaurantsLoaded extends RestaurantState {
   final List<Restaurant> restaurants;
 
-  RestaurantLoaded({required this.restaurants});
+  RestaurantsLoaded({required this.restaurants});
 }
 
-class RestaurantError extends RestaurantState {
+class RestaurantsLoadingError extends RestaurantState {
   final String message;
 
-  RestaurantError({required this.message});
+  RestaurantsLoadingError({required this.message});
 }
 
 class RestaurantFoodsLoaded extends RestaurantState {
@@ -29,4 +29,8 @@ class RestaurantFoodsError extends RestaurantState {
   final String message;
 
   RestaurantFoodsError({required this.message});
+}
+
+class SearchUpdated extends RestaurantState {
+  SearchUpdated();
 }

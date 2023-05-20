@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:food_ninja/models/testimonial.dart';
+import 'package:hive/hive.dart';
 
 // ignore: must_be_immutable
 class Food extends Equatable {
@@ -18,6 +19,9 @@ class Food extends Equatable {
 
   // for cart
   int quantity = 0;
+
+  // id is the document id
+  String? id;
 
   Food({
     required this.category,
@@ -56,6 +60,7 @@ class Food extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'image': image,
       'category': category,
       'restaurant': restaurant,
@@ -67,6 +72,15 @@ class Food extends Equatable {
       'description': description ?? '',
       'testimonials': testimonials?.map((x) => x.toMap()).toList(),
     };
+  }
+
+  // food is favorite
+  bool get isFavorite {
+    final box = Hive.box('myBox');
+    final favorites = box.get('favoriteFoods') as List<dynamic>?;
+    if (favorites == null || favorites.isEmpty) return false;
+    DocumentReference ref = FirebaseFirestore.instance.doc('/foods/$id');
+    return favorites.contains(ref);
   }
 
   // rating is calculated by averaging all the ratings from testimonials

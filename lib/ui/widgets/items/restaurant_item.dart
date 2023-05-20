@@ -32,20 +32,29 @@ class RestaurantItem extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 26, 0, 0),
           child: Column(
             children: [
+              // https://firebasestorage.googleapis.com/v0/b/food-ninja-f7b7c.appspot.com/o/restaurants%2Frestaurant-menu-removebg-preview.png?alt=media&token=8b463292-0f02-47f3-89da-196bc752f6ae
               ClipRRect(
                 borderRadius: AppStyles.defaultBorderRadius,
                 child: restaurant.image == null
-                    ? Image.asset(
-                        "assets/png/no-image.png",
+                    ? const SizedBox(
                         height: 90,
+                        child: Icon(
+                          Icons.restaurant,
+                          color: AppColors.secondaryColor,
+                          size: 70,
+                        ),
                       )
                     : Image.network(
                         restaurant.image!,
                         height: 90,
                         errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            "assets/png/no-image.png",
+                          return const SizedBox(
                             height: 90,
+                            child: Icon(
+                              Icons.restaurant,
+                              color: AppColors.secondaryColor,
+                              size: 70,
+                            ),
                           );
                         },
                       ),

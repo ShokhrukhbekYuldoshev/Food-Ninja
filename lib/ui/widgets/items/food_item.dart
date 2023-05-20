@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/services/firestore_db.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -62,9 +63,9 @@ class _FoodItemState extends State<FoodItem> {
                 child: ClipRRect(
                   borderRadius: AppStyles.defaultBorderRadius,
                   child: widget.food.image == null
-                      ? Image.asset(
-                          "assets/png/no-image.png",
-                          fit: BoxFit.cover,
+                      ? ImagePlaceholder(
+                          iconData: Icons.fastfood,
+                          iconSize: 30,
                         )
                       : Image.network(
                           widget.food.image!,

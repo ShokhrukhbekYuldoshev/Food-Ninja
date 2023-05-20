@@ -18,3 +18,7 @@ class FoodError extends FoodState {
 
   FoodError({required this.message});
 }
+
+class SearchUpdated extends FoodState {
+  SearchUpdated();
+}

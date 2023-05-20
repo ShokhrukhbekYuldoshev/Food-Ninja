@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
+import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/ui/widgets/bullet_point.dart';
 import 'package:food_ninja/ui/widgets/buttons/primary_button.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/ui/widgets/items/testimonial_item.dart';
+import 'package:food_ninja/ui/widgets/buttons/like_button.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -48,9 +51,9 @@ class FoodDetailsScreen extends StatelessWidget {
                           food.image!,
                           fit: BoxFit.cover,
                         )
-                      : Image.asset(
-                          "assets/png/no-image.png",
-                          fit: BoxFit.cover,
+                      : ImagePlaceholder(
+                          iconData: Icons.fastfood,
+                          iconSize: 100,
                         ),
                 ),
                 //Border radius
@@ -123,8 +126,17 @@ class FoodDetailsScreen extends StatelessWidget {
                           "assets/svg/location.svg",
                         ),
                         const SizedBox(width: 12),
-                        SvgPicture.asset(
-                          "assets/svg/heart.svg",
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            return LikeButton(
+                              isLiked: food.isFavorite,
+                              onTap: () {
+                                BlocProvider.of<ProfileBloc>(context).add(
+                                  ToggleFavoriteFood(foodId: food.id!),
+                                );
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),

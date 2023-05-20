@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ninja/bloc/profile/profile_bloc.dart';
-import 'package:food_ninja/models/food.dart';
-import 'package:food_ninja/models/restaurant.dart';
 import 'package:food_ninja/models/user.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/ui/widgets/items/food_item.dart';
 import 'package:food_ninja/ui/widgets/items/restaurant_item.dart';
 import 'package:food_ninja/utils/app_colors.dart';
@@ -19,18 +18,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final User _user = User.fromHive();
-  final List<Food> _favoriteFoods = [];
-  final List<Restaurant> _favoriteRestaurants = [];
 
   @override
   void initState() {
     super.initState();
     BlocProvider.of<ProfileBloc>(context).add(
-      LoadFavoriteFoods(),
-    );
-
-    BlocProvider.of<ProfileBloc>(context).add(
-      LoadFavoriteRestaurants(),
+      FetchFavorites(),
     );
   }
 
@@ -54,14 +47,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             _user.image!,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(
-                              "assets/png/no-image.png",
-                              fit: BoxFit.cover,
+                                ImagePlaceholder(
+                              iconData: Icons.person,
+                              iconSize: 100,
                             ),
                           )
-                        : Image.asset(
-                            "assets/png/no-image.png",
-                            fit: BoxFit.cover,
+                        : ImagePlaceholder(
+                            iconData: Icons.person,
+                            iconSize: 100,
                           ),
                   ),
                   //Border radius
@@ -165,13 +158,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 20),
                     BlocBuilder<ProfileBloc, ProfileState>(
                       builder: (context, state) {
-                        if (state is FavoriteFoodsLoading) {
+                        if (state is FetchingFavorites) {
                           return const FoodItemShimmer();
-                        } else if (state is FavoriteFoodsLoaded) {
-                          _favoriteFoods.clear();
-                          _favoriteFoods.addAll(state.favoriteFoods);
-
-                          if (_favoriteFoods.isEmpty) {
+                        } else if (state is FavoritesFetched) {
+                          if (state.favoriteFoods.isEmpty) {
                             return Center(
                               child: Text(
                                 'No favorite foods',
@@ -185,32 +175,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: _favoriteFoods.length,
+                            itemCount: state.favoriteFoods.length,
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
-                                  FoodItem(food: _favoriteFoods[index]),
-                                  const SizedBox(height: 20),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: _favoriteFoods.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  FoodItem(food: _favoriteFoods[index]),
+                                  FoodItem(food: state.favoriteFoods[index]),
                                   const SizedBox(height: 20),
                                 ],
                               );
                             },
                           );
                         }
+                        return const SizedBox();
                       },
                     ),
                     const SizedBox(height: 20),
@@ -221,14 +197,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 20),
                     BlocBuilder<ProfileBloc, ProfileState>(
                       builder: (context, state) {
-                        if (state is FavoriteRestaurantsLoading) {
-                          return const FoodItemShimmer();
-                        } else if (state is FavoriteRestaurantsLoaded) {
-                          _favoriteRestaurants.clear();
-                          _favoriteRestaurants
-                              .addAll(state.favoriteRestaurants);
-
-                          if (_favoriteRestaurants.isEmpty) {
+                        if (state is FetchingFavorites) {
+                          return const SizedBox(
+                            width: 150,
+                            height: 200,
+                            child: RestaurantItemShimmer(),
+                          );
+                        } else if (state is FavoritesFetched) {
+                          if (state.favoriteRestaurants.isEmpty) {
                             return Center(
                               child: Text(
                                 'No favorite restaurants',
@@ -245,7 +221,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               scrollDirection: Axis.horizontal,
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
-                              children: _favoriteRestaurants.map((restaurant) {
+                              children:
+                                  state.favoriteRestaurants.map((restaurant) {
                                 return Container(
                                   width: 150,
                                   margin: const EdgeInsets.only(right: 20),
@@ -257,19 +234,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           );
                         }
-                        return SizedBox(
-                          height: 200,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            children: _favoriteRestaurants.map((restaurant) {
-                              return RestaurantItem(
-                                restaurant: restaurant,
-                              );
-                            }).toList(),
-                          ),
-                        );
+                        return const SizedBox();
                       },
                     ),
                   ],

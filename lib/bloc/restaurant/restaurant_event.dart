@@ -19,3 +19,5 @@ class LoadRestaurantFoods extends RestaurantEvent {
 
   LoadRestaurantFoods(this.foodList);
 }
+
+class SearchRestaurants extends RestaurantEvent {}

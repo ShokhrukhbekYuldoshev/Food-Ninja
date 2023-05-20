@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/services/firestore_db.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -53,16 +54,17 @@ class _CartItemState extends State<CartItem> {
             child: ClipRRect(
               borderRadius: AppStyles.defaultBorderRadius,
               child: widget.food.image == null
-                  ? Image.asset(
-                      "assets/png/no-image.png",
-                      fit: BoxFit.cover,
+                  ? ImagePlaceholder(
+                      iconData: Icons.fastfood,
+                      iconSize: 30,
                     )
                   : Image.network(
                       widget.food.image!,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
-                        return const Center(
-                          child: Icon(Icons.error),
+                        return ImagePlaceholder(
+                          iconData: Icons.fastfood,
+                          iconSize: 30,
                         );
                       },
                     ),

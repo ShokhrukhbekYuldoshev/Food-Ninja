@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_ninja/models/food.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -37,11 +38,11 @@ class FoodCard extends StatelessWidget {
                 topRight: Radius.circular(10),
               ),
               child: food.image == null
-                  ? Image.asset(
-                      "assets/png/no-image.png",
-                      fit: BoxFit.cover,
+                  ? ImagePlaceholder(
                       width: double.infinity,
                       height: 100,
+                      iconData: Icons.fastfood,
+                      iconSize: 50,
                     )
                   : Image.network(
                       food.image!,
@@ -53,11 +54,11 @@ class FoodCard extends StatelessWidget {
                         error,
                         stackTrace,
                       ) {
-                        return Image.asset(
-                          "assets/png/no-image.png",
-                          fit: BoxFit.cover,
+                        return ImagePlaceholder(
                           width: double.infinity,
                           height: 100,
+                          iconData: Icons.fastfood,
+                          iconSize: 50,
                         );
                       },
                     ),

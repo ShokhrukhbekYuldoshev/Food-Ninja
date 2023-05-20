@@ -13,3 +13,5 @@ class LoadFoods extends FoodEvent {
     required this.lastDocument,
   });
 }
+
+class SearchFoods extends FoodEvent {}

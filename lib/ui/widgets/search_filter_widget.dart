@@ -5,10 +5,14 @@ import 'package:food_ninja/ui/widgets/search_field.dart';
 class SearchFilterWidget extends StatelessWidget {
   const SearchFilterWidget({
     super.key,
-    required TextEditingController searchController,
-  }) : _searchController = searchController;
+    required this.searchController,
+    required this.onChanged,
+    required this.onTap,
+  });
 
-  final TextEditingController _searchController;
+  final TextEditingController searchController;
+  final Function(String)? onChanged;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +20,14 @@ class SearchFilterWidget extends StatelessWidget {
       height: 50,
       child: Row(
         children: [
-          SearchField(searchController: _searchController),
+          SearchField(
+            searchController: searchController,
+            onChanged: onChanged,
+          ),
           const SizedBox(width: 10),
-          const FilterWidget(),
+          FilterWidget(
+            onTap: onTap,
+          ),
         ],
       ),
     );

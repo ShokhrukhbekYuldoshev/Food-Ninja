@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:food_ninja/models/payment_method.dart';
 import 'package:hive/hive.dart';
 
+// ignore: must_be_immutable
 class User extends Equatable {
   final String email;
   final String phone;
@@ -15,7 +16,10 @@ class User extends Equatable {
   final PaymentMethod paymentMethod;
   final DateTime createdAt;
 
-  const User({
+  // id is the document id
+  String? id;
+
+  User({
     required this.email,
     required this.phone,
     required this.location,
@@ -59,6 +63,7 @@ class User extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'email': email,
       'phone': phone,
       'location': location,
@@ -101,6 +106,7 @@ class User extends Equatable {
   Future<void> saveToHive() async {
     var box = Hive.box('myBox');
 
+    box.put('id', id);
     box.put('email', email);
     box.put('phone', phone);
     box.put('location', location);

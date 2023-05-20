@@ -11,7 +11,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
   RestaurantBloc() : super(RestaurantInitial()) {
     on<RestaurantEvent>((event, emit) {});
     on<LoadRestaurants>((event, emit) async {
-      emit(RestaurantLoading());
+      emit(RestaurantsLoading());
       try {
         FirestoreDatabase db = FirestoreDatabase();
         QuerySnapshot<Object?> restaurantsCollection =
@@ -23,20 +23,21 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
         List<Restaurant> restaurants = restaurantsCollection.docs
             .map(
-              (e) => Restaurant.fromMap(e.data() as Map<String, dynamic>),
+              (e) => Restaurant.fromMap(e.data() as Map<String, dynamic>)
+                ..id = e.id,
             )
             .toList();
         emit(
-          RestaurantLoaded(restaurants: restaurants),
+          RestaurantsLoaded(restaurants: restaurants),
         );
       } catch (e, s) {
         debugPrint(e.toString());
         debugPrint(s.toString());
-        emit(RestaurantError(message: e.toString()));
+        emit(RestaurantsLoadingError(message: e.toString()));
       }
     });
     on<LoadRestaurantFoods>((event, emit) async {
-      emit(RestaurantLoading());
+      emit(RestaurantsLoading());
       try {
         List<Food> foods = [];
         for (DocumentReference foodRef in event.foodList) {
@@ -50,8 +51,12 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       } catch (e, s) {
         debugPrint(e.toString());
         debugPrint(s.toString());
-        emit(RestaurantError(message: e.toString()));
+        emit(RestaurantFoodsError(message: e.toString()));
       }
+    });
+    on<SearchRestaurants>((event, emit) async {
+      emit(RestaurantInitial());
+      emit(SearchUpdated());
     });
   }
 }

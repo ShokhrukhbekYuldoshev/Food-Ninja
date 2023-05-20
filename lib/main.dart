@@ -25,6 +25,7 @@ Future<void> main() async {
   Hive.registerAdapter(TestimonialAdapter());
   Hive.registerAdapter(FoodAdapter());
   await Hive.openBox('myBox');
+
   OrderRepository.loadCart();
 
   runApp(
@@ -68,6 +69,21 @@ class MyApp extends StatelessWidget {
           backgroundColor: AppColors.backgroundColor,
           indicatorColor: AppColors.primaryColor.withOpacity(0.1),
           surfaceTintColor: Colors.transparent,
+        ),
+        // change text button style
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: AppColors.secondaryDarkColor,
+          ),
+        ),
+        // change checkbox style
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStateProperty.all(
+            AppColors.secondaryLightColor.withOpacity(0.1),
+          ),
+          checkColor: MaterialStateProperty.all(
+            AppColors.secondaryDarkColor,
+          ),
         ),
       ),
       onGenerateRoute: AppRouter.onGenerateRoute,

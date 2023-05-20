@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/bloc/restaurant/restaurant_bloc.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/restaurant.dart';
+import 'package:food_ninja/ui/widgets/buttons/like_button.dart';
 import 'package:food_ninja/ui/widgets/food_card.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/ui/widgets/items/testimonial_item.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
@@ -50,10 +53,15 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       ? Image.network(
                           widget.restaurant.image!,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              ImagePlaceholder(
+                            iconData: Icons.restaurant,
+                            iconSize: 100,
+                          ),
                         )
-                      : Image.asset(
-                          "assets/png/no-image.png",
-                          fit: BoxFit.cover,
+                      : ImagePlaceholder(
+                          iconData: Icons.restaurant,
+                          iconSize: 100,
                         ),
                 ),
                 //Border radius
@@ -126,8 +134,19 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                           "assets/svg/location.svg",
                         ),
                         const SizedBox(width: 12),
-                        SvgPicture.asset(
-                          "assets/svg/heart.svg",
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            return LikeButton(
+                              isLiked: widget.restaurant.isFavorite,
+                              onTap: () {
+                                BlocProvider.of<ProfileBloc>(context).add(
+                                  ToggleFavoriteRestaurant(
+                                    restaurantId: widget.restaurant.id!,
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),

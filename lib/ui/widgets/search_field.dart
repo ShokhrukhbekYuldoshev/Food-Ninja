@@ -5,19 +5,22 @@ import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
 
 class SearchField extends StatelessWidget {
+  final TextEditingController searchController;
+  final Function(String)? onChanged;
+
   const SearchField({
     super.key,
-    required TextEditingController searchController,
-  }) : _searchController = searchController;
-
-  final TextEditingController _searchController;
+    required this.searchController,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
         cursorColor: AppColors.secondaryDarkColor,
-        controller: _searchController,
+        controller: searchController,
+        onChanged: onChanged,
         decoration: InputDecoration(
           fillColor: AppColors.secondaryLightColor.withOpacity(0.1),
           filled: true,

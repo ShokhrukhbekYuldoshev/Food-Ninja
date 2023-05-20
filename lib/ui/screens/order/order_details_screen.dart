@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/models/order.dart';
 import 'package:food_ninja/ui/widgets/buttons/back_button.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -154,27 +155,22 @@ class OrderDetailsScreen extends StatelessWidget {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              item.image != null
-                                  ? ClipRRect(
-                                      borderRadius:
-                                          AppStyles.defaultBorderRadius,
-                                      child: Image.network(
+                              ClipRRect(
+                                borderRadius: AppStyles.defaultBorderRadius,
+                                child: item.image != null
+                                    ? Image.network(
                                         item.image!,
                                         fit: BoxFit.cover,
                                         width: 64,
                                         height: 64,
+                                      )
+                                    : ImagePlaceholder(
+                                        iconData: Icons.fastfood,
+                                        iconSize: 30,
+                                        width: 64,
+                                        height: 64,
                                       ),
-                                    )
-                                  : Container(
-                                      width: 64,
-                                      height: 64,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            AppStyles.defaultBorderRadius,
-                                        color: AppColors.primaryColor,
-                                      ),
-                                      child: const Icon(Icons.fastfood),
-                                    ),
+                              ),
                               const SizedBox(width: 16),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
