@@ -15,3 +15,9 @@ class LoadFoods extends FoodEvent {
 }
 
 class SearchFoods extends FoodEvent {}
+
+class FetchOrderCount extends FoodEvent {
+  final String foodId;
+
+  FetchOrderCount({required this.foodId});
+}

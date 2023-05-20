@@ -3,30 +3,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/restaurant.dart';
-import 'package:food_ninja/services/firestore_db.dart';
+import 'package:food_ninja/repositories/restaurant_repository.dart';
 part 'restaurant_event.dart';
 part 'restaurant_state.dart';
 
 class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
+  final RestaurantRepository restaurantRepository = RestaurantRepository();
   RestaurantBloc() : super(RestaurantInitial()) {
     on<RestaurantEvent>((event, emit) {});
     on<LoadRestaurants>((event, emit) async {
       emit(RestaurantsLoading());
       try {
-        FirestoreDatabase db = FirestoreDatabase();
-        QuerySnapshot<Object?> restaurantsCollection =
-            await db.getCollectionWithPagination(
-          "restaurants",
-          event.limit,
-          event.lastDocument,
-        );
-
-        List<Restaurant> restaurants = restaurantsCollection.docs
-            .map(
-              (e) => Restaurant.fromMap(e.data() as Map<String, dynamic>)
-                ..id = e.id,
-            )
-            .toList();
+        List<Restaurant> restaurants = await restaurantRepository
+            .fetchRestaurants(event.limit, event.lastDocument);
         emit(
           RestaurantsLoaded(restaurants: restaurants),
         );
@@ -39,12 +28,8 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     on<LoadRestaurantFoods>((event, emit) async {
       emit(RestaurantsLoading());
       try {
-        List<Food> foods = [];
-        for (DocumentReference foodRef in event.foodList) {
-          DocumentSnapshot<Object?> foodDoc = await foodRef.get();
-          Food food = Food.fromMap(foodDoc.data() as Map<String, dynamic>);
-          foods.add(food);
-        }
+        List<Food> foods =
+            await restaurantRepository.fetchRestaurantFoods(event.foodList);
         emit(
           RestaurantFoodsLoaded(foods: foods),
         );
@@ -57,6 +42,19 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     on<SearchRestaurants>((event, emit) async {
       emit(RestaurantInitial());
       emit(SearchUpdated());
+    });
+    on<FetchOrderCount>((event, emit) async {
+      emit(OrderCountFetching());
+      try {
+        int count = await restaurantRepository
+            .getRestaurantOrderCount(event.restaurantId);
+
+        emit(OrderCountFetched(count: count));
+      } catch (e, s) {
+        debugPrint(e.toString());
+        debugPrint(s.toString());
+        emit(OrderCountError(message: e.toString()));
+      }
     });
   }
 }

@@ -34,3 +34,17 @@ class RestaurantFoodsError extends RestaurantState {
 class SearchUpdated extends RestaurantState {
   SearchUpdated();
 }
+
+class OrderCountFetching extends RestaurantState {}
+
+class OrderCountError extends RestaurantState {
+  final String message;
+
+  OrderCountError({required this.message});
+}
+
+class OrderCountFetched extends RestaurantState {
+  final int count;
+
+  OrderCountFetched({required this.count});
+}

@@ -30,6 +30,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
     BlocProvider.of<RestaurantBloc>(context).add(
       LoadRestaurantFoods(widget.restaurant.foodList),
     );
+    BlocProvider.of<RestaurantBloc>(context).add(
+      FetchOrderCount(restaurantId: widget.restaurant.id!),
+    );
   }
 
   @override
@@ -177,12 +180,23 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                         "assets/svg/shopping-bag.svg",
                       ),
                       const SizedBox(width: 10),
-                      // TODO: change this to actual number of orders
-                      Text(
-                        "2000+ Orders",
-                        style: CustomTextStyle.size14Weight400Text(
-                          AppColors.grayColor.withOpacity(0.3),
-                        ),
+                      BlocBuilder<RestaurantBloc, RestaurantState>(
+                        builder: (context, state) {
+                          if (state is OrderCountFetched) {
+                            return Text(
+                              "${state.count} ${state.count == 1 ? "Order" : "Orders"}",
+                              style: CustomTextStyle.size14Weight400Text(
+                                AppColors.grayColor.withOpacity(0.3),
+                              ),
+                            );
+                          }
+                          return Text(
+                            "0 Orders",
+                            style: CustomTextStyle.size14Weight400Text(
+                              AppColors.grayColor.withOpacity(0.3),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

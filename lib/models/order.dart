@@ -50,7 +50,6 @@ class Order extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'cart': cart.map(
         (x) {
           var food = x.toMap();

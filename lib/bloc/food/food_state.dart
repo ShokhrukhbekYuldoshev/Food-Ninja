@@ -22,3 +22,17 @@ class FoodError extends FoodState {
 class SearchUpdated extends FoodState {
   SearchUpdated();
 }
+
+class OrderCountFetching extends FoodState {}
+
+class OrderCountError extends FoodState {
+  final String message;
+
+  OrderCountError({required this.message});
+}
+
+class OrderCountFetched extends FoodState {
+  final int count;
+
+  OrderCountFetched({required this.count});
+}

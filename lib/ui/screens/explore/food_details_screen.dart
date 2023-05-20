@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_ninja/bloc/food/food_bloc.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/models/food.dart';
@@ -13,9 +14,22 @@ import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
 
-class FoodDetailsScreen extends StatelessWidget {
+class FoodDetailsScreen extends StatefulWidget {
   final Food food;
   const FoodDetailsScreen({super.key, required this.food});
+
+  @override
+  State<FoodDetailsScreen> createState() => _FoodDetailsScreenState();
+}
+
+class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<FoodBloc>(context).add(
+      FetchOrderCount(foodId: widget.food.id!),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +40,7 @@ class FoodDetailsScreen extends StatelessWidget {
           text: "Add to cart",
           onTap: () {
             BlocProvider.of<OrderBloc>(context).add(
-              AddToCart(food),
+              AddToCart(widget.food),
             );
             Navigator.pushNamed(context, '/cart');
           },
@@ -46,9 +60,9 @@ class FoodDetailsScreen extends StatelessWidget {
             flexibleSpace: Stack(
               children: [
                 FlexibleSpaceBar(
-                  background: food.image != null
+                  background: widget.food.image != null
                       ? Image.network(
-                          food.image!,
+                          widget.food.image!,
                           fit: BoxFit.cover,
                         )
                       : ImagePlaceholder(
@@ -129,10 +143,10 @@ class FoodDetailsScreen extends StatelessWidget {
                         BlocBuilder<ProfileBloc, ProfileState>(
                           builder: (context, state) {
                             return LikeButton(
-                              isLiked: food.isFavorite,
+                              isLiked: widget.food.isFavorite,
                               onTap: () {
                                 BlocProvider.of<ProfileBloc>(context).add(
-                                  ToggleFavoriteFood(foodId: food.id!),
+                                  ToggleFavoriteFood(foodId: widget.food.id!),
                                 );
                               },
                             );
@@ -149,12 +163,12 @@ class FoodDetailsScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          food.name,
+                          widget.food.name,
                           style: CustomTextStyle.size27Weight600Text(),
                         ),
                       ),
                       Text(
-                        "\$${food.price}",
+                        "\$${widget.food.price}",
                         style: CustomTextStyle.size22Weight600Text(
                           AppColors.secondaryDarkColor,
                         ),
@@ -171,7 +185,7 @@ class FoodDetailsScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        "${food.rating} Rating",
+                        "${widget.food.rating} Rating",
                         style: CustomTextStyle.size14Weight400Text(
                           AppColors.grayColor.withOpacity(0.3),
                         ),
@@ -181,21 +195,33 @@ class FoodDetailsScreen extends StatelessWidget {
                         "assets/svg/shopping-bag.svg",
                       ),
                       const SizedBox(width: 10),
-                      // TODO: change this to actual number of orders
-                      Text(
-                        "2000+ Orders",
-                        style: CustomTextStyle.size14Weight400Text(
-                          AppColors.grayColor.withOpacity(0.3),
-                        ),
+                      BlocBuilder<FoodBloc, FoodState>(
+                        builder: (context, state) {
+                          if (state is OrderCountFetched) {
+                            return Text(
+                              "${state.count} ${state.count == 1 ? "Order" : "Orders"}",
+                              style: CustomTextStyle.size14Weight400Text(
+                                AppColors.grayColor.withOpacity(0.3),
+                              ),
+                            );
+                          }
+                          return Text(
+                            "0 Orders",
+                            style: CustomTextStyle.size14Weight400Text(
+                              AppColors.grayColor.withOpacity(0.3),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
                   const SizedBox(height: 24),
 
                   // description
-                  food.description != null && food.description!.isNotEmpty
+                  widget.food.description != null &&
+                          widget.food.description!.isNotEmpty
                       ? Text(
-                          food.description!,
+                          widget.food.description!,
                           style: CustomTextStyle.size14Weight400Text(),
                         )
                       : Center(
@@ -214,11 +240,11 @@ class FoodDetailsScreen extends StatelessWidget {
                     style: CustomTextStyle.size18Weight600Text(),
                   ),
                   const SizedBox(height: 10),
-                  food.ingredients.isNotEmpty
+                  widget.food.ingredients.isNotEmpty
                       ? ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: food.ingredients.length,
+                          itemCount: widget.food.ingredients.length,
                           padding: const EdgeInsets.all(0),
                           itemBuilder: (context, index) {
                             return Row(
@@ -227,7 +253,7 @@ class FoodDetailsScreen extends StatelessWidget {
                                 const BulletPoint(),
                                 const SizedBox(width: 10),
                                 Text(
-                                  food.ingredients[index],
+                                  widget.food.ingredients[index],
                                   style: CustomTextStyle.size14Weight400Text(),
                                 ),
                               ],
@@ -250,15 +276,16 @@ class FoodDetailsScreen extends StatelessWidget {
                     style: CustomTextStyle.size18Weight600Text(),
                   ),
                   const SizedBox(height: 20),
-                  food.testimonials != null && food.testimonials!.isNotEmpty
+                  widget.food.testimonials != null &&
+                          widget.food.testimonials!.isNotEmpty
                       ? ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: food.testimonials!.length,
+                          itemCount: widget.food.testimonials!.length,
                           padding: const EdgeInsets.all(0),
                           itemBuilder: (context, index) {
                             return TestimonialItem(
-                              testimonial: food.testimonials![index],
+                              testimonial: widget.food.testimonials![index],
                             );
                           },
                         )

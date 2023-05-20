@@ -30,5 +30,16 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
       emit(FoodInitial());
       emit(SearchUpdated());
     });
+    on<FetchOrderCount>((event, emit) async {
+      emit(OrderCountFetching());
+      try {
+        int count = await foodRepository.getFoodOrderCount(event.foodId);
+        emit(OrderCountFetched(count: count));
+      } catch (e, s) {
+        debugPrint(e.toString());
+        debugPrint(s.toString());
+        emit(OrderCountError(message: e.toString()));
+      }
+    });
   }
 }

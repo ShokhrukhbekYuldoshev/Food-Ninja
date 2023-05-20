@@ -10,6 +10,7 @@ import 'package:food_ninja/repositories/order_repository.dart';
 import 'package:food_ninja/ui/screens/chat/chat_list_screen.dart';
 import 'package:food_ninja/ui/screens/home/profile_screen.dart';
 import 'package:food_ninja/ui/screens/order/order_list_screen.dart';
+import 'package:food_ninja/ui/widgets/filter_dialog.dart';
 import 'package:food_ninja/ui/widgets/items/food_item.dart';
 import 'package:food_ninja/ui/widgets/items/restaurant_item.dart';
 import 'package:food_ninja/ui/widgets/search_filter_widget.dart';
@@ -223,7 +224,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   SearchFilterWidget(
                     searchController: _searchController,
                     onChanged: (value) {},
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const FilterDialog();
+                        },
+                      );
+                    },
                   ),
                   const SizedBox(height: 20),
                   Container(

@@ -28,4 +28,24 @@ class FoodRepository {
 
     return foods;
   }
+
+  // get number of orders for a food
+  Future<int> getFoodOrderCount(String foodId) async {
+    int count = 0;
+    QuerySnapshot<Object?> ordersCollection = await _db.getCollection("orders");
+
+    var data = ordersCollection.docs
+        .map((snapshot) => snapshot.data() as Map<String, dynamic>)
+        .toList();
+
+    for (var order in data) {
+      for (var food in order["cart"]) {
+        if (food["id"] == foodId) {
+          count += food["quantity"] as int;
+        }
+      }
+    }
+
+    return count;
+  }
 }

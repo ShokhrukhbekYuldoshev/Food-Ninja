@@ -21,3 +21,9 @@ class LoadRestaurantFoods extends RestaurantEvent {
 }
 
 class SearchRestaurants extends RestaurantEvent {}
+
+class FetchOrderCount extends RestaurantEvent {
+  final String restaurantId;
+
+  FetchOrderCount({required this.restaurantId});
+}
