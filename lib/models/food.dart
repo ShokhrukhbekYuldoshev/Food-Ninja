@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:food_ninja/models/testimonial.dart';
 import 'package:hive/hive.dart';
 
 // ignore: must_be_immutable
@@ -15,7 +14,6 @@ class Food extends Equatable {
   final String? image;
   final String? description;
   final double? discount;
-  final List<Testimonial>? testimonials;
 
   // for cart
   int quantity = 0;
@@ -30,7 +28,6 @@ class Food extends Equatable {
     required this.price,
     required this.ingredients,
     required this.createdAt,
-    this.testimonials,
     this.image,
     this.discount,
     this.description,
@@ -48,12 +45,6 @@ class Food extends Equatable {
       createdAt: map['createdAt'].toDate(),
       discount: map['discount'] * 1.0 ?? 0.0,
       description: map['description'],
-      testimonials: List<Testimonial>.from(
-        map['testimonials']?.map(
-              (x) => Testimonial.fromMap(x),
-            ) ??
-            const [],
-      ),
       quantity: map['quantity'] ?? 0,
     );
   }
@@ -70,7 +61,6 @@ class Food extends Equatable {
       'createdAt': createdAt,
       'discount': discount ?? 0.0,
       'description': description ?? '',
-      'testimonials': testimonials?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -81,13 +71,6 @@ class Food extends Equatable {
     if (favorites == null || favorites.isEmpty) return false;
     DocumentReference ref = FirebaseFirestore.instance.doc('/foods/$id');
     return favorites.contains(ref);
-  }
-
-  // rating is calculated by averaging all the ratings from testimonials
-  double get rating {
-    if (testimonials != null && testimonials!.isEmpty) return 0.0;
-    return testimonials!.map((e) => e.rating).reduce((a, b) => a + b) /
-        testimonials!.length;
   }
 
   @override

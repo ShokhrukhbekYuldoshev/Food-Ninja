@@ -26,6 +26,7 @@ import 'package:food_ninja/ui/screens/order/cart_screen.dart';
 import 'package:food_ninja/ui/screens/order/order_confirm_screen.dart';
 import 'package:food_ninja/ui/screens/order/order_details_screen.dart';
 import 'package:food_ninja/ui/screens/order/order_list_screen.dart';
+import 'package:food_ninja/ui/screens/order/review_screen.dart';
 import 'package:food_ninja/ui/screens/splash_screen.dart';
 
 class AppRouter {
@@ -155,6 +156,12 @@ class AppRouter {
           builder: (_) => const OrderConfirmScreen(),
         );
 
+      case '/order/review':
+        return MaterialPageRoute(
+          builder: (_) => ReviewScreen(
+            order: settings.arguments as Order,
+          ),
+        );
       case '/orders':
         return MaterialPageRoute(
           builder: (_) => const OrderListScreen(),

@@ -79,9 +79,9 @@ class OrderRepository {
     return subtotal + deliveryFee - discount;
   }
 
-  Future<void> createOrder() async {
+  Future<model.Order> createOrder() async {
     final model.Order order = model.Order(
-      cart: cart,
+      cart: [...cart],
       subtotal: subtotal,
       deliveryFee: deliveryFee,
       discount: discount,
@@ -103,6 +103,8 @@ class OrderRepository {
 
     cart.clear();
     updateHive();
+
+    return order;
   }
 
   Future<List<model.Order>> fetchOrders() async {

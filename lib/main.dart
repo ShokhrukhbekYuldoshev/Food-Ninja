@@ -6,6 +6,7 @@ import 'package:food_ninja/bloc/login/login_bloc.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/bloc/register/register_bloc.dart';
+import 'package:food_ninja/bloc/testimonial/testimonial_bloc.dart';
 import 'package:food_ninja/repositories/order_repository.dart';
 import 'package:food_ninja/services/hive_adapters.dart';
 import 'package:food_ninja/utils/app_colors.dart';
@@ -22,7 +23,6 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(FirestoreDocumentReferenceAdapter());
   Hive.registerAdapter(RestaurantAdapter());
-  Hive.registerAdapter(TestimonialAdapter());
   Hive.registerAdapter(FoodAdapter());
   await Hive.openBox('myBox');
 
@@ -48,6 +48,9 @@ Future<void> main() async {
         ),
         BlocProvider(
           create: (context) => OrderBloc(),
+        ),
+        BlocProvider(
+          create: (context) => TestimonialBloc(),
         ),
       ],
       child: const MyApp(),
@@ -87,6 +90,14 @@ class MyApp extends StatelessWidget {
         ),
         // change app bar surface tint color
         appBarTheme: const AppBarTheme(
+          surfaceTintColor: Colors.transparent,
+        ),
+        // change cursor color
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: AppColors.primaryColor,
+        ),
+        // change dialog surface tint color
+        dialogTheme: const DialogTheme(
           surfaceTintColor: Colors.transparent,
         ),
       ),

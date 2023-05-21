@@ -16,7 +16,7 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: AppColors.cardColor,
       borderRadius: AppStyles.defaultBorderRadius,
       child: InkWell(
         borderRadius: AppStyles.defaultBorderRadius,

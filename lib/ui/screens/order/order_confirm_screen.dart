@@ -29,10 +29,10 @@ class OrderConfirmScreen extends StatelessWidget {
             ),
           );
           Navigator.of(context).pushNamedAndRemoveUntil(
-            "/home",
+            "/order/review",
+            arguments: state.order,
             (route) => false,
           );
-          Navigator.of(context).pushNamed("/orders");
         } else if (state is OrderCreatingError) {
           // remove loading
           Navigator.of(context).pop();

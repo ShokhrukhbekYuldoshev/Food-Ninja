@@ -18,7 +18,10 @@ class CartUpdated extends OrderState {
 class OrderCreating extends OrderState {}
 
 class OrderCreated extends OrderState {
-  OrderCreated();
+  final Order order;
+  OrderCreated(
+    this.order,
+  );
 }
 
 class OrderCreatingError extends OrderState {

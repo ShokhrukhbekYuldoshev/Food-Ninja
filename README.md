@@ -7,24 +7,23 @@ Food Ninja is a food delivery app created using Flutter, Firebase, BLoC.
 - Authentication
 - Restaurants
 - Food Menu
-- Cart
-- Order
-- Profile
 - Search
 - Filter
-- Payment (just UI)
+- Pagination
+- Cart
+- Order
 - Order History
+- Profile
+- Favorites
+- Payment (just UI)
 - Map
 - Chat
-- Notification (just UI)
-- Voucher (just UI)
-- Call
 - Rate
 - Review
-- Favorites
-- Settings
 - Dark Mode
-- Pagination
+- Settings
+- Notification (just UI)
+- Voucher (just UI)
 
 ## Screenshots
 

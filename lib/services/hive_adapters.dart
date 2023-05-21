@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/restaurant.dart';
-import 'package:food_ninja/models/testimonial.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class FirestoreDocumentReferenceAdapter extends TypeAdapter<DocumentReference> {
@@ -34,7 +33,6 @@ class FoodAdapter extends TypeAdapter<Food> {
       restaurant: reader.read(),
       createdAt: reader.read(),
       ingredients: reader.read(),
-      testimonials: List<Testimonial>.from(reader.read()),
       quantity: reader.read(),
     );
   }
@@ -49,31 +47,7 @@ class FoodAdapter extends TypeAdapter<Food> {
     writer.write(obj.restaurant);
     writer.write(obj.createdAt);
     writer.write(obj.ingredients);
-    writer.write(obj.testimonials);
     writer.write(obj.quantity);
-  }
-}
-
-class TestimonialAdapter extends TypeAdapter<Testimonial> {
-  @override
-  final int typeId = 2;
-
-  @override
-  Testimonial read(BinaryReader reader) {
-    return Testimonial(
-      comment: reader.read(),
-      createdAt: reader.read(),
-      userEmail: reader.read(),
-      rating: reader.read(),
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, Testimonial obj) {
-    writer.write(obj.comment);
-    writer.write(obj.createdAt);
-    writer.write(obj.userEmail);
-    writer.write(obj.rating);
   }
 }
 
@@ -87,7 +61,6 @@ class RestaurantAdapter extends TypeAdapter<Restaurant> {
       name: reader.read(),
       location: reader.read(),
       createdAt: reader.read(),
-      testimonials: reader.read(),
       image: reader.read(),
       description: reader.read(),
     );
@@ -98,7 +71,6 @@ class RestaurantAdapter extends TypeAdapter<Restaurant> {
     writer.write(obj.name);
     writer.write(obj.location);
     writer.write(obj.createdAt);
-    writer.write(obj.testimonials);
     writer.write(obj.image);
     writer.write(obj.description);
   }

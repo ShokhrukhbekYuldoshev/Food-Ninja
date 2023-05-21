@@ -33,8 +33,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<CreateOrder>((event, emit) async {
       emit(OrderCreating());
       try {
-        await orderRepository.createOrder();
-        emit(OrderCreated());
+        Order order = await orderRepository.createOrder();
+        emit(OrderCreated(order));
       } catch (e, s) {
         debugPrint(e.toString());
         debugPrint(s.toString());

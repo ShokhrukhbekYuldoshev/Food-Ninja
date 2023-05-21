@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/models/restaurant.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
@@ -32,7 +31,6 @@ class RestaurantItem extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 26, 0, 0),
           child: Column(
             children: [
-              // https://firebasestorage.googleapis.com/v0/b/food-ninja-f7b7c.appspot.com/o/restaurants%2Frestaurant-menu-removebg-preview.png?alt=media&token=8b463292-0f02-47f3-89da-196bc752f6ae
               ClipRRect(
                 borderRadius: AppStyles.defaultBorderRadius,
                 child: restaurant.image == null
@@ -60,28 +58,10 @@ class RestaurantItem extends StatelessWidget {
                       ),
               ),
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    restaurant.name,
-                    overflow: TextOverflow.ellipsis,
-                    style: CustomTextStyle.size16Weight600Text(),
-                  ),
-                  const SizedBox(width: 5),
-                  SvgPicture.asset(
-                    "assets/svg/star.svg",
-                    height: 14,
-                    width: 14,
-                  ),
-                  const SizedBox(width: 3),
-                  Text(
-                    restaurant.rating.toString(),
-                    style: CustomTextStyle.size14Weight400Text(
-                      AppColors.grayColor,
-                    ),
-                  ),
-                ],
+              Text(
+                restaurant.name,
+                overflow: TextOverflow.ellipsis,
+                style: CustomTextStyle.size16Weight600Text(),
               ),
             ],
           ),

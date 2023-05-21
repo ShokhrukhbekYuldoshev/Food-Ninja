@@ -101,7 +101,7 @@ class PriceInfoWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '\$${OrderRepository.total}',
+                        '\$${OrderRepository.total.toStringAsFixed(2)}',
                         style: CustomTextStyle.size22Weight600Text(
                           Colors.white,
                         ),
