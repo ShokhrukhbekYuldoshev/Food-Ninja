@@ -7,7 +7,6 @@ import 'package:hive/hive.dart';
 class Restaurant extends Equatable {
   final String name;
   final String location;
-  final List<DocumentReference> foodList;
   final DateTime createdAt;
   final List<Testimonial> testimonials;
   final String? image;
@@ -19,7 +18,6 @@ class Restaurant extends Equatable {
   Restaurant({
     required this.name,
     required this.location,
-    required this.foodList,
     required this.createdAt,
     required this.testimonials,
     this.image,
@@ -32,11 +30,6 @@ class Restaurant extends Equatable {
       image: map['image'],
       location: map['location'],
       description: map['description'],
-      foodList: List<DocumentReference>.from(
-        map['foodList']?.map(
-          (x) => x,
-        ),
-      ),
       createdAt: map['createdAt'].toDate(),
       testimonials: List<Testimonial>.from(
         map['testimonials']?.map(
@@ -54,7 +47,6 @@ class Restaurant extends Equatable {
       'image': image,
       'location': location,
       'description': description,
-      'foodList': foodList,
       'createdAt': createdAt,
       'testimonials': testimonials.map((x) => x.toMap()).toList(),
     };
@@ -82,7 +74,6 @@ class Restaurant extends Equatable {
         image,
         location,
         description,
-        foodList,
         createdAt,
         testimonials,
       ];

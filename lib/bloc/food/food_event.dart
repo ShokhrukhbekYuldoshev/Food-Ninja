@@ -14,6 +14,17 @@ class LoadFoods extends FoodEvent {
   });
 }
 
+class FetchMoreFoods extends FoodEvent {
+  // limit, lastDocument
+  final int limit;
+  final DocumentSnapshot? lastDocument;
+
+  FetchMoreFoods({
+    required this.limit,
+    required this.lastDocument,
+  });
+}
+
 class SearchFoods extends FoodEvent {}
 
 class FetchOrderCount extends FoodEvent {

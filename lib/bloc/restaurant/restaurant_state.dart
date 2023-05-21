@@ -31,6 +31,8 @@ class RestaurantFoodsError extends RestaurantState {
   RestaurantFoodsError({required this.message});
 }
 
+class RestaurantFoodsLoading extends RestaurantState {}
+
 class SearchUpdated extends RestaurantState {
   SearchUpdated();
 }

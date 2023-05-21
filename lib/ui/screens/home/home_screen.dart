@@ -239,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 150,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image: AssetImage("assets/png/banner.png"),
+                        image: AssetImage("assets/png/voucher-1.png"),
                         fit: BoxFit.cover,
                       ),
                       gradient: LinearGradient(
@@ -268,7 +268,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               const SizedBox(height: 10),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    "/vouchers",
+                                  );
+                                },
                                 style: TextButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(

@@ -26,10 +26,10 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       }
     });
     on<LoadRestaurantFoods>((event, emit) async {
-      emit(RestaurantsLoading());
+      emit(RestaurantFoodsLoading());
       try {
         List<Food> foods =
-            await restaurantRepository.fetchRestaurantFoods(event.foodList);
+            await restaurantRepository.fetchRestaurantFoods(event.restaurantId);
         emit(
           RestaurantFoodsLoaded(foods: foods),
         );

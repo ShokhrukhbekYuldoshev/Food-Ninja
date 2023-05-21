@@ -19,6 +19,7 @@ import 'package:food_ninja/ui/screens/explore/restaurant_list_screen.dart';
 import 'package:food_ninja/ui/screens/home/home_screen.dart';
 import 'package:food_ninja/ui/screens/home/notification_screen.dart';
 import 'package:food_ninja/ui/screens/home/settings_screen.dart';
+import 'package:food_ninja/ui/screens/home/vouchers_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_first_screen.dart';
 import 'package:food_ninja/ui/screens/onboarding/onboarding_second_screen.dart';
 import 'package:food_ninja/ui/screens/order/cart_screen.dart';
@@ -108,6 +109,11 @@ class AppRouter {
       case '/notification':
         return MaterialPageRoute(
           builder: (_) => const NotificationScreen(),
+        );
+
+      case '/vouchers':
+        return MaterialPageRoute(
+          builder: (_) => const VouchersScreen(),
         );
 
       case '/restaurants':

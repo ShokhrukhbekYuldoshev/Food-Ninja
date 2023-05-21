@@ -26,14 +26,24 @@ class RestaurantRepository {
     return restaurants;
   }
 
-  Future<List<Food>> fetchRestaurantFoods(
-      List<DocumentReference<Object?>> foodList) async {
-    List<Food> foods = [];
-    for (DocumentReference foodRef in foodList) {
-      DocumentSnapshot<Object?> foodDoc = await foodRef.get();
-      Food food = Food.fromMap(foodDoc.data() as Map<String, dynamic>);
-      foods.add(food);
-    }
+  Future<List<Food>> fetchRestaurantFoods(String restaurantId) async {
+    DocumentReference restaurantRef =
+        FirebaseFirestore.instance.collection("restaurants").doc(restaurantId);
+    var snapshot = await _db.getDocumentFromCollectionWhere(
+      "foods",
+      "restaurant",
+      restaurantRef,
+    );
+
+    List<Food> foods = snapshot.docs
+        .map(
+          (e) => Food.fromMap(e.data() as Map<String, dynamic>)..id = e.id,
+        )
+        .toList();
+
+    // sort by date
+    foods.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
     return foods;
   }
 

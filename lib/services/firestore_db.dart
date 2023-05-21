@@ -39,8 +39,8 @@ class FirestoreDatabase {
   // get document from collection where field == value
   Future<QuerySnapshot> getDocumentFromCollectionWhere(
     String collectionName,
-    String field,
-    String value,
+    Object field,
+    Object value,
   ) async {
     return await _firebaseFirestore
         .collection(collectionName)

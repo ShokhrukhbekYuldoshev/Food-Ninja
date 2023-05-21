@@ -86,7 +86,6 @@ class RestaurantAdapter extends TypeAdapter<Restaurant> {
     return Restaurant(
       name: reader.read(),
       location: reader.read(),
-      foodList: reader.read(),
       createdAt: reader.read(),
       testimonials: reader.read(),
       image: reader.read(),
@@ -98,7 +97,6 @@ class RestaurantAdapter extends TypeAdapter<Restaurant> {
   void write(BinaryWriter writer, Restaurant obj) {
     writer.write(obj.name);
     writer.write(obj.location);
-    writer.write(obj.foodList);
     writer.write(obj.createdAt);
     writer.write(obj.testimonials);
     writer.write(obj.image);

@@ -6,7 +6,7 @@ import '../services/firestore_db.dart';
 class FoodRepository {
   final FirestoreDatabase _db = FirestoreDatabase();
 
-  Future<List<Food>> fetchFoods(int limit, var lastDocument) async {
+  Future<Map<String, Object?>> fetchFoods(int limit, var lastDocument) async {
     QuerySnapshot<Object?> foodsCollection =
         await _db.getCollectionWithPagination(
       "foods",
@@ -26,7 +26,18 @@ class FoodRepository {
     // sort by date
     foods.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
-    return foods;
+    // check if there are more foods to fetch
+    if (foodsCollection.docs.length == limit) {
+      return {
+        "foods": foods,
+        "lastDocument": foodsCollection.docs.last,
+      };
+    } else {
+      return {
+        "foods": foods,
+        "lastDocument": null,
+      };
+    }
   }
 
   // get number of orders for a food

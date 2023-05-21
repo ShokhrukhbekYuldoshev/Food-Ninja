@@ -85,6 +85,10 @@ class MyApp extends StatelessWidget {
             AppColors.secondaryDarkColor,
           ),
         ),
+        // change app bar surface tint color
+        appBarTheme: const AppBarTheme(
+          surfaceTintColor: Colors.transparent,
+        ),
       ),
       onGenerateRoute: AppRouter.onGenerateRoute,
     );

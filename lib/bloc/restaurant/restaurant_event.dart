@@ -15,9 +15,9 @@ class LoadRestaurants extends RestaurantEvent {
 }
 
 class LoadRestaurantFoods extends RestaurantEvent {
-  final List<DocumentReference> foodList;
+  final String restaurantId;
 
-  LoadRestaurantFoods(this.foodList);
+  LoadRestaurantFoods({required this.restaurantId});
 }
 
 class SearchRestaurants extends RestaurantEvent {}
