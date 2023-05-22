@@ -1,10 +1,13 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class Category extends Equatable {
   final String name;
+  String? id;
 
-  const Category({
+  Category({
     required this.name,
+    this.id,
   });
 
   factory Category.fromMap(Map<String, dynamic> json) {

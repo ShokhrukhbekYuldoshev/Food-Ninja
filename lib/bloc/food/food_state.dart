@@ -5,13 +5,13 @@ abstract class FoodState {}
 
 class FoodInitial extends FoodState {}
 
-class FoodLoading extends FoodState {}
+class FoodFetching extends FoodState {}
 
-class FoodLoaded extends FoodState {
+class FoodFetched extends FoodState {
   final List<Food> foods;
   final DocumentSnapshot? lastDocument;
 
-  FoodLoaded({required this.foods, required this.lastDocument});
+  FoodFetched({required this.foods, required this.lastDocument});
 }
 
 class FoodMoreFetched extends FoodState {
@@ -29,8 +29,8 @@ class FoodError extends FoodState {
   FoodError({required this.message});
 }
 
-class SearchUpdated extends FoodState {
-  SearchUpdated();
+class QueryUpdated extends FoodState {
+  QueryUpdated();
 }
 
 class OrderCountFetching extends FoodState {}

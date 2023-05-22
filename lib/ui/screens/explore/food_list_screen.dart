@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/bloc/food/food_bloc.dart';
 import 'package:food_ninja/models/food.dart';
-import 'package:food_ninja/ui/widgets/filter_dialog.dart';
+import 'package:food_ninja/ui/widgets/buttons/back_button.dart';
 import 'package:food_ninja/ui/widgets/items/food_item.dart';
 import 'package:food_ninja/ui/widgets/search_filter_widget.dart';
+import 'package:food_ninja/utils/custom_text_style.dart';
 
 class FoodListScreen extends StatefulWidget {
   const FoodListScreen({super.key});
@@ -19,7 +21,7 @@ class _FoodListScreenState extends State<FoodListScreen> {
   final ScrollController _scrollController = ScrollController();
   DocumentSnapshot? _lastDocument;
 
-  List<Food> _foods = [];
+  final List<Food> _foods = [];
   List<Food> _filteredFoods = [];
 
   final TextEditingController _searchController = TextEditingController();
@@ -29,14 +31,14 @@ class _FoodListScreenState extends State<FoodListScreen> {
   void initState() {
     BlocProvider.of<FoodBloc>(context).add(
       LoadFoods(
-        limit: _foodLimit,
+        limit: 20,
         lastDocument: _lastDocument,
       ),
     );
 
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
         BlocProvider.of<FoodBloc>(context).add(
           FetchMoreFoods(
             limit: _foodLimit,
@@ -67,6 +69,16 @@ class _FoodListScreenState extends State<FoodListScreen> {
               _foods.add(food);
             }
           }
+          _filteredFoods = _foods;
+        }
+        if (state is FoodFetched) {
+          _lastDocument = state.lastDocument;
+          for (var food in state.foods) {
+            if (!_foods.contains(food)) {
+              _foods.add(food);
+            }
+          }
+          _filteredFoods = _foods;
         }
       },
       child: GestureDetector(
@@ -75,81 +87,71 @@ class _FoodListScreenState extends State<FoodListScreen> {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Foods'),
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(75),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  25,
-                  0,
-                  25,
-                  25,
-                ),
-                child: SearchFilterWidget(
-                  searchController: _searchController,
-                  onChanged: (value) {
-                    _filteredFoods = _foods
-                        .where((food) => food.name
-                            .toLowerCase()
-                            .contains(value.toLowerCase()))
-                        .toList();
-                    BlocProvider.of<FoodBloc>(context).add(SearchFoods());
-                  },
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const FilterDialog();
-                      },
-                    );
-                  },
+          body: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: SvgPicture.asset(
+                  "assets/svg/pattern-small.svg",
                 ),
               ),
-            ),
-          ),
-          body: Container(
-            margin: const EdgeInsets.only(
-              left: 25,
-              right: 25,
-              // top: 25,
-            ),
-            child: BlocBuilder<FoodBloc, FoodState>(
-              builder: (context, state) {
-                if (state is FoodLoading) {
-                  return const FoodItemShimmer();
-                } else if (state is FoodLoaded) {
-                  _lastDocument = state.lastDocument;
-                  _foods = state.foods;
-                  _filteredFoods = _foods;
-                  return ListView.builder(
+              SafeArea(
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: SingleChildScrollView(
                     controller: _scrollController,
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: _filteredFoods.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: FoodItem(food: _filteredFoods[index]),
-                      );
-                    },
-                  );
-                } else {
-                  return ListView.builder(
-                    controller: _scrollController,
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: _filteredFoods.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: FoodItem(food: _filteredFoods[index]),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
+                    child: Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const CustomBackButton(),
+                            const SizedBox(height: 20),
+                            Text(
+                              "Foods",
+                              style: CustomTextStyle.size25Weight600Text(),
+                            ),
+                            const SizedBox(height: 20),
+                            SearchFilterWidget(
+                              searchController: _searchController,
+                              onChanged: (value) {
+                                _filteredFoods = _foods
+                                    .where((restaurant) => restaurant.name
+                                        .toLowerCase()
+                                        .contains(value.toLowerCase()))
+                                    .toList();
+
+                                BlocProvider.of<FoodBloc>(context).add(
+                                  QueryFoods(),
+                                );
+                              },
+                              onTap: () {},
+                            ),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                        BlocBuilder<FoodBloc, FoodState>(
+                          builder: (context, state) {
+                            return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: _filteredFoods.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 20),
+                                  child: FoodItem(food: _filteredFoods[index]),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

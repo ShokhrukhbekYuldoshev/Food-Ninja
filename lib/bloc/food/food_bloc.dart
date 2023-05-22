@@ -11,14 +11,14 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
   FoodBloc() : super(FoodInitial()) {
     on<FoodEvent>((event, emit) {});
     on<LoadFoods>((event, emit) async {
-      emit(FoodLoading());
+      emit(FoodFetching());
       try {
         Map<String, dynamic> map = await foodRepository.fetchFoods(
           event.limit,
           event.lastDocument,
         );
         emit(
-          FoodLoaded(
+          FoodFetched(
             foods: map["foods"] as List<Food>,
             lastDocument: map["lastDocument"] as DocumentSnapshot?,
           ),
@@ -48,9 +48,9 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
         emit(FoodError(message: e.toString()));
       }
     });
-    on<SearchFoods>((event, emit) async {
+    on<QueryFoods>((event, emit) async {
       emit(FoodInitial());
-      emit(SearchUpdated());
+      emit(QueryUpdated());
     });
     on<FetchOrderCount>((event, emit) async {
       emit(OrderCountFetching());

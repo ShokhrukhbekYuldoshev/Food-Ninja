@@ -25,7 +25,7 @@ class FetchMoreFoods extends FoodEvent {
   });
 }
 
-class SearchFoods extends FoodEvent {}
+class QueryFoods extends FoodEvent {}
 
 class FetchOrderCount extends FoodEvent {
   final String foodId;

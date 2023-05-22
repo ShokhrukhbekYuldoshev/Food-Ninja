@@ -8,8 +8,10 @@ class BulletPoint extends StatelessWidget {
     return Container(
       height: 3.0,
       width: 3.0,
-      decoration: const BoxDecoration(
-        color: Colors.black,
+      decoration: BoxDecoration(
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.black
+            : Colors.white,
         shape: BoxShape.circle,
       ),
     );

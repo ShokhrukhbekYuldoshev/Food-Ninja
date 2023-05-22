@@ -27,8 +27,8 @@ dependencies:
   hive_flutter: ^1.1.0
   image_picker: ^0.8.7+5
   intl: ^0.18.1
-  latlong2: ^0.8.1
-  shimmer: ^2.0.0
+  latlong2: ^0.8.2
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
