@@ -37,7 +37,7 @@ class FirestoreDatabase {
   }
 
   // get document from collection where field == value
-  Future<QuerySnapshot> getDocumentFromCollectionWhere(
+  Future<QuerySnapshot> getDocumentsWithQuery(
     String collectionName,
     Object field,
     Object value,
@@ -46,6 +46,18 @@ class FirestoreDatabase {
         .collection(collectionName)
         .where(field, isEqualTo: value)
         .get();
+  }
+
+  // multiple queries
+  Future<QuerySnapshot> getDocumentsWithMultipleQueries(
+    String collectionName,
+    List<Map<String, dynamic>> where,
+  ) async {
+    Query query = _firebaseFirestore.collection(collectionName);
+    for (var item in where) {
+      query = query.where(item['field'], isEqualTo: item['value']);
+    }
+    return await query.get();
   }
 
   Future<void> addDocument(

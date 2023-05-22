@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/order.dart';
 import 'package:food_ninja/models/restaurant.dart';
+import 'package:food_ninja/models/user.dart';
 import 'package:food_ninja/ui/screens/auth/forgot_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/login_screen.dart';
 import 'package:food_ninja/ui/screens/auth/otp_screen.dart';
@@ -12,6 +13,7 @@ import 'package:food_ninja/ui/screens/auth/reset_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/set_location_screen.dart';
 import 'package:food_ninja/ui/screens/auth/set_payment_screen.dart';
 import 'package:food_ninja/ui/screens/auth/upload_photo_screen.dart';
+import 'package:food_ninja/ui/screens/chat/chat_details_screen.dart';
 import 'package:food_ninja/ui/screens/explore/food_details_screen.dart';
 import 'package:food_ninja/ui/screens/explore/food_list_screen.dart';
 import 'package:food_ninja/ui/screens/explore/restaurant_details_screen.dart';
@@ -28,6 +30,8 @@ import 'package:food_ninja/ui/screens/order/order_details_screen.dart';
 import 'package:food_ninja/ui/screens/order/order_list_screen.dart';
 import 'package:food_ninja/ui/screens/order/review_screen.dart';
 import 'package:food_ninja/ui/screens/splash_screen.dart';
+
+import '../ui/screens/chat/chat_list_screen.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -171,6 +175,18 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => OrderDetailsScreen(
             order: settings.arguments as Order,
+          ),
+        );
+
+      case '/chats':
+        return MaterialPageRoute(
+          builder: (_) => const ChatListScreen(),
+        );
+
+      case '/chats/detail':
+        return MaterialPageRoute(
+          builder: (_) => ChatDetailsScreen(
+            otherUser: settings.arguments as User,
           ),
         );
 

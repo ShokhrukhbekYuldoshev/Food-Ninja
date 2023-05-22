@@ -23,13 +23,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           password: event.password,
         );
 
-        var userDocument =
-            (await FirestoreDatabase().getDocumentFromCollectionWhere(
+        var userDocument = (await FirestoreDatabase().getDocumentsWithQuery(
           "users",
           "email",
           event.email,
         ))
-                .docs[0];
+            .docs[0];
 
         // save user data to Hive
         model.User user = model.User.fromMap(

@@ -109,7 +109,7 @@ class OrderRepository {
 
   Future<List<model.Order>> fetchOrders() async {
     final List<model.Order> orders = [];
-    var data = await _db.getDocumentFromCollectionWhere(
+    var data = await _db.getDocumentsWithQuery(
       'orders',
       'userEmail',
       box.get('email'),

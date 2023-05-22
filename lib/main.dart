@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_ninja/bloc/chat/chat_bloc.dart';
 import 'package:food_ninja/bloc/food/food_bloc.dart';
 import 'package:food_ninja/bloc/login/login_bloc.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
@@ -51,6 +52,9 @@ Future<void> main() async {
         ),
         BlocProvider(
           create: (context) => TestimonialBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ChatBloc(),
         ),
       ],
       child: const MyApp(),

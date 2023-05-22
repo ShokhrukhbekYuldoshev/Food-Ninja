@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class Message extends Equatable {
   final DocumentReference receiver;
   final DocumentReference sender;
   final String text;
   final DateTime createdAt;
-
-  const Message({
+  String? id;
+  Message({
     required this.receiver,
     required this.sender,
     required this.text,
@@ -19,12 +20,13 @@ class Message extends Equatable {
       receiver: map['receiver'],
       sender: map['sender'],
       text: map['text'],
-      createdAt: map['createdAt'],
+      createdAt: map['createdAt'].toDate(),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'receiver': receiver,
       'sender': sender,
       'text': text,

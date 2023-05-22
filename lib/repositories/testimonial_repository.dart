@@ -24,7 +24,7 @@ class TestimonialRepository {
   }
 
   Future<List<Testimonial>> fetchTestimonials(DocumentReference target) async {
-    final QuerySnapshot snapshot = await _db.getDocumentFromCollectionWhere(
+    final QuerySnapshot snapshot = await _db.getDocumentsWithQuery(
       "testimonials",
       "target",
       target,

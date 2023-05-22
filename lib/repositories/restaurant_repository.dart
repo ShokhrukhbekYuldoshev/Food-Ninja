@@ -29,7 +29,7 @@ class RestaurantRepository {
   Future<List<Food>> fetchRestaurantFoods(String restaurantId) async {
     DocumentReference restaurantRef =
         FirebaseFirestore.instance.collection("restaurants").doc(restaurantId);
-    var snapshot = await _db.getDocumentFromCollectionWhere(
+    var snapshot = await _db.getDocumentsWithQuery(
       "foods",
       "restaurant",
       restaurantRef,
