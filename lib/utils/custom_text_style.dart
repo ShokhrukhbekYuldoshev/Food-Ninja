@@ -6,7 +6,7 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
     );
   }
 
@@ -14,7 +14,7 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 27,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
     );
   }
 
@@ -22,7 +22,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 25,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -30,7 +32,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 22,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -38,7 +42,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -46,7 +52,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -54,7 +62,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -62,7 +72,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -70,7 +82,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -78,7 +92,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w600,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 
@@ -86,7 +102,9 @@ class CustomTextStyle {
     return TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      color: color ?? AppColors.textColor,
+      color: color ?? AppColors().textColor,
+      letterSpacing: 0.5,
+      height: 1,
     );
   }
 }

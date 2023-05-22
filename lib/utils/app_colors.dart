@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AppColors {
   // general colors
@@ -16,7 +17,7 @@ class AppColors {
   static const Color likeColor = Color(0xFFFF1D1D);
   static const Color starColor = Color(0xFFFEAD1D);
   static Color starEmptyColor = starColor.withOpacity(0.3);
-  static const Color borderColor = Color(0xFFF4F4F4);
+  static const Color lightBorderColor = Color(0xFFF4F4F4);
   static const Color grayColor = Color(0xFF3B3B3B);
   static const Color grayLightColor = Color(0xFFF6F6F6);
   // for order status
@@ -48,15 +49,23 @@ class AppColors {
   static const Color darkCardColor = Color(0xFF252525);
 
   // getters
-  static Color get backgroundColor => ThemeData().brightness == Brightness.light
+  Color backgroundColor = Hive.box("myBox").get("isDarkMode") == false
       ? lightBackgroundColor
       : darkBackgroundColor;
 
-  static Color get textColor => ThemeData().brightness == Brightness.light
+  Color textColor = Hive.box("myBox").get("isDarkMode") == false
       ? lightTextColor
       : darkTextColor;
 
-  static Color get cardColor => ThemeData().brightness == Brightness.light
+  Color cardColor = Hive.box("myBox").get("isDarkMode") == false
       ? lightCardColor
       : darkCardColor;
+
+  Color secondaryTextColor = Hive.box("myBox").get("isDarkMode") == false
+      ? grayColor.withOpacity(0.3)
+      : grayLightColor.withOpacity(0.3);
+
+  Color borderColor = Hive.box("myBox").get("isDarkMode") == false
+      ? lightBorderColor
+      : Colors.transparent;
 }

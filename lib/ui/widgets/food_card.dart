@@ -17,9 +17,9 @@ class FoodCard extends StatelessWidget {
     return Ink(
       width: 150,
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
         borderRadius: AppStyles.largeBorderRadius,
-        boxShadow: [AppStyles.boxShadow20],
+        boxShadow: [AppStyles().largeBoxShadow],
       ),
       child: InkWell(
         borderRadius: AppStyles.defaultBorderRadius,

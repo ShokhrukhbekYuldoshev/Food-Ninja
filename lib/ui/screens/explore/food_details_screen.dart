@@ -90,6 +90,11 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                         ? Image.network(
                             widget.food.image!,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                ImagePlaceholder(
+                              iconData: Icons.fastfood,
+                              iconSize: 100,
+                            ),
                           )
                         : ImagePlaceholder(
                             iconData: Icons.fastfood,
@@ -102,7 +107,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(
-                        color: AppColors.cardColor,
+                        color: AppColors().backgroundColor,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(50),
@@ -215,7 +220,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                             return Text(
                               "$rating Rating",
                               style: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                             );
                           },
@@ -231,14 +236,14 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                               return Text(
                                 "${state.count} ${state.count == 1 ? "Order" : "Orders"}",
                                 style: CustomTextStyle.size14Weight400Text(
-                                  AppColors.grayColor.withOpacity(0.3),
+                                  AppColors().secondaryTextColor,
                                 ),
                               );
                             }
                             return Text(
                               "0 Orders",
                               style: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                             );
                           },
@@ -258,7 +263,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                             child: Text(
                               "No description available",
                               style: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                             ),
                           ),
@@ -295,7 +300,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                             child: Text(
                               "No ingredients available",
                               style: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                             ),
                           ),
@@ -314,7 +319,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                             child: Text(
                               "No testimonials available",
                               style: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                             ),
                           );

@@ -101,7 +101,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                       10,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.cardColor,
+                      color: AppColors().cardColor,
                       boxShadow: [AppStyles.boxShadow7],
                       borderRadius: AppStyles.largeBorderRadius,
                     ),

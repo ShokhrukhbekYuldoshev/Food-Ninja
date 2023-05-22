@@ -79,12 +79,21 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             child: Text(state.message),
                           );
                         } else {
+                          if (messages.isEmpty) {
+                            return SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.7,
+                              child: const Center(
+                                child: Text("No chats yet"),
+                              ),
+                            );
+                          }
                           return ListView.builder(
                             itemCount: messages.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               String key = messages.keys.elementAt(index);
                               List<Message> messagesList = messages[key]!;
+
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: ChatItem(
@@ -163,7 +172,7 @@ class _ChatItemState extends State<ChatItem> {
   Ink _buildChatItem() {
     return Ink(
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
       ),
@@ -216,9 +225,7 @@ class _ChatItemState extends State<ChatItem> {
                     Text(
                       widget.messagesList[0].text,
                       style: CustomTextStyle.size14Weight400Text(
-                        AppColors.grayColor.withOpacity(
-                          0.5,
-                        ),
+                        AppColors().secondaryTextColor,
                       ),
                     ),
                   ],
@@ -229,7 +236,7 @@ class _ChatItemState extends State<ChatItem> {
                   widget.messagesList[0].createdAt,
                 ),
                 style: CustomTextStyle.size14Weight400Text(
-                  AppColors.grayColor.withOpacity(0.3),
+                  AppColors().secondaryTextColor,
                 ),
               ),
             ],
@@ -250,7 +257,7 @@ class ChatShimmerItem extends StatelessWidget {
       highlightColor: AppColors.shimmerHighlightColor,
       child: Ink(
         decoration: BoxDecoration(
-          color: AppColors.cardColor,
+          color: AppColors().cardColor,
           borderRadius: AppStyles.largeBorderRadius,
           boxShadow: [AppStyles.boxShadow7],
         ),

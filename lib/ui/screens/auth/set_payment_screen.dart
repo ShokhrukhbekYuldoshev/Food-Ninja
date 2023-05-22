@@ -74,7 +74,7 @@ class _SetPaymentScreenState extends State<SetPaymentScreen> {
                     decoration: BoxDecoration(
                       color: PaymentMethod.paypal == _paymentMethod
                           ? AppColors.primaryColor.withOpacity(0.1)
-                          : Colors.white,
+                          : AppColors().cardColor,
                       boxShadow: [AppStyles.boxShadow7],
                       borderRadius: AppStyles.largeBorderRadius,
                     ),
@@ -102,7 +102,7 @@ class _SetPaymentScreenState extends State<SetPaymentScreen> {
                     decoration: BoxDecoration(
                       color: PaymentMethod.visa == _paymentMethod
                           ? AppColors.primaryColor.withOpacity(0.1)
-                          : Colors.white,
+                          : AppColors().cardColor,
                       boxShadow: [AppStyles.boxShadow7],
                       borderRadius: AppStyles.largeBorderRadius,
                     ),

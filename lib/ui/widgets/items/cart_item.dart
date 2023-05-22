@@ -40,7 +40,7 @@ class _CartItemState extends State<CartItem> {
       decoration: BoxDecoration(
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
       ),
       child: Row(
         children: [
@@ -49,7 +49,7 @@ class _CartItemState extends State<CartItem> {
             width: 64,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [AppStyles.boxShadow20],
+              boxShadow: [AppStyles().largeBoxShadow],
             ),
             child: ClipRRect(
               borderRadius: AppStyles.defaultBorderRadius,
@@ -82,7 +82,7 @@ class _CartItemState extends State<CartItem> {
                 Text(
                   category,
                   style: CustomTextStyle.size14Weight400Text(
-                    AppColors.grayColor.withOpacity(0.3),
+                    AppColors().secondaryTextColor,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -163,7 +163,7 @@ class UpdateQuantityButton extends StatelessWidget {
         width: 26,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          boxShadow: [AppStyles.boxShadow20],
+          boxShadow: [AppStyles().largeBoxShadow],
           color: backgroundColor,
         ),
         child: Icon(
@@ -185,7 +185,7 @@ class CartItemShimmer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
       ),
       padding: const EdgeInsets.fromLTRB(10, 10, 20, 10),
       child: Row(
@@ -199,7 +199,7 @@ class CartItemShimmer extends StatelessWidget {
               width: 64,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: [AppStyles.boxShadow20],
+                boxShadow: [AppStyles().largeBoxShadow],
                 color: AppColors.shimmerBaseColor,
               ),
             ),
@@ -217,7 +217,7 @@ class CartItemShimmer extends StatelessWidget {
                     width: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [AppStyles.boxShadow20],
+                      boxShadow: [AppStyles().largeBoxShadow],
                       color: AppColors.shimmerBaseColor,
                     ),
                   ),
@@ -231,7 +231,7 @@ class CartItemShimmer extends StatelessWidget {
                     width: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [AppStyles.boxShadow20],
+                      boxShadow: [AppStyles().largeBoxShadow],
                       color: AppColors.shimmerBaseColor,
                     ),
                   ),
@@ -248,7 +248,7 @@ class CartItemShimmer extends StatelessWidget {
               width: 32,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: [AppStyles.boxShadow20],
+                boxShadow: [AppStyles().largeBoxShadow],
                 color: AppColors.shimmerBaseColor,
               ),
             ),

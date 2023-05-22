@@ -51,7 +51,7 @@ class RegisterSuccessScreen extends StatelessWidget {
                 Text(
                   "Your Profile Is Ready To Use",
                   style: CustomTextStyle.size16Weight400Text(
-                    AppColors.textColor.withOpacity(0.5),
+                    AppColors().textColor.withOpacity(0.5),
                   ),
                 ),
               ],

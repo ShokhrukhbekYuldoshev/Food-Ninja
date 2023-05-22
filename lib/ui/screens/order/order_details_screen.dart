@@ -100,7 +100,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '\$${order.total}',
+                        '\$${order.total.toStringAsFixed(2)}',
                         style: CustomTextStyle.size22Weight600Text(
                           Colors.white,
                         ),
@@ -150,7 +150,7 @@ class OrderDetailsScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: AppStyles.defaultBorderRadius,
                             boxShadow: [AppStyles.boxShadow7],
-                            color: AppColors.cardColor,
+                            color: AppColors().cardColor,
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,6 +163,15 @@ class OrderDetailsScreen extends StatelessWidget {
                                         fit: BoxFit.cover,
                                         width: 64,
                                         height: 64,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return ImagePlaceholder(
+                                            iconData: Icons.fastfood,
+                                            iconSize: 30,
+                                            width: 64,
+                                            height: 64,
+                                          );
+                                        },
                                       )
                                     : ImagePlaceholder(
                                         iconData: Icons.fastfood,

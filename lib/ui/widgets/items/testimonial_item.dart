@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
@@ -56,7 +57,7 @@ class _TestimonialItemState extends State<TestimonialItem> {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
       ),
@@ -85,6 +86,14 @@ class _TestimonialItemState extends State<TestimonialItem> {
                     height: 64,
                     width: 64,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return ImagePlaceholder(
+                        iconData: Icons.person,
+                        iconSize: 40,
+                        width: 64,
+                        height: 64,
+                      );
+                    },
                   ),
                 ),
           const SizedBox(width: 20),
@@ -108,7 +117,7 @@ class _TestimonialItemState extends State<TestimonialItem> {
                               widget.testimonial.createdAt,
                             ),
                             style: CustomTextStyle.size14Weight400Text(
-                              AppColors.grayColor.withOpacity(0.5),
+                              AppColors().secondaryTextColor,
                             ),
                           ),
                         ],
@@ -182,7 +191,7 @@ class TestimonialShimmerItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
       ),

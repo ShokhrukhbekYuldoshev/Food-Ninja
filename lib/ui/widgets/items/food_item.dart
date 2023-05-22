@@ -37,7 +37,7 @@ class _FoodItemState extends State<FoodItem> {
       decoration: BoxDecoration(
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
       ),
       child: InkWell(
         borderRadius: AppStyles.largeBorderRadius,
@@ -58,7 +58,7 @@ class _FoodItemState extends State<FoodItem> {
                 width: 64,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [AppStyles.boxShadow20],
+                  boxShadow: [AppStyles().largeBoxShadow],
                 ),
                 child: ClipRRect(
                   borderRadius: AppStyles.defaultBorderRadius,
@@ -90,7 +90,7 @@ class _FoodItemState extends State<FoodItem> {
                     Text(
                       category,
                       style: CustomTextStyle.size14Weight400Text(
-                        AppColors.grayColor.withOpacity(0.3),
+                        AppColors().secondaryTextColor,
                       ),
                     ),
                   ],
@@ -120,7 +120,7 @@ class FoodItemShimmer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
       ),
       child: InkWell(
         borderRadius: AppStyles.largeBorderRadius,
@@ -138,7 +138,7 @@ class FoodItemShimmer extends StatelessWidget {
                   width: 64,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [AppStyles.boxShadow20],
+                    boxShadow: [AppStyles().largeBoxShadow],
                     color: AppColors.shimmerBaseColor,
                   ),
                 ),
@@ -156,7 +156,7 @@ class FoodItemShimmer extends StatelessWidget {
                         width: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [AppStyles.boxShadow20],
+                          boxShadow: [AppStyles().largeBoxShadow],
                           color: AppColors.shimmerBaseColor,
                         ),
                       ),
@@ -170,7 +170,7 @@ class FoodItemShimmer extends StatelessWidget {
                         width: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [AppStyles.boxShadow20],
+                          boxShadow: [AppStyles().largeBoxShadow],
                           color: AppColors.shimmerBaseColor,
                         ),
                       ),
@@ -187,7 +187,7 @@ class FoodItemShimmer extends StatelessWidget {
                   width: 32,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [AppStyles.boxShadow20],
+                    boxShadow: [AppStyles().largeBoxShadow],
                     color: AppColors.shimmerBaseColor,
                   ),
                 ),

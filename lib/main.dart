@@ -7,11 +7,13 @@ import 'package:food_ninja/bloc/login/login_bloc.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/bloc/profile/profile_bloc.dart';
 import 'package:food_ninja/bloc/register/register_bloc.dart';
+import 'package:food_ninja/bloc/settings/settings_bloc.dart';
 import 'package:food_ninja/bloc/testimonial/testimonial_bloc.dart';
+import 'package:food_ninja/bloc/theme/theme_bloc.dart';
 import 'package:food_ninja/repositories/order_repository.dart';
 import 'package:food_ninja/services/hive_adapters.dart';
-import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_router.dart';
+import 'package:food_ninja/utils/app_theme.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:food_ninja/bloc/restaurant/restaurant_bloc.dart';
 import 'firebase_options.dart';
@@ -56,6 +58,12 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => ChatBloc(),
         ),
+        BlocProvider(
+          create: (context) => SettingsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ThemeBloc(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -67,45 +75,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Food Ninja",
-      theme: ThemeData(
-        useMaterial3: true,
-        primaryColor: AppColors.primaryColor,
-        navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: AppColors.backgroundColor,
-          indicatorColor: AppColors.primaryColor.withOpacity(0.1),
-          surfaceTintColor: Colors.transparent,
-        ),
-        // change text button style
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            foregroundColor: AppColors.secondaryDarkColor,
-          ),
-        ),
-        // change checkbox style
-        checkboxTheme: CheckboxThemeData(
-          fillColor: MaterialStateProperty.all(
-            AppColors.secondaryLightColor.withOpacity(0.1),
-          ),
-          checkColor: MaterialStateProperty.all(
-            AppColors.secondaryDarkColor,
-          ),
-        ),
-        // change app bar surface tint color
-        appBarTheme: const AppBarTheme(
-          surfaceTintColor: Colors.transparent,
-        ),
-        // change cursor color
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: AppColors.primaryColor,
-        ),
-        // change dialog surface tint color
-        dialogTheme: const DialogTheme(
-          surfaceTintColor: Colors.transparent,
-        ),
-      ),
-      onGenerateRoute: AppRouter.onGenerateRoute,
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        ThemeData themeData =
+            Hive.box('myBox').get('isDarkMode', defaultValue: false)
+                ? AppTheme().darkThemeData
+                : AppTheme().lightThemeData;
+        if (state is ThemeChanged) {
+          themeData = state.themeData;
+        }
+
+        return MaterialApp(
+          title: "Food Ninja",
+          theme: themeData,
+          onGenerateRoute: AppRouter.onGenerateRoute,
+        );
+      },
     );
   }
 }

@@ -14,9 +14,9 @@ class RestaurantItem extends StatelessWidget {
     return Ink(
       height: 184,
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
         borderRadius: AppStyles.defaultBorderRadius,
-        boxShadow: [AppStyles.boxShadow20],
+        boxShadow: [AppStyles().largeBoxShadow],
       ),
       child: InkWell(
         borderRadius: AppStyles.defaultBorderRadius,
@@ -82,9 +82,9 @@ class RestaurantItemShimmer extends StatelessWidget {
       child: Ink(
         height: 184,
         decoration: BoxDecoration(
-          color: AppColors.cardColor,
+          color: AppColors().cardColor,
           borderRadius: AppStyles.defaultBorderRadius,
-          boxShadow: [AppStyles.boxShadow20],
+          boxShadow: [AppStyles().largeBoxShadow],
         ),
         child: InkWell(
           borderRadius: AppStyles.defaultBorderRadius,

@@ -103,15 +103,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   child: TextFormField(
                                     controller: _emailController,
                                     decoration: InputDecoration(
-                                      fillColor: Colors.white,
+                                      fillColor: AppColors().cardColor,
                                       filled: true,
                                       hintText: "Email",
                                       hintStyle:
                                           CustomTextStyle.size14Weight400Text(
-                                        AppColors.grayColor.withOpacity(0.3),
+                                        AppColors().secondaryTextColor,
                                       ),
                                       enabledBorder:
-                                          AppStyles.defaultEnabledBorder,
+                                          AppStyles().defaultEnabledBorder,
                                       focusedBorder:
                                           AppStyles.defaultFocusedBorder(),
                                     ),
@@ -127,15 +127,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     controller: _passwordController,
                                     obscureText: hidePassword,
                                     decoration: InputDecoration(
-                                      fillColor: Colors.white,
+                                      fillColor: AppColors().cardColor,
                                       filled: true,
                                       hintText: "Password",
                                       hintStyle:
                                           CustomTextStyle.size14Weight400Text(
-                                        AppColors.grayColor.withOpacity(0.3),
+                                        AppColors().secondaryTextColor,
                                       ),
                                       enabledBorder:
-                                          AppStyles.defaultEnabledBorder,
+                                          AppStyles().defaultEnabledBorder,
                                       focusedBorder:
                                           AppStyles.defaultFocusedBorder(),
                                       suffixIcon: GestureDetector(

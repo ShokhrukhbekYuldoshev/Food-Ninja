@@ -91,7 +91,7 @@ class VoucherItem extends StatelessWidget {
         //   end: Alignment.bottomRight,
         // ),
         borderRadius: AppStyles.defaultBorderRadius,
-        boxShadow: [AppStyles.boxShadow20],
+        boxShadow: [AppStyles().largeBoxShadow],
       ),
       child: Row(
         children: [

@@ -96,7 +96,7 @@ class OrderConfirmScreen extends StatelessWidget {
                           vertical: 15,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.cardColor,
+                          color: AppColors().cardColor,
                           borderRadius: AppStyles.largeBorderRadius,
                           boxShadow: [AppStyles.boxShadow7],
                         ),
@@ -108,7 +108,7 @@ class OrderConfirmScreen extends StatelessWidget {
                                 Text(
                                   "Delivery Address",
                                   style: CustomTextStyle.size16Weight400Text(
-                                    AppColors.grayColor.withOpacity(0.5),
+                                    AppColors().secondaryTextColor,
                                   ),
                                 ),
                                 TextButton(
@@ -170,7 +170,7 @@ class OrderConfirmScreen extends StatelessWidget {
                           vertical: 15,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.cardColor,
+                          color: AppColors().cardColor,
                           borderRadius: AppStyles.largeBorderRadius,
                           boxShadow: [AppStyles.boxShadow7],
                         ),
@@ -182,7 +182,7 @@ class OrderConfirmScreen extends StatelessWidget {
                                 Text(
                                   "Payment Method",
                                   style: CustomTextStyle.size16Weight400Text(
-                                    AppColors.grayColor.withOpacity(0.5),
+                                    AppColors().secondaryTextColor,
                                   ),
                                 ),
                                 TextButton(
@@ -251,7 +251,6 @@ buildDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        surfaceTintColor: AppColors.primaryColor,
         title: Text(
           "Select Payment Method",
           style: CustomTextStyle.size18Weight600Text(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_ninja/utils/app_colors.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AppStyles {
   static final defaultBorderRadius = BorderRadius.circular(15);
@@ -16,20 +17,31 @@ class AppStyles {
     ),
   );
 
-  static final boxShadow20 = BoxShadow(
-    color: const Color(0xFF5A6CEA).withOpacity(0.2),
-    spreadRadius: 0,
-    blurRadius: 50,
-    offset: const Offset(
-      0,
-      3,
-    ),
-  );
+  final largeBoxShadow = Hive.box("myBox").get("isDarkMode") != null &&
+          Hive.box("myBox").get("isDarkMode") == true
+      ? BoxShadow(
+          color: const Color(0xFF010207).withOpacity(0.5),
+          spreadRadius: 0,
+          blurRadius: 50,
+          offset: const Offset(
+            0,
+            3,
+          ),
+        )
+      : BoxShadow(
+          color: const Color(0xFF5A6CEA).withOpacity(0.2),
+          spreadRadius: 0,
+          blurRadius: 50,
+          offset: const Offset(
+            0,
+            3,
+          ),
+        );
 
-  static final defaultEnabledBorder = OutlineInputBorder(
+  final defaultEnabledBorder = OutlineInputBorder(
     borderRadius: defaultBorderRadius,
-    borderSide: const BorderSide(
-      color: AppColors.borderColor,
+    borderSide: BorderSide(
+      color: AppColors().borderColor,
     ),
   );
 
@@ -44,13 +56,6 @@ class AppStyles {
       ),
     );
   }
-
-  // static final defaultFocusedBorder = OutlineInputBorder(
-  //   borderRadius: defaultBorderRadius,
-  //   borderSide: BorderSide(
-  //     color: AppColors.primaryColor,
-  //   ),
-  // );
 
   static final defaultErrorBorder = OutlineInputBorder(
     borderRadius: defaultBorderRadius,

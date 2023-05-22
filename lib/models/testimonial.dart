@@ -29,7 +29,7 @@ class Testimonial extends Equatable {
   factory Testimonial.fromMap(Map<String, dynamic> map) {
     return Testimonial(
       map['review'] as String,
-      map['rating'] as double,
+      map['rating'] * 1.0,
       map['user'] as DocumentReference,
       map['createdAt'].toDate(),
       map['target'] as DocumentReference,

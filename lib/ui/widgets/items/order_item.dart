@@ -14,7 +14,7 @@ class OrderItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
       ),
       child: InkWell(
         borderRadius: AppStyles.largeBorderRadius,
@@ -97,7 +97,7 @@ class OrderItemShimmer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
       ),
       child: Shimmer.fromColors(
         baseColor: AppColors.shimmerBaseColor,

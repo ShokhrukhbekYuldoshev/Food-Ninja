@@ -22,7 +22,7 @@ class FilterWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.secondaryLightColor.withOpacity(0.1),
           borderRadius: AppStyles.defaultBorderRadius,
-          boxShadow: [AppStyles.boxShadow20],
+          boxShadow: [AppStyles().largeBoxShadow],
         ),
         child: SvgPicture.asset(
           "assets/svg/filter.svg",

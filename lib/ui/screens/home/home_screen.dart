@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/bloc/food/food_bloc.dart';
 import 'package:food_ninja/bloc/order/order_bloc.dart';
 import 'package:food_ninja/bloc/restaurant/restaurant_bloc.dart';
+import 'package:food_ninja/bloc/theme/theme_bloc.dart';
 import 'package:food_ninja/models/food.dart';
 import 'package:food_ninja/models/restaurant.dart';
 import 'package:food_ninja/repositories/order_repository.dart';
@@ -63,103 +64,108 @@ class _HomeScreenState extends State<HomeScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-          decoration: BoxDecoration(
-            color: AppColors.cardColor,
-            borderRadius: AppStyles.largeBorderRadius,
-            boxShadow: [AppStyles.boxShadow20],
-          ),
-          child: NavigationBar(
-            backgroundColor: Colors.transparent,
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            onDestinationSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            selectedIndex: _selectedIndex,
-            destinations: [
-              NavigationDestination(
-                icon: Opacity(
-                  opacity: 0.5,
-                  child: SvgPicture.asset(
-                    "assets/svg/home.svg",
-                  ),
-                ),
-                selectedIcon: SvgPicture.asset(
-                  "assets/svg/home.svg",
-                ),
-                label: "Home",
+        bottomNavigationBar: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            return Container(
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              decoration: BoxDecoration(
+                color: AppColors().cardColor,
+                borderRadius: AppStyles.largeBorderRadius,
+                boxShadow: [AppStyles().largeBoxShadow],
               ),
-              NavigationDestination(
-                icon: Opacity(
-                  opacity: 0.5,
-                  child: SvgPicture.asset(
-                    "assets/svg/chat.svg",
-                  ),
-                ),
-                selectedIcon: SvgPicture.asset(
-                  "assets/svg/chat.svg",
-                ),
-                label: "Chat",
-              ),
-              NavigationDestination(
-                icon: BlocBuilder<OrderBloc, OrderState>(
-                  builder: (context, state) {
-                    return Badge(
-                      backgroundColor: AppColors.errorColor,
-                      isLabelVisible: OrderRepository.cart.isNotEmpty,
-                      label: Text(
-                        OrderRepository.cart.length.toString(),
-                        style: CustomTextStyle.size14Weight400Text(
-                          Colors.white,
-                        ),
-                      ),
-                      offset: const Offset(10, -10),
-                      child: Opacity(
-                        opacity: 0.5,
-                        child: SvgPicture.asset(
-                          "assets/svg/cart.svg",
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                selectedIcon: BlocBuilder<OrderBloc, OrderState>(
-                  builder: (context, state) {
-                    return Badge(
-                      backgroundColor: AppColors.errorColor,
-                      isLabelVisible: OrderRepository.cart.isNotEmpty,
-                      label: Text(
-                        OrderRepository.cart.length.toString(),
-                        style: CustomTextStyle.size14Weight400Text(
-                          Colors.white,
-                        ),
-                      ),
-                      offset: const Offset(10, -10),
+              child: NavigationBar(
+                backgroundColor: Colors.transparent,
+                labelBehavior:
+                    NavigationDestinationLabelBehavior.onlyShowSelected,
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+                selectedIndex: _selectedIndex,
+                destinations: [
+                  NavigationDestination(
+                    icon: Opacity(
+                      opacity: 0.5,
                       child: SvgPicture.asset(
-                        "assets/svg/cart.svg",
+                        "assets/svg/home.svg",
                       ),
-                    );
-                  },
-                ),
-                label: "Cart",
-              ),
-              NavigationDestination(
-                icon: Opacity(
-                  opacity: 0.5,
-                  child: SvgPicture.asset(
-                    "assets/svg/profile.svg",
+                    ),
+                    selectedIcon: SvgPicture.asset(
+                      "assets/svg/home.svg",
+                    ),
+                    label: "Home",
                   ),
-                ),
-                selectedIcon: SvgPicture.asset(
-                  "assets/svg/profile.svg",
-                ),
-                label: "Profile",
+                  NavigationDestination(
+                    icon: Opacity(
+                      opacity: 0.5,
+                      child: SvgPicture.asset(
+                        "assets/svg/chat.svg",
+                      ),
+                    ),
+                    selectedIcon: SvgPicture.asset(
+                      "assets/svg/chat.svg",
+                    ),
+                    label: "Chat",
+                  ),
+                  NavigationDestination(
+                    icon: BlocBuilder<OrderBloc, OrderState>(
+                      builder: (context, state) {
+                        return Badge(
+                          backgroundColor: AppColors.errorColor,
+                          isLabelVisible: OrderRepository.cart.isNotEmpty,
+                          label: Text(
+                            OrderRepository.cart.length.toString(),
+                            style: CustomTextStyle.size14Weight400Text(
+                              Colors.white,
+                            ),
+                          ),
+                          offset: const Offset(10, -10),
+                          child: Opacity(
+                            opacity: 0.5,
+                            child: SvgPicture.asset(
+                              "assets/svg/cart.svg",
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    selectedIcon: BlocBuilder<OrderBloc, OrderState>(
+                      builder: (context, state) {
+                        return Badge(
+                          backgroundColor: AppColors.errorColor,
+                          isLabelVisible: OrderRepository.cart.isNotEmpty,
+                          label: Text(
+                            OrderRepository.cart.length.toString(),
+                            style: CustomTextStyle.size14Weight400Text(
+                              Colors.white,
+                            ),
+                          ),
+                          offset: const Offset(10, -10),
+                          child: SvgPicture.asset(
+                            "assets/svg/cart.svg",
+                          ),
+                        );
+                      },
+                    ),
+                    label: "Cart",
+                  ),
+                  NavigationDestination(
+                    icon: Opacity(
+                      opacity: 0.5,
+                      child: SvgPicture.asset(
+                        "assets/svg/profile.svg",
+                      ),
+                    ),
+                    selectedIcon: SvgPicture.asset(
+                      "assets/svg/profile.svg",
+                    ),
+                    label: "Profile",
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         ),
         body: _selectedIndex == 0
             ? _buildHomeBody(context)
@@ -198,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Material(
-                        color: AppColors.cardColor,
+                        color: AppColors().cardColor,
                         borderRadius: AppStyles.defaultBorderRadius,
                         child: InkWell(
                           borderRadius: AppStyles.defaultBorderRadius,
@@ -210,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 45,
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              boxShadow: [AppStyles.boxShadow20],
+                              boxShadow: [AppStyles().largeBoxShadow],
                             ),
                             child: SvgPicture.asset(
                               "assets/svg/notification.svg",
@@ -248,7 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: AppStyles.defaultBorderRadius,
-                      boxShadow: [AppStyles.boxShadow20],
+                      boxShadow: [AppStyles().largeBoxShadow],
                     ),
                     child: Row(
                       children: [

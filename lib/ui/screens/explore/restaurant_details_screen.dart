@@ -109,7 +109,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       child: Container(
                         height: 40,
                         decoration: BoxDecoration(
-                          color: AppColors.cardColor,
+                          color: AppColors().backgroundColor,
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(50),
                             topRight: Radius.circular(50),
@@ -210,7 +210,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                               return Text(
                                 "$rating Rating",
                                 style: CustomTextStyle.size14Weight400Text(
-                                  AppColors.grayColor.withOpacity(0.3),
+                                  AppColors().secondaryTextColor,
                                 ),
                               );
                             },
@@ -226,14 +226,14 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                                 return Text(
                                   "${state.count} ${state.count == 1 ? "Order" : "Orders"}",
                                   style: CustomTextStyle.size14Weight400Text(
-                                    AppColors.grayColor.withOpacity(0.3),
+                                    AppColors().secondaryTextColor,
                                   ),
                                 );
                               }
                               return Text(
                                 "0 Orders",
                                 style: CustomTextStyle.size14Weight400Text(
-                                  AppColors.grayColor.withOpacity(0.3),
+                                  AppColors().secondaryTextColor,
                                 ),
                               );
                             },
@@ -253,7 +253,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                               child: Text(
                                 "No description available",
                                 style: CustomTextStyle.size14Weight400Text(
-                                  AppColors.grayColor.withOpacity(0.3),
+                                  AppColors().secondaryTextColor,
                                 ),
                               ),
                             ),
@@ -292,7 +292,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                                   child: Text(
                                     "No foods available",
                                     style: CustomTextStyle.size14Weight400Text(
-                                      AppColors.grayColor.withOpacity(0.3),
+                                      AppColors().secondaryTextColor,
                                     ),
                                   ),
                                 );
@@ -313,7 +313,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                               child: Text(
                                 "No testimonials available",
                                 style: CustomTextStyle.size14Weight400Text(
-                                  AppColors.grayColor.withOpacity(0.3),
+                                  AppColors().secondaryTextColor,
                                 ),
                               ),
                             );

@@ -73,7 +73,7 @@ class NotificationItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
+        color: AppColors().cardColor,
         borderRadius: AppStyles.largeBorderRadius,
         boxShadow: [AppStyles.boxShadow7],
       ),
@@ -99,7 +99,7 @@ class NotificationItem extends StatelessWidget {
                 Text(
                   DateFormat("dd MMM yyyy, HH:mm").format(time),
                   style: CustomTextStyle.size14Weight400Text(
-                    AppColors.grayColor.withOpacity(0.3),
+                    AppColors().secondaryTextColor,
                   ),
                 ),
               ],

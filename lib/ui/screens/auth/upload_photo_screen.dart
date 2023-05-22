@@ -7,6 +7,7 @@ import 'package:food_ninja/services/firebase_storage.dart';
 import 'package:food_ninja/ui/widgets/buttons/back_button.dart';
 import 'package:food_ninja/ui/widgets/buttons/primary_button.dart';
 import 'package:food_ninja/ui/widgets/loading_indicator.dart';
+import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
 import 'package:hive/hive.dart';
@@ -24,7 +25,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
     FirebaseStorage.instance,
   );
   XFile? _image;
-  String imageUrl = "";
+  String? imageUrl;
 
   // pick image from gallery
   Future<void> _pickImageFromGallery() async {
@@ -188,10 +189,18 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                     ClipRRect(
                                       borderRadius: AppStyles.largeBorderRadius,
                                       child: Image.network(
-                                        imageUrl,
+                                        imageUrl!,
                                         width: 250,
                                         height: 250,
                                         fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                const Center(
+                                          child: Icon(
+                                            Icons.error,
+                                            color: Colors.red,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Positioned(
@@ -227,7 +236,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                               children: [
                                 Ink(
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: AppColors().cardColor,
                                     boxShadow: [AppStyles.boxShadow7],
                                     borderRadius: AppStyles.largeBorderRadius,
                                   ),
@@ -261,7 +270,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                 // from camera
                                 Ink(
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: AppColors().cardColor,
                                     boxShadow: [AppStyles.boxShadow7],
                                     borderRadius: AppStyles.largeBorderRadius,
                                   ),

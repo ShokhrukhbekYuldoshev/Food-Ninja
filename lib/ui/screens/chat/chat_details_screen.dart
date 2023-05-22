@@ -6,6 +6,7 @@ import 'package:food_ninja/bloc/chat/chat_bloc.dart';
 import 'package:food_ninja/models/message.dart';
 import 'package:food_ninja/models/user.dart';
 import 'package:food_ninja/ui/widgets/buttons/back_button.dart';
+import 'package:food_ninja/ui/widgets/chat_bubble.dart';
 import 'package:food_ninja/ui/widgets/image_placeholder.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
@@ -85,7 +86,9 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 15),
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      color: AppColors.cardColor,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.white
+                          : Colors.white.withOpacity(0.1),
                       borderRadius: AppStyles.largeBorderRadius,
                       boxShadow: [AppStyles.boxShadow7],
                     ),
@@ -127,7 +130,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                               widget.otherUser.email,
                               overflow: TextOverflow.ellipsis,
                               style: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                             ),
                           ],
@@ -159,7 +162,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                   Container(
                     margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                     decoration: BoxDecoration(
-                      color: AppColors.cardColor,
+                      color: AppColors().cardColor,
                       borderRadius: AppStyles.largeBorderRadius,
                       boxShadow: [
                         AppStyles.boxShadow7,
@@ -173,13 +176,12 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                           vertical: 25,
                         ),
                         filled: true,
-                        fillColor: AppColors.cardColor,
+                        fillColor: AppColors().cardColor,
                         hintText: 'Type a message',
                         hintStyle: TextStyle(
-                          color: AppColors.grayColor.withOpacity(0.3),
+                          color: AppColors().secondaryTextColor,
                         ),
-                        border: AppStyles.defaultEnabledBorder,
-                        enabledBorder: AppStyles.defaultEnabledBorder,
+                        enabledBorder: AppStyles().defaultEnabledBorder,
                         focusedBorder: AppStyles.defaultFocusedBorder(),
                         suffixIcon: IntrinsicWidth(
                           child: Row(
@@ -223,37 +225,6 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ChatBubble extends StatelessWidget {
-  final Message message;
-  final bool isMe;
-  const ChatBubble({
-    super.key,
-    required this.message,
-    required this.isMe,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isMe ? AppColors.primaryColor : AppColors.grayLightColor,
-          borderRadius: AppStyles.defaultBorderRadius,
-        ),
-        child: Text(
-          message.text,
-          style: TextStyle(
-            color: isMe ? Colors.white : Colors.black,
-          ),
         ),
       ),
     );

@@ -135,14 +135,15 @@ class _ReviewScreenState extends State<ReviewScreen> {
                               child: TextField(
                                 controller: _reviewController,
                                 decoration: InputDecoration(
-                                  fillColor: Colors.white,
+                                  fillColor: AppColors().cardColor,
                                   filled: true,
                                   hintText: "Leave a feedback",
                                   hintStyle:
                                       CustomTextStyle.size14Weight400Text(
-                                    AppColors.grayColor.withOpacity(0.3),
+                                    AppColors().secondaryTextColor,
                                   ),
-                                  enabledBorder: AppStyles.defaultEnabledBorder,
+                                  enabledBorder:
+                                      AppStyles().defaultEnabledBorder,
                                   focusedBorder:
                                       AppStyles.defaultFocusedBorder(),
                                 ),
@@ -184,13 +185,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           "assets/svg/edit.svg",
                         ),
                       ),
-                      fillColor: Colors.white,
+                      fillColor: AppColors().cardColor,
                       filled: true,
                       hintText: "Leave a feedback",
                       hintStyle: CustomTextStyle.size14Weight400Text(
-                        AppColors.grayColor.withOpacity(0.3),
+                        AppColors().secondaryTextColor,
                       ),
-                      enabledBorder: AppStyles.defaultEnabledBorder,
+                      enabledBorder: AppStyles().defaultEnabledBorder,
                       focusedBorder: AppStyles.defaultFocusedBorder(),
                     ),
                   ),
@@ -292,6 +293,15 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                   fit: BoxFit.cover,
                                   width: 200,
                                   height: 200,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      ImagePlaceholder(
+                                    iconData: isRestaurant
+                                        ? Icons.restaurant
+                                        : Icons.fastfood,
+                                    height: 200,
+                                    width: 200,
+                                    iconSize: 80,
+                                  ),
                                 )
                               : ImagePlaceholder(
                                   iconData: isRestaurant
@@ -313,7 +323,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           "Please leave a review below for",
                           textAlign: TextAlign.center,
                           style: CustomTextStyle.size14Weight400Text(
-                            AppColors.grayColor.withOpacity(0.5),
+                            AppColors().secondaryTextColor,
                           ),
                         ),
                         Text(

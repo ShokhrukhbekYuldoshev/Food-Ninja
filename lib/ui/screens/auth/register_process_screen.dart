@@ -113,16 +113,16 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              fillColor: Colors.white,
+                              fillColor: AppColors().cardColor,
                               filled: true,
                               hintText: "First name",
                               hintStyle: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                               contentPadding: const EdgeInsets.only(
                                 left: 20,
                               ),
-                              enabledBorder: AppStyles.defaultEnabledBorder,
+                              enabledBorder: AppStyles().defaultEnabledBorder,
                               focusedBorder: AppStyles.defaultFocusedBorder(),
                               errorBorder: AppStyles.defaultErrorBorder,
                               focusedErrorBorder:
@@ -144,16 +144,16 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              fillColor: Colors.white,
+                              fillColor: AppColors().cardColor,
                               filled: true,
                               hintText: "Last name",
                               hintStyle: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                               contentPadding: const EdgeInsets.only(
                                 left: 20,
                               ),
-                              enabledBorder: AppStyles.defaultEnabledBorder,
+                              enabledBorder: AppStyles().defaultEnabledBorder,
                               focusedBorder: AppStyles.defaultFocusedBorder(),
                               errorBorder: AppStyles.defaultErrorBorder,
                               focusedErrorBorder:
@@ -176,16 +176,16 @@ class _RegisterProcessScreenState extends State<RegisterProcessScreen> {
                             },
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
-                              fillColor: Colors.white,
+                              fillColor: AppColors().cardColor,
                               filled: true,
                               hintText: "Mobile number",
                               hintStyle: CustomTextStyle.size14Weight400Text(
-                                AppColors.grayColor.withOpacity(0.3),
+                                AppColors().secondaryTextColor,
                               ),
                               contentPadding: const EdgeInsets.only(
                                 left: 20,
                               ),
-                              enabledBorder: AppStyles.defaultEnabledBorder,
+                              enabledBorder: AppStyles().defaultEnabledBorder,
                               focusedBorder: AppStyles.defaultFocusedBorder(),
                               errorBorder: AppStyles.defaultErrorBorder,
                               focusedErrorBorder:

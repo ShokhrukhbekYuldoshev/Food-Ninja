@@ -36,7 +36,7 @@ class SearchField extends StatelessWidget {
               "assets/svg/search.svg",
             ),
           ),
-          enabledBorder: AppStyles.defaultEnabledBorder,
+          enabledBorder: AppStyles().defaultEnabledBorder,
           focusedBorder: AppStyles.defaultFocusedBorder(
             color: AppColors.secondaryColor,
           ),
