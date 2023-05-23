@@ -2,9 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/ui/widgets/buttons/primary_button.dart';
 import 'package:food_ninja/utils/custom_text_style.dart';
+import 'package:hive/hive.dart';
 
-class OnboardingFirstScreen extends StatelessWidget {
+class OnboardingFirstScreen extends StatefulWidget {
   const OnboardingFirstScreen({super.key});
+
+  @override
+  State<OnboardingFirstScreen> createState() => _OnboardingFirstScreenState();
+}
+
+class _OnboardingFirstScreenState extends State<OnboardingFirstScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    bool isDarkMode = Hive.box("myBox").get("isDarkMode", defaultValue: false);
+    if (isDarkMode) {
+      Hive.box("myBox").put("isDarkMode", true);
+    } else {
+      Hive.box("myBox").put("isDarkMode", false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
