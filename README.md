@@ -22,6 +22,7 @@ Food Ninja is a food delivery app created using Flutter, Firebase, BLoC.
 - Review
 - Dark Mode
 - Settings
+- Reset Password
 - Notification (just UI)
 - Voucher (just UI)
 
@@ -73,6 +74,7 @@ Run the project in Android Studio or Visual Studio Code.
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/caa56940-163c-4f9f-8b34-e49263e75776" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/a49f5482-2ad2-4015-a036-9b7cf6f44164" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/45289d1f-7c71-4f28-9056-2b9e2a581dc7" height="500">
+<img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/16cd42d1-b358-484e-9a9b-4e34d889ed39" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/4dc1be24-5886-4c9f-a301-1423f984f584" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/4ae70fd2-e131-4d19-acd6-c16335d51e61" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/bda14b62-c886-49af-92f2-c2b73166ea76" height="500">
