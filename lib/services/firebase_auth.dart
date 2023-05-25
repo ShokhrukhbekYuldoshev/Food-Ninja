@@ -31,6 +31,10 @@ class FirebaseAuthService {
     );
   }
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
   // error handling
   String getErrorString(String errorCode) {
     switch (errorCode) {

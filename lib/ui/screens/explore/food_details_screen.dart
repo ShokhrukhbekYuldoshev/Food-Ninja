@@ -112,7 +112,10 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(50),
                         ),
-                        border: Border.all(width: 0),
+                        border: Border.all(
+                          width: 0,
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                        ),
                       ),
                     ),
                   )

@@ -148,8 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           hidePassword
                                               ? Icons.visibility
                                               : Icons.visibility_off,
-                                          color: AppColors.grayColor
-                                              .withOpacity(0.3),
+                                          color: AppColors.primaryColor,
                                         ),
                                       ),
                                     ),

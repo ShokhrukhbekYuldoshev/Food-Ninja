@@ -148,8 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           hidePassword
                                               ? Icons.visibility
                                               : Icons.visibility_off,
-                                          color: AppColors.grayColor
-                                              .withOpacity(0.3),
+                                          color: AppColors.primaryColor,
                                         ),
                                       ),
                                     ),

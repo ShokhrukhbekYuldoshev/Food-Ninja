@@ -16,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SettingsBloc, SettingsState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is LogoutInProgress) {
           showDialog(
             context: context,
@@ -24,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
           );
         } else if (state is LogoutSuccess) {
           Navigator.pop(context);
-          Navigator.pushNamedAndRemoveUntil(
+          await Navigator.pushNamedAndRemoveUntil(
             context,
             "/register",
             (route) => false,

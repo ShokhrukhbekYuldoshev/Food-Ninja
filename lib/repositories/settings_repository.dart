@@ -7,8 +7,8 @@ class SettingsRepository {
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
     FirebaseAuthService(FirebaseAuth.instance).signOut();
-    bool isDarkMode = Hive.box('myBox').get('isDarkMode');
-    Hive.box('myBox').clear();
-    Hive.box('myBox').put('isDarkMode', isDarkMode);
+    bool isDarkMode = await Hive.box('myBox').get('isDarkMode');
+    await Hive.box('myBox').clear();
+    await Hive.box('myBox').put('isDarkMode', isDarkMode);
   }
 }

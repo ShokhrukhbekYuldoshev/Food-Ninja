@@ -5,11 +5,9 @@ import 'package:food_ninja/models/restaurant.dart';
 import 'package:food_ninja/models/user.dart';
 import 'package:food_ninja/ui/screens/auth/forgot_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/login_screen.dart';
-import 'package:food_ninja/ui/screens/auth/otp_screen.dart';
 import 'package:food_ninja/ui/screens/auth/register_process_screen.dart';
 import 'package:food_ninja/ui/screens/auth/register_screen.dart';
 import 'package:food_ninja/ui/screens/auth/register_success_screen.dart';
-import 'package:food_ninja/ui/screens/auth/reset_password_screen.dart';
 import 'package:food_ninja/ui/screens/auth/set_location_screen.dart';
 import 'package:food_ninja/ui/screens/auth/set_payment_screen.dart';
 import 'package:food_ninja/ui/screens/auth/upload_photo_screen.dart';
@@ -89,21 +87,6 @@ class AppRouter {
       case '/login/forgot-password':
         return MaterialPageRoute(
           builder: (_) => const ForgotPasswordScreen(),
-        );
-
-      case '/login/forgot-password/otp':
-        return MaterialPageRoute(
-          builder: (_) => const OtpScreen(),
-        );
-
-      case '/login/reset-password':
-        return MaterialPageRoute(
-          builder: (_) => const ResetPasswordScreen(),
-        );
-
-      case '/login/reset-password/success':
-        return MaterialPageRoute(
-          builder: (_) => const ResetPasswordScreen(),
         );
 
       case '/home':
