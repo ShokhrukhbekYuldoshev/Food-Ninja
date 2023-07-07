@@ -102,3 +102,47 @@ Run the project in Android Studio or Visual Studio Code.
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/7c27ea86-cace-4579-b2ba-c2468e13f272" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/0091594f-f548-4c5a-a066-c639a37daca5" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/4f91faf7-9b38-40f3-93fc-f9eb8501d49b" height="500">
+
+## [Dependencies](pub.dev)
+
+- [bloc](https://pub.dev/packages/bloc)
+- [cloud_firestore](https://pub.dev/packages/cloud_firestore)
+- [dio](https://pub.dev/packages/dio)
+- [equatable](https://pub.dev/packages/equatable)
+- [firebase_auth](https://pub.dev/packages/firebase_auth)
+- [firebase_core](https://pub.dev/packages/firebase_core)
+- [firebase_storage](https://pub.dev/packages/firebase_storage)
+- [flutter](https://pub.dev/packages/flutter)
+- [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+- [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
+- [flutter_map](https://pub.dev/packages/flutter_map)
+- [flutter_rating_bar](https://pub.dev/packages/flutter_rating_bar)
+- [flutter_slidable](https://pub.dev/packages/flutter_slidable)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
+- [geolocator](https://pub.dev/packages/geolocator)
+- [hive](https://pub.dev/packages/hive)
+- [hive_flutter](https://pub.dev/packages/hive_flutter)
+- [image_picker](https://pub.dev/packages/image_picker)
+- [intl](https://pub.dev/packages/intl)
+- [latlong2](https://pub.dev/packages/latlong2)
+- [shimmer](https://pub.dev/packages/shimmer)
+
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.
+
+## 👨🏽‍💻 Author
+
+👤 **Shokhrukhbek Yuldoshev**
+
+- Github: [@ShokhrukhYuldoshev](https://github.com/ShokhrukhbekYuldoshev)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/issues)
+
+## Show your support
+
+Give a ⭐️ if you like this project!
