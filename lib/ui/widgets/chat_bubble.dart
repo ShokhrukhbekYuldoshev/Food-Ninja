@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_ninja/models/message.dart';
 import 'package:food_ninja/utils/app_colors.dart';
 import 'package:food_ninja/utils/app_styles.dart';
+import 'package:hive/hive.dart';
 
 class ChatBubble extends StatelessWidget {
   final Message message;
@@ -20,7 +21,11 @@ class ChatBubble extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isMe ? AppColors.primaryColor : AppColors().cardColor,
+          color: isMe
+              ? AppColors.primaryColor
+              : Hive.box("myBox").get("isDarkMode")
+                  ? AppColors().cardColor
+                  : AppColors.grayLightColor,
           borderRadius: AppStyles.defaultBorderRadius,
         ),
         child: Text(

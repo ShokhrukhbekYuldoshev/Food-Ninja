@@ -69,8 +69,8 @@ class _SetLocationMapScreenState extends State<SetLocationMapScreen> {
           center: selectedLocation,
           onTap: (tapPosition, latLng) => _selectLocation(latLng),
           maxBounds: LatLngBounds(
-            LatLng(-90, -180.0),
-            LatLng(90.0, 180.0),
+            const LatLng(-90, -180.0),
+            const LatLng(90.0, 180.0),
           ),
         ),
         children: [

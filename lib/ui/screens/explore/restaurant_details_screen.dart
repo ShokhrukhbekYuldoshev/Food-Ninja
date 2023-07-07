@@ -114,7 +114,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                             topLeft: Radius.circular(50),
                             topRight: Radius.circular(50),
                           ),
-                           border: Border.all(
+                          border: Border.all(
                             width: 0,
                             color: Theme.of(context).scaffoldBackgroundColor,
                           ),
@@ -212,7 +212,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                           BlocBuilder<TestimonialBloc, TestimonialState>(
                             builder: (context, state) {
                               return Text(
-                                "$rating Rating",
+                                "${rating.toStringAsFixed(2)} Rating",
                                 style: CustomTextStyle.size14Weight400Text(
                                   AppColors().secondaryTextColor,
                                 ),

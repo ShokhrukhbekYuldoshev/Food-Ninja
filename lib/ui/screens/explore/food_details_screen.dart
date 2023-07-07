@@ -222,7 +222,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                         BlocBuilder<TestimonialBloc, TestimonialState>(
                           builder: (context, state) {
                             return Text(
-                              "$rating Rating",
+                              "${rating.toStringAsFixed(2)} Rating",
                               style: CustomTextStyle.size14Weight400Text(
                                 AppColors().secondaryTextColor,
                               ),
