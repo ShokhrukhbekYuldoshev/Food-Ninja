@@ -103,7 +103,7 @@ Run the project in Android Studio or Visual Studio Code.
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/0091594f-f548-4c5a-a066-c639a37daca5" height="500">
 <img src="https://github.com/ShokhrukhbekYuldoshev/Food-Ninja/assets/72590392/4f91faf7-9b38-40f3-93fc-f9eb8501d49b" height="500">
 
-## [Dependencies](pub.dev)
+## [Dependencies](https://pub.dev)
 
 - [bloc](https://pub.dev/packages/bloc)
 - [cloud_firestore](https://pub.dev/packages/cloud_firestore)
