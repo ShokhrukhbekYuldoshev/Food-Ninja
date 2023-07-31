@@ -37,7 +37,7 @@ For help getting started with Flutter, view Flutter's online
 
 Download or clone this repo by using the link below:
 
-```
+```sh
 git clone https://github.com/ShokhrukhbekYuldoshev/Food-Ninja.git
 ```
 
@@ -45,7 +45,7 @@ git clone https://github.com/ShokhrukhbekYuldoshev/Food-Ninja.git
 
 Go to project root and execute the following command in console to get the required dependencies:
 
-```
+```sh
 flutter pub get
 ```
 
@@ -57,7 +57,7 @@ This project uses Firebase. Go to https://firebase.google.com/ and create a new 
 
 Mapbox is used for map. Go to https://www.mapbox.com/ and create a new token. Then, create a file named `secrets.dart` in `lib` folder and add the following code:
 
-```
+```dart
 const String MAPBOX_ACCESS_TOKEN = {YOUR_MAPBOX_ACCESS_TOKEN};
 ```
 
