@@ -1,56 +1,56 @@
 name: food_ninja
 description: Food Ninja is a food delivery app created using Flutter, Firebase, BLoC.
-publish_to: "none"
-version: 0.1.2
+publish_to: 'none'
+version: 0.2.0
 
 environment:
-  sdk: ">=2.19.6 <3.0.0"
+    sdk: '>=3.2.5 <4.0.0'
 
 dependencies:
-  bloc: ^8.1.2
-  cloud_firestore: ^4.8.2
-  dio: ^5.2.1+1
-  equatable: ^2.0.5
-  firebase_auth: ^4.6.3
-  firebase_core: ^2.14.0
-  firebase_storage: ^11.2.4
-  flutter:
-    sdk: flutter
-  flutter_bloc: ^8.1.3
-  flutter_launcher_icons: ^0.13.1
-  flutter_map: ^5.0.0
-  flutter_rating_bar: ^4.0.1
-  flutter_slidable: ^3.0.0
-  flutter_svg: ^2.0.7
-  geolocator: ^9.0.2
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  image_picker: ^1.0.0
-  intl: ^0.18.1
-  latlong2: ^0.9.0
-  shimmer: ^3.0.0
+    bloc: ^8.1.2
+    cloud_firestore: ^4.14.0
+    dio: ^5.4.0
+    equatable: ^2.0.5
+    firebase_auth: ^4.16.0
+    firebase_core: ^2.24.2
+    firebase_storage: ^11.6.0
+    flutter:
+        sdk: flutter
+    flutter_bloc: ^8.1.3
+    flutter_launcher_icons: ^0.13.1
+    flutter_map: ^6.1.0
+    flutter_rating_bar: ^4.0.1
+    flutter_slidable: ^3.0.1
+    flutter_svg: ^2.0.9
+    geolocator: ^10.1.0
+    hive: ^2.2.3
+    hive_flutter: ^1.1.0
+    image_picker: ^1.0.7
+    intl: ^0.19.0
+    latlong2: ^0.9.0
+    shimmer: ^3.0.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.2
+    flutter_test:
+        sdk: flutter
+    flutter_lints: ^3.0.1
 
 flutter:
-  uses-material-design: true
+    uses-material-design: true
 
-  assets:
-    - assets/png/
-    - assets/svg/
+    assets:
+        - assets/png/
+        - assets/svg/
 
 flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  web:
-    generate: true
-    image_path: "assets/icon/icon.png"
+    android: 'launcher_icon'
+    ios: true
+    web:
+        generate: true
+        image_path: 'assets/icon/icon.png'
 
-  image_path: "assets/icon/icon.png"
-  min_sdk_android: 21
-  remove_alpha_ios: true
+    image_path: 'assets/icon/icon.png'
+    min_sdk_android: 21
+    remove_alpha_ios: true
 # flutter pub get
 # flutter pub run flutter_launcher_icons

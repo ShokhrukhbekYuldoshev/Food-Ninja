@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 # ignore secrets.dart file
-secrets.dart
+/lib/src/secrets.dart
