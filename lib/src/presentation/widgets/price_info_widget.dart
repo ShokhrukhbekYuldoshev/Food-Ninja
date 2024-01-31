@@ -17,6 +17,7 @@ class PriceInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Container(
+        height: 163,
         margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(

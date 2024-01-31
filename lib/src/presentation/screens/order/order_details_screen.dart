@@ -15,7 +15,7 @@ class OrderDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        height: 160,
+        height: 163,
         margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(

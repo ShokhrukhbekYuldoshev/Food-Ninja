@@ -1,7 +1,7 @@
 name: food_ninja
 description: Food Ninja is a food delivery app created using Flutter, Firebase, BLoC.
 publish_to: 'none'
-version: 0.2.0
+version: 0.2.1
 
 environment:
     sdk: '>=3.2.5 <4.0.0'
