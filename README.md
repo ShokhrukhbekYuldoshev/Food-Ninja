@@ -188,7 +188,7 @@ Contributions, issues and feature requests are welcome!
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+Distributed under the Attribution-NonCommercial-ShareAlike 4.0 International License. See [LICENSE](LICENSE) for more information.
 
 ## 👨‍💻 Author
 
